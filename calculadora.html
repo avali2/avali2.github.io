@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculadora de Recetas para Jabones — Tu costo real, en segundos</title>
+<meta name="description" content="La app que calcula costos, cantidades y precio de venta de tus jabones en segundos. Deja de poner el precio a ojo: conoce tu costo completo, con tu tiempo incluido.">
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1424136109626344');
@@ -12,92 +13,210 @@ document.addEventListener('click',function(e){var a=e.target.closest('a.cta');if
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1424136109626344&ev=PageView&noscript=1"/></noscript>
 <style>
-  :root{--crema:#FBF6EE;--tinta:#2B2118;--ambar:#C07F13;--ambar2:#E8A020;--suave:#6B5B4A;--linea:#E9DCC8;--verde:#2F7D4F}
+  :root{
+    --crema:#FAF4EA; --papel:#FFFDF8; --tinta:#2A2019; --suave:#6F5D4B;
+    --ambar:#C07F13; --ambar2:#E19A1F; --ambar-osc:#9A670D;
+    --linea:#EADFC9; --verde:#2F7D4F; --verde-osc:#256B42;
+    --sombra:0 10px 30px rgba(84,58,20,.10); --sombra-lg:0 18px 44px rgba(84,58,20,.16);
+    --radio:18px;
+  }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:Georgia,'Times New Roman',serif;background:var(--crema);color:var(--tinta);line-height:1.55}
-  .wrap{max-width:680px;margin:0 auto;padding:28px 20px 48px}
-  nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
-  nav a{font-size:14.5px;color:var(--tinta);text-decoration:none;background:#fff;border:1px solid var(--linea);border-radius:20px;padding:6px 14px}
-  nav a.activo{background:var(--ambar);color:#fff;border-color:var(--ambar)}
-  h1{font-size:32px;line-height:1.2;margin:10px 0 12px}
-  h2{font-size:22px;margin:30px 0 12px}
-  p,li{font-size:17px}
-  .sub{color:var(--suave);font-size:18px}
-  .cta{display:block;text-align:center;background:var(--ambar);color:#fff;text-decoration:none;font-size:19px;font-weight:bold;padding:16px 20px;border-radius:10px;margin:22px 0 8px}
-  .cta:hover{background:var(--ambar2)}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--crema);color:var(--tinta);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.22}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,244,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+  .topbar-in{max-width:1060px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+  .marca{font-family:Georgia,serif;font-weight:700;font-size:17px;white-space:nowrap}
+  .marca span{color:var(--ambar)}
+  .topnav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .topnav a{font-size:14px;color:var(--tinta);text-decoration:none;padding:7px 13px;border-radius:999px;border:1px solid transparent}
+  .topnav a:hover{border-color:var(--linea);background:#fff}
+  .topnav a.activo{background:var(--tinta);color:#fff}
+  .topnav a.fb{color:var(--ambar-osc);font-weight:600}
+  .cta{display:block;text-align:center;background:linear-gradient(180deg,var(--ambar2),var(--ambar));color:#fff;text-decoration:none;font-size:19px;font-weight:700;padding:17px 22px;border-radius:14px;box-shadow:0 12px 26px rgba(192,127,19,.35);transition:transform .15s ease}
+  .cta:hover{transform:translateY(-2px)}
+  .cta small{display:block;font-size:13.5px;font-weight:500;opacity:.92;margin-top:2px}
   .mini{font-size:13.5px;color:var(--suave);text-align:center}
-  .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:18px 20px;margin:14px 0}
-  .card p{margin:8px 0}
-  ul{margin:8px 0 8px 20px}
-  li{margin:5px 0}
-  .faq p{margin:10px 0}
-  .pie{border-top:1px solid var(--linea);margin-top:34px;padding-top:16px;font-size:13.5px;color:var(--suave)}
-  .badge{display:inline-block;background:#F3E7CF;border-radius:20px;padding:4px 12px;font-size:13.5px;margin-bottom:8px}
-  .num{font-size:21px;font-weight:bold;color:var(--ambar)}
+
+  .hero{padding:44px 0 8px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:start}
+  .pill{display:inline-flex;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600;box-shadow:var(--sombra)}
+  .hero h1{font-size:clamp(31px,4.4vw,46px);margin:16px 0 12px}
+  .hero h1 em{font-style:normal;color:var(--verde)}
+  .hero .sub{font-size:18.5px;color:var(--suave)}
+  .hero .cta{margin-top:22px;max-width:480px}
+  .hero .mini{text-align:left;max-width:480px;margin-top:9px}
+
+  /* Tarjeta ejemplo tipo recibo */
+  .recibo{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);box-shadow:var(--sombra-lg);padding:24px}
+  .recibo h3{font-size:18px;margin-bottom:4px}
+  .recibo .ej{font-size:13.5px;color:var(--suave);margin-bottom:14px}
+  .recibo .fila{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dashed var(--linea);font-size:16px}
+  .recibo .fila span{color:var(--suave)}
+  .recibo .fila strong{font-variant-numeric:tabular-nums}
+  .recibo .total{display:flex;justify-content:space-between;gap:14px;padding:13px 0 4px;font-size:18px;font-weight:700}
+  .recibo .pieza{margin-top:12px;background:#EAF4EC;border:1px solid #CFE6D4;border-radius:12px;padding:13px 16px;font-size:16px}
+  .recibo .pieza strong{color:var(--verde-osc);font-size:19px}
+  .recibo .ojo{margin-top:12px;font-size:14.5px;color:var(--suave)}
+
+  section{padding:36px 0 4px}
+  .sec-head h2{font-size:clamp(24px,3.2vw,32px);margin-bottom:8px}
+  .sec-head p{color:var(--suave);font-size:16.5px}
+  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+  .feat{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);padding:20px;box-shadow:var(--sombra)}
+  .feat h3{font-size:17.5px;margin-bottom:5px}
+  .feat p{font-size:15.5px;color:var(--suave)}
+  .feat .ico{width:42px;height:42px;border-radius:12px;background:#EAF4EC;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .feat .ico svg{width:22px;height:22px;stroke:var(--verde-osc);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+  .pago{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);box-shadow:var(--sombra);padding:8px 24px;margin-top:20px}
+  .pago .fila{display:flex;gap:16px;padding:15px 0;border-bottom:1px solid var(--linea)}
+  .pago .fila:last-child{border-bottom:none}
+  .pago .ico{flex:0 0 44px;width:44px;height:44px;border-radius:12px;background:#F6E9CF;display:flex;align-items:center;justify-content:center}
+  .pago .ico svg{width:23px;height:23px;stroke:var(--ambar-osc);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .pago strong{display:block;font-size:16.5px;margin-bottom:2px}
+  .pago p{font-size:15.5px;color:var(--suave)}
+
+  details{background:var(--papel);border:1px solid var(--linea);border-radius:14px;margin-bottom:10px;box-shadow:var(--sombra)}
+  summary{cursor:pointer;font-weight:700;font-size:16.5px;padding:16px 20px;list-style:none;position:relative;padding-right:48px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";position:absolute;right:20px;top:12px;font-size:24px;color:var(--verde);font-weight:400}
+  details[open ] summary::after{content:"–"}
+  details p{padding:0 20px 16px;font-size:16px;color:var(--suave)}
+  .faq{margin-top:18px}
+
+  .final{margin:42px 0 10px;background:linear-gradient(135deg,#1E3A28,var(--verde-osc));border-radius:22px;padding:36px 28px;text-align:center;color:#EAF4EC}
+  .final h2{color:#fff;font-size:clamp(23px,3.2vw,31px);margin-bottom:10px}
+  .final p{font-size:16.5px;max-width:36em;margin:0 auto 20px}
+  .final .cta{max-width:460px;margin:0 auto}
+  .final .mini{color:#BFDCC8;margin-top:10px}
+  .pie{border-top:1px solid var(--linea);margin-top:34px;padding:20px 0 90px;font-size:13.5px;color:var(--suave)}
+  .pie p{margin-bottom:8px;max-width:75em}
+  .sticky-cta{display:none}
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr}
+    .feats{grid-template-columns:1fr}
+    .topnav a.fb{display:none}
+  }
+  @media (max-width:640px){
+    .sticky-cta{display:block;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,253,248,.97);border-top:1px solid var(--linea);padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+    .sticky-cta .cta{padding:14px 18px;font-size:17px}
+  }
 </style>
 </head>
 <body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="marca">Velas y Jabones <span>con Lia</span></div>
+    <nav class="topnav">
+      <a href="tienda.html">Vitrina</a>
+      <a href="index.html">Curso 3x1</a>
+      <a href="calculadora.html" class="activo">Calculadora</a>
+      <a class="fb" href="https://www.facebook.com/Liavelasjabones">Facebook</a>
+    </nav>
+  </div>
+</header>
+
 <div class="wrap">
 
-  <nav>
-    <a href="tienda.html">Vitrina</a>
-    <a href="index.html">Curso 3x1</a>
-    <a href="calculadora.html" class="activo">Calculadora</a>
-    <a href="https://www.facebook.com/Liavelasjabones">Nuestra página</a>
-  </nav>
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="pill">🧼 Herramienta del taller · Aprende a Crear Velas y Jabones con Lia</span>
+        <h1>¿Sabes cuánto te cuesta <em>de verdad</em> cada jabón?</h1>
+        <p class="sub">Si pones el precio «a ojo», puedes estar perdiendo dinero en cada venta sin saberlo. La <strong>Calculadora de Recetas para Jabones</strong> hace las cuentas por ti: metes tus ingredientes y tus costos, y te da tu número real en segundos.</p>
+        <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Quiero mi Calculadora<small>Pago único · Acceso inmediato</small></a>
+        <p class="mini">Pago único, sin suscripción. El precio exacto, en tu moneda, se confirma en la página de pago antes de pagar.</p>
+      </div>
 
-  <span class="badge">🧼 Aprende a Crear Velas y Jabones con Lia</span>
-  <h1>¿Sabes cuánto te cuesta DE VERDAD cada jabón?</h1>
-  <p class="sub">Si pones el precio «a ojo», puedes estar perdiendo dinero en cada venta sin saberlo. La <strong>Calculadora de Recetas para Jabones</strong> hace las cuentas por ti: metes tus ingredientes y tus costos, y te da tu número real en segundos.</p>
-
-  <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Ver la Calculadora →</a>
-  <p class="mini">Pago único — sin suscripción. El precio exacto se confirma en la página de pago antes de pagar. Acceso inmediato.</p>
-
-  <h2>El error que esta herramienta corrige</h2>
-  <div class="card">
-    <p>Mira un ejemplo ilustrativo de un lote de 6 piezas:</p>
-    <ul>
-      <li>Materiales: <span class="num">$15.68</span></li>
-      <li>Tu tiempo de trabajo (45 min): <span class="num">$11.25</span></li>
-      <li>Gastos del taller (luz, empaque, desgaste): <span class="num">$3.00</span></li>
-    </ul>
-    <p>Total real del lote: <span class="num">$29.93</span> → <span class="num">$4.99 por pieza</span>. Quien solo cuenta los materiales cree que le cuesta $2.61… y vende perdiendo. <em>El método es el mismo para tus jabones: costo completo, no solo ingredientes.</em></p>
+      <div class="recibo">
+        <h3>El error que esta herramienta corrige</h3>
+        <p class="ej">Ejemplo ilustrativo: un lote de 6 piezas</p>
+        <div class="fila"><span>Materiales</span><strong>$15.68</strong></div>
+        <div class="fila"><span>Tu tiempo de trabajo (45 min)</span><strong>$11.25</strong></div>
+        <div class="fila"><span>Gastos del taller (luz, empaque, desgaste)</span><strong>$3.00</strong></div>
+        <div class="total"><span>Costo real del lote</span><span>$29.93</span></div>
+        <div class="pieza">Costo real por pieza: <strong>$4.99</strong></div>
+        <p class="ojo">Quien solo cuenta los materiales cree que le cuesta $2.61… y vende perdiendo. <em>El método es el mismo para tus jabones: costo completo, no solo ingredientes.</em></p>
+      </div>
+    </div>
   </div>
 
-  <h2>Qué hace la Calculadora</h2>
-  <div class="card">
-    <ul>
-      <li>Calcula <strong>costos, cantidades y precios</strong> de tus recetas en segundos.</li>
-      <li>Tú ingresas tus ingredientes y tus costos; la app hace la magia.</li>
-      <li><strong>Acceso inmediato</strong> al comprarla.</li>
-      <li>Se instala en tu <strong>celular como una app</strong> y también funciona en la computadora.</li>
-      <li>Incluye <strong>tutoriales en video</strong> para usarla desde el primer día.</li>
-    </ul>
-  </div>
+  <section>
+    <div class="sec-head">
+      <h2>Qué hace la Calculadora</h2>
+    </div>
+    <div class="feats">
+      <div class="feat">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 19h.01M12 19h.01M15.5 19h.01"/></svg></div>
+        <h3>Tus números, en segundos</h3>
+        <p>Calcula costos, cantidades y precio de venta de tus recetas. Tú ingresas tus ingredientes y tus costos; la app hace las cuentas.</p>
+      </div>
+      <div class="feat">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+        <h3>En tu celular, como una app</h3>
+        <p>Se instala en tu teléfono y también funciona en la computadora. Acceso inmediato al comprarla, para usarla en el taller cuando la necesitas.</p>
+      </div>
+      <div class="feat">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l5 2.5-5 2.5z"/></svg></div>
+        <h3>Tutoriales en video</h3>
+        <p>Incluye tutoriales paso a paso para usarla desde el primer día, aunque los números no sean lo tuyo.</p>
+      </div>
+    </div>
+  </section>
 
-  <h2>Antes de pagar, que te quede claro</h2>
-  <div class="card">
-    <p><strong>Quién te cobra:</strong> Hotmart, la plataforma del producto. Es el cargo que verás en tu tarjeta: es correcto.</p>
-    <p><strong>Cuánto pagas:</strong> una sola vez, sin mensualidades. El monto exacto, en tu moneda según tu país, aparece en la página de pago antes de que confirmes.</p>
-    <p><strong>Garantía:</strong> la gestiona Hotmart dentro del plazo del producto, que se confirma en la página de pago.</p>
-    <p><strong>Idioma:</strong> la página de pago puede abrir en inglés según tu país; el producto y sus tutoriales son en español.</p>
-  </div>
+  <section>
+    <div class="sec-head">
+      <h2>Antes de pagar, que te quede claro</h2>
+    </div>
+    <div class="pago">
+      <div class="fila">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></div>
+        <div><strong>Quién te cobra</strong><p>Hotmart, la plataforma del producto. Es el cargo que verás en tu tarjeta: es correcto, no es un error.</p></div>
+      </div>
+      <div class="fila">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.2c-.6-.8-1.7-1.2-3-1.2-1.9 0-3.2 1-3.2 2.4 0 3.3 6.6 1.9 6.6 4.7 0 1.4-1.5 2.4-3.4 2.4-1.4 0-2.7-.6-3.4-1.5"/></svg></div>
+        <div><strong>Cuánto pagas</strong><p>Una sola vez, sin mensualidades. El monto exacto, en tu moneda según tu país, aparece en la página de pago antes de que confirmes.</p></div>
+      </div>
+      <div class="fila">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4.5"/></svg></div>
+        <div><strong>Garantía</strong><p>La gestiona Hotmart dentro del plazo de garantía del producto, que se confirma en la página de pago antes de que confirmes.</p></div>
+      </div>
+      <div class="fila">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></div>
+        <div><strong>Idioma</strong><p>La página de pago puede abrir en inglés según tu país; el producto y sus tutoriales son en español.</p></div>
+      </div>
+    </div>
+  </section>
 
-  <h2>Preguntas frecuentes</h2>
-  <div class="card faq">
-    <p><strong>¿Necesito saber de números?</strong> No: tú pones los datos de tu receta y la app calcula. Para eso están los tutoriales.</p>
-    <p><strong>¿Sirve para velas también?</strong> Está hecha para recetas de jabones; el método de costo completo (materiales + tu tiempo + gastos) es el mismo que enseñamos para velas en nuestras clases gratis.</p>
-    <p><strong>¿Cuándo la recibo?</strong> El acceso es inmediato tras confirmar el pago.</p>
-  </div>
+  <section>
+    <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
+    <div class="faq">
+      <details><summary>¿Necesito saber de números?</summary><p>No: tú pones los datos de tu receta y la app calcula. Para eso están los tutoriales en video.</p></details>
+      <details><summary>¿Sirve para velas también?</summary><p>Está hecha para recetas de jabones; el método de costo completo (materiales + tu tiempo + gastos) es el mismo que enseñamos para velas en nuestras clases gratis.</p></details>
+      <details><summary>¿Cuándo la recibo?</summary><p>El acceso es inmediato tras confirmar el pago.</p></details>
+    </div>
+  </section>
 
-  <h2>Deja de adivinar tu precio</h2>
-  <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Ir a la Calculadora →</a>
+  <div class="final">
+    <h2>Deja de adivinar tu precio</h2>
+    <p>Cada jabón vendido por debajo de su costo real es dinero que regalas sin saberlo. Ponle número a tu trabajo desde hoy.</p>
+    <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Ir a la Calculadora<small>Pago único · Acceso inmediato</small></a>
+    <p class="mini">El precio exacto, en tu moneda, lo confirmas en la página de pago antes de pagar.</p>
+  </div>
 
   <div class="pie">
-    <p>Enlace de afiliado: si compras desde aquí, recibimos una comisión sin costo adicional para ti. El precio que pagas es el mismo.</p>
+    <p><strong>Enlace de afiliado:</strong> si compras desde aquí, recibimos una comisión sin costo adicional para ti. El precio que pagas es el mismo.</p>
     <p>Página de la comunidad «Aprende a Crear Velas y Jabones con Lia». La Calculadora es un producto de su productor en Hotmart; las condiciones finales (precio en tu moneda, garantía y acceso) son las de su página de pago. El ejemplo de costos de esta página es ilustrativo.</p>
   </div>
 
 </div>
+
+<div class="sticky-cta">
+  <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Quiero mi Calculadora →</a>
+</div>
+
 </body>
 </html>
