@@ -16,6 +16,9 @@ document.addEventListener('click',function(e){var a=e.target.closest('a.cta');if
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:Georgia,'Times New Roman',serif;background:var(--crema);color:var(--tinta);line-height:1.55}
   .wrap{max-width:680px;margin:0 auto;padding:28px 20px 48px}
+  nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  nav a{font-size:14.5px;color:var(--tinta);text-decoration:none;background:#fff;border:1px solid var(--linea);border-radius:20px;padding:6px 14px}
+  nav a.activo{background:var(--ambar);color:#fff;border-color:var(--ambar)}
   .stars{color:var(--ambar2);font-size:20px;letter-spacing:2px}
   h1{font-size:32px;line-height:1.2;margin:10px 0 12px}
   h2{font-size:22px;margin:30px 0 12px}
@@ -35,6 +38,13 @@ document.addEventListener('click',function(e){var a=e.target.closest('a.cta');if
 </head>
 <body>
 <div class="wrap">
+
+  <nav>
+    <a href="tienda.html">Vitrina</a>
+    <a href="index.html" class="activo">Curso 3x1</a>
+    <a href="calculadora.html">Calculadora</a>
+    <a href="https://www.facebook.com/Liavelasjabones">Nuestra página</a>
+  </nav>
 
   <span class="badge">🕯️🧼 Aprende a Crear Velas y Jabones con Lia</span>
   <div class="stars">★★★★★</div>
