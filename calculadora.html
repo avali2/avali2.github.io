@@ -13,210 +13,739 @@ document.addEventListener('click',function(e){var a=e.target.closest('a.cta');if
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1424136109626344&ev=PageView&noscript=1"/></noscript>
 <style>
-  :root{
-    --crema:#FAF4EA; --papel:#FFFDF8; --tinta:#2A2019; --suave:#6F5D4B;
-    --ambar:#C07F13; --ambar2:#E19A1F; --ambar-osc:#9A670D;
-    --linea:#EADFC9; --verde:#2F7D4F; --verde-osc:#256B42;
-    --sombra:0 10px 30px rgba(84,58,20,.10); --sombra-lg:0 18px 44px rgba(84,58,20,.16);
-    --radio:18px;
+:root {
+  color-scheme: light;
+  --paper: #fbf7ef;
+  --surface: #fffdf8;
+  --cream: #f3e8d8;
+  --parchment: #f6eee2;
+  --ink: #30211b;
+  --body: #4e3e34;
+  --muted: #6a5446;
+  --caramel: #88442e;
+  --cta: #843c27;
+  --cta-hover: #68301f;
+  --line: #e4d5c4;
+  --olive: #3f503b;
+  --olive-pale: #e9ecdf;
+  --radius: 20px;
+  --shadow: 0 15px 38px rgb(64 37 23 / 8%);
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  --gutter: clamp(20px, 5.3vw, 78px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-block: 20px; }
+body {
+  margin: 0;
+  color: var(--body);
+  background: var(--paper);
+  font: 400 1rem/1.64 var(--sans);
+  -webkit-text-size-adjust: 100%;
+}
+:where(h1, h2, h3, p, figure, dl, dd, ul, ol) { margin: 0; }
+h1, h2, h3 {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.09;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.65rem, 5.35vw, 5.35rem); letter-spacing: -.046em; }
+h2 { font-size: clamp(2.1rem, 3.7vw, 3.65rem); letter-spacing: -.036em; }
+h3 { font-size: clamp(1.55rem, 2.2vw, 2.12rem); letter-spacing: -.024em; }
+h1 em { color: var(--caramel); font-weight: inherit; }
+a { color: var(--caramel); text-underline-offset: .22em; }
+a:hover { color: var(--cta-hover); }
+:where(a, summary, button):focus-visible {
+  outline: 2px solid #3f503b;
+  outline-offset: 4px;
+}
+img { display: block; max-width: 100%; }
+strong { color: var(--ink); }
+ul, ol { padding-inline-start: 1.25rem; }
+::selection { color: var(--ink); background: #f1d4b9; }
+.wrap { width: min(100% - var(--gutter) * 2, 1200px); margin-inline: auto; }
+
+.topbar {
+  position: relative;
+  z-index: 2;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-in {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--ink);
+  font: 400 clamp(1.24rem, 2.2vw, 1.64rem)/1.1 var(--serif);
+  white-space: nowrap;
+  letter-spacing: -.028em;
+}
+.marca em { color: var(--caramel); }
+.marca .sello {
+  display: grid;
+  place-items: center;
+  flex: 0 0 38px;
+  inline-size: 38px;
+  block-size: 43px;
+  color: var(--caramel);
+  background: var(--parchment);
+  border: 1px solid #dec4a8;
+  border-radius: 50% 50% 47% 47%;
+}
+.line-icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.topnav { display: flex; align-items: center; gap: 6px; }
+.topnav a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 44px;
+  padding-inline: 14px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: var(--body);
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: .875rem;
+  font-weight: 650;
+  transition: color .16s ease, background .16s ease, border-color .16s ease;
+}
+.topnav a:hover { color: var(--cta-hover); background: var(--parchment); }
+.topnav a[aria-current="page"] {
+  color: var(--cta-hover);
+  background: #f2e3d4;
+  border-color: #ecdbcb;
+}
+.topnav .fb { margin-inline-start: 8px; border-color: var(--line); }
+.topnav .fb::after {
+  content: "";
+  inline-size: 7px;
+  block-size: 7px;
+  border-block-start: 1px solid;
+  border-inline-end: 1px solid;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.09fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(30px, 6vw, 88px);
+}
+.hero-copy .sub, .section-intro p { max-width: 61ch; }
+.hero-copy .sub {
+  margin-top: 20px;
+  font-size: clamp(1rem, 1.45vw, 1.15rem);
+  line-height: 1.58;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  color: var(--caramel);
+  font-size: .75rem;
+  font-weight: 750;
+  letter-spacing: .077em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  flex: 0 0 20px;
+  block-size: 1px;
+  background: currentColor;
+  opacity: .66;
+}
+.mini {
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: .855rem;
+  line-height: 1.56;
+}
+.stars { color: #914521; letter-spacing: .075em; white-space: nowrap; }
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 48px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: var(--cta);
+  color: #fffaf3;
+  text-align: center;
+  text-decoration: none;
+  font-size: .965rem;
+  font-weight: 720;
+  line-height: 1.35;
+  box-shadow: 0 3px 10px rgb(101 46 28 / 14%);
+  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.cta:hover {
+  background: var(--cta-hover);
+  color: #fffaf3;
+  box-shadow: 0 6px 16px rgb(101 46 28 / 20%);
+}
+.cta.main-action {
+  display: inline-grid;
+  min-block-size: 62px;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 3px 22px;
+  justify-items: start;
+  align-content: center;
+  padding-inline: 20px;
+  text-align: left;
+  font-size: 1.06rem;
+}
+.main-action small {
+  grid-row: 2;
+  color: inherit;
+  font-size: .765rem;
+  font-weight: 500;
+  opacity: .94;
+}
+.main-action .arrow {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  align-self: center;
+  width: 19px;
+  height: 19px;
+}
+.cta.suave {
+  background: transparent;
+  color: var(--cta-hover);
+  border-color: #cbb39d;
+  box-shadow: none;
+}
+.cta.suave:hover { background: #f3e4d5; border-color: #a86d53; }
+.hero-actions { margin-top: 23px; }
+.hero-actions .mini { margin-top: 10px; }
+.alt-link { margin-top: 11px; font-size: .895rem; }
+.alt-link a { display: inline-block; padding-block: 4px; font-weight: 700; }
+.checklist { padding: 0; list-style: none; }
+.checklist li {
+  position: relative;
+  min-height: 24px;
+  padding-inline-start: 31px;
+}
+.checklist li + li { margin-top: 8px; }
+.checklist li::before {
+  content: "";
+  position: absolute;
+  inset: .22em auto auto 0;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--olive-pale);
+}
+.checklist li::after {
+  content: "";
+  position: absolute;
+  inset: .5em auto auto 5px;
+  width: 9px;
+  height: 5px;
+  border-inline-start: 1.5px solid var(--olive);
+  border-block-end: 1.5px solid var(--olive);
+  transform: rotate(-45deg);
+}
+
+.section-block { padding-block: clamp(47px, 6.15vw, 91px); }
+.section-intro { margin-bottom: clamp(22px, 3.35vw, 43px); }
+.section-intro p { margin-top: 12px; font-size: 1.055rem; }
+.soft-band {
+  background: var(--parchment);
+  border-block: 1px solid var(--line);
+}
+.split-section {
+  display: grid;
+  grid-template-columns: minmax(0, .71fr) minmax(0, 1.29fr);
+  align-items: start;
+  gap: clamp(24px, 5.5vw, 80px);
+}
+.split-section h2 { text-wrap: initial; }
+.split-section .section-intro { margin-bottom: 0; }
+.split-section .section-intro p { max-width: 36ch; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.25vw, 28px);
+}
+.tile {
+  min-width: 0;
+  padding: clamp(20px, 2.6vw, 35px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 18px rgb(64 37 23 / 4%);
+}
+.tile p { margin-top: 11px; }
+.icon-box {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  color: var(--caramel);
+  background: #f5e8d9;
+  border-radius: 12px;
+}
+.icon-box svg { width: 22px; height: 22px; }
+.icon-box.olive { color: var(--olive); background: var(--olive-pale); }
+
+.payment-list {
+  margin: 0;
+  padding-inline: clamp(14px, 3vw, 30px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgb(64 37 23 / 4%);
+}
+.payment-row {
+  position: relative;
+  min-block-size: 76px;
+  padding-block: 17px;
+  padding-inline-start: 55px;
+}
+.payment-row + .payment-row { border-top: 1px solid var(--line); }
+.payment-row .icon-box { position: absolute; inset: 17px auto auto 0; }
+.payment-row dt { display: block; color: var(--ink); font-weight: 720; }
+.payment-row dd { margin-top: 3px; font-size: .95rem; line-height: 1.58; }
+
+.faq {
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.faq details + details { border-top: 1px solid var(--line); }
+.faq summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  min-block-size: 61px;
+  padding: 14px clamp(17px, 3vw, 25px);
+  color: var(--ink);
+  background: transparent;
+  font-weight: 700;
+  line-height: 1.42;
+  cursor: pointer;
+  list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:focus-visible { outline-offset: -4px; border-radius: 8px; }
+.faq summary:hover { background: var(--paper); }
+.faq summary::after {
+  content: "";
+  flex: 0 0 28px;
+  height: 28px;
+  border: 1px solid #e2cbb6;
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--caramel), var(--caramel)) center / 11px 1.5px no-repeat,
+    linear-gradient(var(--caramel), var(--caramel)) center / 1.5px 11px no-repeat,
+    var(--parchment);
+}
+.faq details[open] summary::after { background-size: 11px 1.5px, 0 0, auto; }
+.faq details p {
+  max-width: 75ch;
+  margin: -3px clamp(17px, 3vw, 25px) 18px;
+  font-size: .975rem;
+}
+
+.finale { padding-bottom: clamp(40px, 5vw, 75px); }
+.final {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+  align-items: center;
+  gap: clamp(24px, 5vw, 76px);
+  padding: clamp(28px, 5vw, 71px);
+  color: #fff1e3;
+  background: #472b23;
+  border: 1px solid #583328;
+  border-radius: clamp(18px, 3vw, 30px);
+}
+.final::before, .final::after {
+  position: absolute;
+  content: "";
+  z-index: -1;
+  inset: -85px -77px auto auto;
+  width: 300px;
+  height: 300px;
+  border: 1px solid rgb(241 206 165 / 19%);
+  border-radius: 50%;
+}
+.final::after { width: 425px; height: 425px; inset: -83px -97px auto auto; }
+.final h2 { color: #fff8e9; text-wrap: initial; }
+.final p { max-width: 57ch; margin-top: 13px; }
+.final .mini { color: #f2dfcd; margin-top: 11px; }
+.final .cta { background: #fae0c0; color: #41271d; }
+.final .cta:hover { background: #f2cda5; color: #41271d; }
+.final .cta:focus-visible { outline-color: #ffebca; }
+
+.pie {
+  padding-block: clamp(24px, 4vw, 48px);
+  background: #f3eadf;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .855rem;
+  line-height: 1.6;
+}
+.pie .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(15px, 5vw, 72px);
+}
+
+.sticky-cta { display: none; }
+.sticky-cta[hidden] { display: none; }
+
+@media (max-width: 900px) {
+  .hero-grid { gap: clamp(24px, 4.3vw, 48px); }
+  .split-section { grid-template-columns: minmax(0, .77fr) minmax(0, 1.23fr); gap: 25px; }
+}
+@media (max-width: 740px) {
+  .topbar-in { min-height: 0; display: grid; gap: 8px; padding-block: 12px 9px; }
+  .marca .sello { flex-basis: 31px; inline-size: 31px; block-size: 35px; }
+  .topnav { display: grid; grid-template-columns: .85fr 1fr 1.13fr 1.12fr; gap: 3px; }
+  .topnav a { min-block-size: 43px; padding-inline: 5px; font-size: .8rem; }
+  .topnav .fb { margin-inline-start: 2px; }
+  .topnav .fb::after { display: none; }
+  .hero-grid, .split-section, .feature-grid, .final, .pie .wrap { grid-template-columns: minmax(0, 1fr); }
+  .split-section .section-intro p { max-width: 56ch; }
+  .hero-copy .sub { margin-top: 15px; }
+  .final h2 { text-wrap: balance; }
+}
+@media (max-width: 640px) {
+  html:has(.sticky-cta) { scroll-padding-block-end: calc(85px + env(safe-area-inset-bottom)); }
+  body:has(.sticky-cta) { padding-bottom: calc(65px + env(safe-area-inset-bottom)); }
+  .hero-actions .main-action, .final .main-action { width: 100%; }
+  .sticky-cta {
+    display: block;
+    position: fixed;
+    z-index: 5;
+    inset: auto 0 0;
+    padding: 8px var(--gutter) calc(8px + env(safe-area-inset-bottom));
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -6px 27px rgb(64 37 23 / 9%);
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--crema);color:var(--tinta);line-height:1.6;-webkit-font-smoothing:antialiased}
-  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.22}
-  img{display:block;max-width:100%}
-  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
-  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,244,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
-  .topbar-in{max-width:1060px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
-  .marca{font-family:Georgia,serif;font-weight:700;font-size:17px;white-space:nowrap}
-  .marca span{color:var(--ambar)}
-  .topnav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
-  .topnav a{font-size:14px;color:var(--tinta);text-decoration:none;padding:7px 13px;border-radius:999px;border:1px solid transparent}
-  .topnav a:hover{border-color:var(--linea);background:#fff}
-  .topnav a.activo{background:var(--tinta);color:#fff}
-  .topnav a.fb{color:var(--ambar-osc);font-weight:600}
-  .cta{display:block;text-align:center;background:linear-gradient(180deg,var(--ambar2),var(--ambar));color:#fff;text-decoration:none;font-size:19px;font-weight:700;padding:17px 22px;border-radius:14px;box-shadow:0 12px 26px rgba(192,127,19,.35);transition:transform .15s ease}
-  .cta:hover{transform:translateY(-2px)}
-  .cta small{display:block;font-size:13.5px;font-weight:500;opacity:.92;margin-top:2px}
-  .mini{font-size:13.5px;color:var(--suave);text-align:center}
+  .sticky-cta .cta { display: flex; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
 
-  .hero{padding:44px 0 8px}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:start}
-  .pill{display:inline-flex;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600;box-shadow:var(--sombra)}
-  .hero h1{font-size:clamp(31px,4.4vw,46px);margin:16px 0 12px}
-  .hero h1 em{font-style:normal;color:var(--verde)}
-  .hero .sub{font-size:18.5px;color:var(--suave)}
-  .hero .cta{margin-top:22px;max-width:480px}
-  .hero .mini{text-align:left;max-width:480px;margin-top:9px}
+.sello {
+  position: relative;
+}
+.sello::before {
+  content: "";
+  width: 12px;
+  height: 11px;
+  margin-top: 10px;
+  border: 1px solid currentColor;
+  border-radius: 2px 2px 3px 3px;
+  background: linear-gradient(currentColor,currentColor) 50% 4px / 6px 1px no-repeat;
+}
+.sello::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 11px);
+  left: calc(50% - 3px);
+  width: 6px;
+  height: 8px;
+  border: 1px solid currentColor;
+  border-radius: 65% 0 65% 65%;
+  transform: rotate(-27deg);
+}
+.arrow {
+  display: inline-block;
+  position: relative;
+  color: inherit;
+}
+.arrow::before, .arrow::after { content: ""; position: absolute; }
+.arrow::before {
+  top: calc(50% - 1px);
+  inset-inline: 1px 3px;
+  border-block-start: 1.5px solid;
+}
+.arrow::after {
+  top: calc(50% - 4.5px);
+  inset-inline-end: 3px;
+  width: 8px;
+  height: 8px;
+  border-block-start: 1.5px solid;
+  border-inline-end: 1.5px solid;
+  transform: rotate(45deg);
+}
+.hero-surface {
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 88% 3%, rgb(233 196 158 / 29%), transparent 56%),
+    repeating-linear-gradient(115deg, transparent 0 9px, rgb(130 80 44 / 2%) 9px 10px),
+    var(--parchment);
+  border-bottom: 1px solid var(--line);
+}
+.hero-surface h1 { text-wrap: initial; }
 
-  /* Tarjeta ejemplo tipo recibo */
-  .recibo{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);box-shadow:var(--sombra-lg);padding:24px}
-  .recibo h3{font-size:18px;margin-bottom:4px}
-  .recibo .ej{font-size:13.5px;color:var(--suave);margin-bottom:14px}
-  .recibo .fila{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dashed var(--linea);font-size:16px}
-  .recibo .fila span{color:var(--suave)}
-  .recibo .fila strong{font-variant-numeric:tabular-nums}
-  .recibo .total{display:flex;justify-content:space-between;gap:14px;padding:13px 0 4px;font-size:18px;font-weight:700}
-  .recibo .pieza{margin-top:12px;background:#EAF4EC;border:1px solid #CFE6D4;border-radius:12px;padding:13px 16px;font-size:16px}
-  .recibo .pieza strong{color:var(--verde-osc);font-size:19px}
-  .recibo .ojo{margin-top:12px;font-size:14.5px;color:var(--suave)}
-
-  section{padding:36px 0 4px}
-  .sec-head h2{font-size:clamp(24px,3.2vw,32px);margin-bottom:8px}
-  .sec-head p{color:var(--suave);font-size:16.5px}
-  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
-  .feat{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);padding:20px;box-shadow:var(--sombra)}
-  .feat h3{font-size:17.5px;margin-bottom:5px}
-  .feat p{font-size:15.5px;color:var(--suave)}
-  .feat .ico{width:42px;height:42px;border-radius:12px;background:#EAF4EC;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-  .feat .ico svg{width:22px;height:22px;stroke:var(--verde-osc);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-
-  .pago{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);box-shadow:var(--sombra);padding:8px 24px;margin-top:20px}
-  .pago .fila{display:flex;gap:16px;padding:15px 0;border-bottom:1px solid var(--linea)}
-  .pago .fila:last-child{border-bottom:none}
-  .pago .ico{flex:0 0 44px;width:44px;height:44px;border-radius:12px;background:#F6E9CF;display:flex;align-items:center;justify-content:center}
-  .pago .ico svg{width:23px;height:23px;stroke:var(--ambar-osc);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-  .pago strong{display:block;font-size:16.5px;margin-bottom:2px}
-  .pago p{font-size:15.5px;color:var(--suave)}
-
-  details{background:var(--papel);border:1px solid var(--linea);border-radius:14px;margin-bottom:10px;box-shadow:var(--sombra)}
-  summary{cursor:pointer;font-weight:700;font-size:16.5px;padding:16px 20px;list-style:none;position:relative;padding-right:48px}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";position:absolute;right:20px;top:12px;font-size:24px;color:var(--verde);font-weight:400}
-  details[open ] summary::after{content:"–"}
-  details p{padding:0 20px 16px;font-size:16px;color:var(--suave)}
-  .faq{margin-top:18px}
-
-  .final{margin:42px 0 10px;background:linear-gradient(135deg,#1E3A28,var(--verde-osc));border-radius:22px;padding:36px 28px;text-align:center;color:#EAF4EC}
-  .final h2{color:#fff;font-size:clamp(23px,3.2vw,31px);margin-bottom:10px}
-  .final p{font-size:16.5px;max-width:36em;margin:0 auto 20px}
-  .final .cta{max-width:460px;margin:0 auto}
-  .final .mini{color:#BFDCC8;margin-top:10px}
-  .pie{border-top:1px solid var(--linea);margin-top:34px;padding:20px 0 90px;font-size:13.5px;color:var(--suave)}
-  .pie p{margin-bottom:8px;max-width:75em}
-  .sticky-cta{display:none}
-  @media (max-width:860px){
-    .hero-grid{grid-template-columns:1fr}
-    .feats{grid-template-columns:1fr}
-    .topnav a.fb{display:none}
-  }
-  @media (max-width:640px){
-    .sticky-cta{display:block;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,253,248,.97);border-top:1px solid var(--linea);padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
-    .sticky-cta .cta{padding:14px 18px;font-size:17px}
-  }
+.calc-hero { padding-block: clamp(35px, 5.7vw, 84px); }
+.calc-hero .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, .92fr); }
+.calc-hero h1 { max-width: 13ch; margin-top: 13px; }
+.calc-hero .eyebrow { max-width: 42ch; }
+.receipt-wrap {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(16px, 3.4vw, 47px);
+  overflow: hidden;
+  border: 1px solid #d6d4c0;
+  border-radius: 23px;
+  background:
+    repeating-linear-gradient(134deg, transparent 0 8px, rgb(66 75 44 / 4%) 8px 9px),
+    radial-gradient(ellipse at 30% 0, #f4f1e2, transparent 58%),
+    #e5e8d9;
+}
+.receipt-wrap::before, .receipt-wrap::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  inset: auto -85px -106px auto;
+  width: 270px;
+  height: 270px;
+  border: 1px solid rgb(63 80 59 / 23%);
+  border-radius: 50%;
+}
+.receipt-wrap::after { width: 325px; height: 325px; inset: auto -100px -120px auto; }
+.recibo {
+  position: relative;
+  z-index: 1;
+  padding: clamp(16px, 2.6vw, 32px);
+  background: #fffdf6;
+  border: 1px solid #ded7c1;
+  border-radius: 10px 10px 2px 2px;
+  box-shadow: 0 10px 22px rgb(53 58 37 / 11%);
+}
+.recibo::after {
+  content: "";
+  position: absolute;
+  inset: 100% -1px auto;
+  height: 5px;
+  background: linear-gradient(135deg, #fffdf6 25%, transparent 25%) 0 0 / 10px 10px repeat-x,
+    linear-gradient(225deg, #fffdf6 25%, transparent 25%) 0 0 / 10px 10px repeat-x;
+}
+.recibo h2 { font-size: clamp(1.53rem, 2.55vw, 2.5rem); letter-spacing: -.027em; text-wrap: initial; }
+.recibo .ej {
+  margin-block: 7px 12px;
+  color: var(--olive);
+  font-size: .835rem;
+  font-weight: 720;
+  line-height: 1.41;
+}
+.receipt-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 10px;
+  padding-block: 7px;
+  border-top: 1px solid #eee3d4;
+  font-size: .87rem;
+  line-height: 1.38;
+}
+.receipt-line dd { color: var(--ink); font-weight: 680; font-variant-numeric: tabular-nums; }
+.receipt-line.total {
+  margin-top: 1px;
+  padding-block: 9px 8px;
+  border-top: 1px dashed #cbbb9e;
+  color: var(--ink);
+  font-weight: 700;
+}
+.receipt-line.pieza {
+  align-items: center;
+  margin-top: 3px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--olive-pale);
+  color: var(--olive);
+  font-weight: 700;
+}
+.receipt-line.pieza dd { color: var(--olive); font-size: 1.17rem; }
+.recibo .ojo {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: .813rem;
+  line-height: 1.5;
+}
+.calc-features .icon-box { margin-bottom: 12px; }
+@media (max-width: 900px) {
+  .receipt-wrap { padding: 17px; }
+}
+@media (max-width: 740px) {
+  .calc-hero .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .calc-hero h1 { max-width: 15ch; }
+}
 </style>
 </head>
 <body>
 
 <header class="topbar">
-  <div class="topbar-in">
-    <div class="marca">Velas y Jabones <span>con Lia</span></div>
-    <nav class="topnav">
+  <div class="wrap topbar-in">
+    <div class="marca"><span class="sello" aria-hidden="true"></span><span>Velas y Jabones <em>con Lia</em></span></div>
+    <nav class="topnav" aria-label="Navegación principal">
       <a href="tienda.html">Vitrina</a>
       <a href="index.html">Curso 3x1</a>
-      <a href="calculadora.html" class="activo">Calculadora</a>
+      <a href="calculadora.html" aria-current="page">Calculadora</a>
       <a class="fb" href="https://www.facebook.com/Liavelasjabones">Facebook</a>
     </nav>
   </div>
 </header>
 
-<div class="wrap">
+<main>
+  <section class="hero-surface calc-hero" aria-labelledby="calc-titulo">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Herramienta del taller · Aprende a Crear Velas y Jabones con Lia</p>
+        <h1 id="calc-titulo">¿Sabes cuánto te cuesta <em>de verdad</em> cada jabón?</h1>
+        <p class="sub">Si pones el precio «a ojo», puedes estar perdiendo dinero en cada venta sin saberlo. En la <strong>Calculadora de Recetas para Jabones</strong> ingresas tus ingredientes y tus costos, y obtienes el costo real en segundos.</p>
+        <div class="hero-actions">
+          <a class="cta main-action" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1"><span>Quiero mi Calculadora</span><small>Pago único · Acceso inmediato</small><span class="arrow" aria-hidden="true"></span></a>
+          <p class="mini">Pago único, sin suscripción. El precio exacto, en tu moneda, se confirma en la página de pago antes de pagar.</p>
+        </div>
+      </div>
+      <div class="receipt-wrap">
+        <section class="recibo" aria-labelledby="ejemplo-titulo">
+          <h2 id="ejemplo-titulo">El error que esta herramienta corrige</h2>
+          <p class="ej">Ejemplo ilustrativo de costos de un lote de 6 piezas</p>
+          <dl>
+            <div class="receipt-line"><dt>Materiales</dt><dd>$15.68</dd></div>
+            <div class="receipt-line"><dt>Tu tiempo de trabajo (45 min)</dt><dd>$11.25</dd></div>
+            <div class="receipt-line"><dt>Gastos del taller (luz, empaque, desgaste)</dt><dd>$3.00</dd></div>
+            <div class="receipt-line total"><dt>Costo real del lote</dt><dd>$29.93</dd></div>
+            <div class="receipt-line pieza"><dt>Costo real por pieza</dt><dd>$4.99</dd></div>
+          </dl>
+          <p class="ojo">Si solo cuentas los materiales, parece que cada pieza cuesta <strong>$2.61</strong>. Si vendes a ese valor, pierdes dinero. Para calcular el costo completo de tus jabones, suma materiales, tiempo y gastos del taller.</p>
+        </section>
+      </div>
+    </div>
+  </section>
 
-  <div class="hero">
-    <div class="hero-grid">
+  <section class="section-block calc-features" aria-labelledby="funciones-titulo">
+    <div class="wrap">
+      <div class="section-intro"><h2 id="funciones-titulo">Qué hace la Calculadora</h2></div>
+      <div class="feature-grid">
+        <article class="tile">
+          <span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 19h.01M12 19h.01"/></svg></span>
+          <h3>Tus números, en segundos</h3>
+          <p>Calcula costos, cantidades y precio de venta de tus recetas. Tú ingresas tus ingredientes y tus costos. La app hace las cuentas.</p>
+        </article>
+        <article class="tile">
+          <span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
+          <h3>En tu celular, como una app</h3>
+          <p>Se instala en tu teléfono y también funciona en la computadora. Recibes acceso inmediato al comprarla y puedes usarla en el taller cuando la necesites.</p>
+        </article>
+        <article class="tile">
+          <span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l5 2.5-5 2.5z"/></svg></span>
+          <h3>Tutoriales en video</h3>
+          <p>Incluye tutoriales paso a paso para usarla desde el primer día, aunque los números no sean lo tuyo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block soft-band" aria-labelledby="pago-titulo">
+    <div class="wrap split-section">
+      <div class="section-intro"><h2 id="pago-titulo">Antes de pagar, que te quede claro</h2></div>
+      <dl class="payment-list">
+        <div class="payment-row"><dt><span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></span>Quién te cobra</dt><dd>Hotmart procesa el pago del producto. Ese es el cargo que verás en tu tarjeta.</dd></div>
+        <div class="payment-row"><dt><span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.2c-.6-.8-1.7-1.2-3-1.2-1.9 0-3.2 1-3.2 2.4 0 3.3 6.6 1.9 6.6 4.7 0 1.4-1.5 2.4-3.4 2.4-1.4 0-2.7-.6-3.4-1.5"/></svg></span>Cuánto pagas</dt><dd>Una sola vez, sin mensualidades. El monto exacto, en la moneda de tu país, aparece en la página de pago antes de que confirmes.</dd></div>
+        <div class="payment-row"><dt><span class="icon-box olive" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4.5"/></svg></span>Garantía</dt><dd>Hotmart gestiona la devolución dentro del plazo de garantía del producto. Puedes consultar ese plazo en la página de pago antes de confirmar.</dd></div>
+        <div class="payment-row"><dt><span class="icon-box olive" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></span>Idioma</dt><dd>La página de pago puede abrir en inglés según tu país. El producto y sus tutoriales son en español.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="faq-titulo">
+    <div class="wrap split-section">
+      <div class="section-intro"><h2 id="faq-titulo">Preguntas frecuentes</h2></div>
+      <div class="faq">
+        <details><summary>¿Necesito saber de números?</summary><p>Solo ingresas los datos de tu receta y la app calcula. Los tutoriales en video te guían paso a paso.</p></details>
+        <details><summary>¿Sirve para velas también?</summary><p>Está hecha para recetas de jabones. El método de costo completo (materiales + tu tiempo + gastos) es el mismo que enseñamos para velas en nuestras clases gratis.</p></details>
+        <details><summary>¿Cuándo la recibo?</summary><p>El acceso es inmediato tras confirmar el pago.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap finale" aria-labelledby="empezar-titulo">
+    <div class="final">
       <div>
-        <span class="pill">🧼 Herramienta del taller · Aprende a Crear Velas y Jabones con Lia</span>
-        <h1>¿Sabes cuánto te cuesta <em>de verdad</em> cada jabón?</h1>
-        <p class="sub">Si pones el precio «a ojo», puedes estar perdiendo dinero en cada venta sin saberlo. La <strong>Calculadora de Recetas para Jabones</strong> hace las cuentas por ti: metes tus ingredientes y tus costos, y te da tu número real en segundos.</p>
-        <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Quiero mi Calculadora<small>Pago único · Acceso inmediato</small></a>
-        <p class="mini">Pago único, sin suscripción. El precio exacto, en tu moneda, se confirma en la página de pago antes de pagar.</p>
+        <h2 id="empezar-titulo">Deja de adivinar tu precio</h2>
+        <p>Si vendes un jabón por debajo de lo que cuesta producirlo, pierdes dinero. Conoce el costo de tu trabajo desde hoy.</p>
       </div>
-
-      <div class="recibo">
-        <h3>El error que esta herramienta corrige</h3>
-        <p class="ej">Ejemplo ilustrativo: un lote de 6 piezas</p>
-        <div class="fila"><span>Materiales</span><strong>$15.68</strong></div>
-        <div class="fila"><span>Tu tiempo de trabajo (45 min)</span><strong>$11.25</strong></div>
-        <div class="fila"><span>Gastos del taller (luz, empaque, desgaste)</span><strong>$3.00</strong></div>
-        <div class="total"><span>Costo real del lote</span><span>$29.93</span></div>
-        <div class="pieza">Costo real por pieza: <strong>$4.99</strong></div>
-        <p class="ojo">Quien solo cuenta los materiales cree que le cuesta $2.61… y vende perdiendo. <em>El método es el mismo para tus jabones: costo completo, no solo ingredientes.</em></p>
-      </div>
-    </div>
-  </div>
-
-  <section>
-    <div class="sec-head">
-      <h2>Qué hace la Calculadora</h2>
-    </div>
-    <div class="feats">
-      <div class="feat">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 19h.01M12 19h.01M15.5 19h.01"/></svg></div>
-        <h3>Tus números, en segundos</h3>
-        <p>Calcula costos, cantidades y precio de venta de tus recetas. Tú ingresas tus ingredientes y tus costos; la app hace las cuentas.</p>
-      </div>
-      <div class="feat">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
-        <h3>En tu celular, como una app</h3>
-        <p>Se instala en tu teléfono y también funciona en la computadora. Acceso inmediato al comprarla, para usarla en el taller cuando la necesitas.</p>
-      </div>
-      <div class="feat">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l5 2.5-5 2.5z"/></svg></div>
-        <h3>Tutoriales en video</h3>
-        <p>Incluye tutoriales paso a paso para usarla desde el primer día, aunque los números no sean lo tuyo.</p>
+      <div>
+        <a class="cta main-action" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1"><span>Ir a la Calculadora</span><small>Pago único · Acceso inmediato</small><span class="arrow" aria-hidden="true"></span></a>
+        <p class="mini">El precio exacto, en tu moneda, lo confirmas en la página de pago antes de pagar.</p>
       </div>
     </div>
   </section>
+</main>
 
-  <section>
-    <div class="sec-head">
-      <h2>Antes de pagar, que te quede claro</h2>
-    </div>
-    <div class="pago">
-      <div class="fila">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></div>
-        <div><strong>Quién te cobra</strong><p>Hotmart, la plataforma del producto. Es el cargo que verás en tu tarjeta: es correcto, no es un error.</p></div>
-      </div>
-      <div class="fila">
-        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.2c-.6-.8-1.7-1.2-3-1.2-1.9 0-3.2 1-3.2 2.4 0 3.3 6.6 1.9 6.6 4.7 0 1.4-1.5 2.4-3.4 2.4-1.4 0-2.7-.6-3.4-1.5"/></svg></div>
-        <div><strong>Cuánto pagas</strong><p>Una sola vez, sin mensualidades. El monto exacto, en tu moneda según tu país, aparece en la página de pago antes de que confirmes.</p></div>
-      </div>
-      <div class="fila">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4.5"/></svg></div>
-        <div><strong>Garantía</strong><p>La gestiona Hotmart dentro del plazo de garantía del producto, que se confirma en la página de pago antes de que confirmes.</p></div>
-      </div>
-      <div class="fila">
-        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></div>
-        <div><strong>Idioma</strong><p>La página de pago puede abrir en inglés según tu país; el producto y sus tutoriales son en español.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
-    <div class="faq">
-      <details><summary>¿Necesito saber de números?</summary><p>No: tú pones los datos de tu receta y la app calcula. Para eso están los tutoriales en video.</p></details>
-      <details><summary>¿Sirve para velas también?</summary><p>Está hecha para recetas de jabones; el método de costo completo (materiales + tu tiempo + gastos) es el mismo que enseñamos para velas en nuestras clases gratis.</p></details>
-      <details><summary>¿Cuándo la recibo?</summary><p>El acceso es inmediato tras confirmar el pago.</p></details>
-    </div>
-  </section>
-
-  <div class="final">
-    <h2>Deja de adivinar tu precio</h2>
-    <p>Cada jabón vendido por debajo de su costo real es dinero que regalas sin saberlo. Ponle número a tu trabajo desde hoy.</p>
-    <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Ir a la Calculadora<small>Pago único · Acceso inmediato</small></a>
-    <p class="mini">El precio exacto, en tu moneda, lo confirmas en la página de pago antes de pagar.</p>
-  </div>
-
-  <div class="pie">
+<footer class="pie">
+  <div class="wrap">
     <p><strong>Enlace de afiliado:</strong> si compras desde aquí, recibimos una comisión sin costo adicional para ti. El precio que pagas es el mismo.</p>
-    <p>Página de la comunidad «Aprende a Crear Velas y Jabones con Lia». La Calculadora es un producto de su productor en Hotmart; las condiciones finales (precio en tu moneda, garantía y acceso) son las de su página de pago. El ejemplo de costos de esta página es ilustrativo.</p>
+    <p>Página de la comunidad «Aprende a Crear Velas y Jabones con Lia». La Calculadora es un producto de su productor en Hotmart. Las condiciones finales (precio en tu moneda, garantía y acceso) son las de su página de pago. El ejemplo de costos de esta página es ilustrativo.</p>
   </div>
-
-</div>
+</footer>
 
 <div class="sticky-cta">
   <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Quiero mi Calculadora →</a>
 </div>
 
+<script>
+(() => {
+  if (!("IntersectionObserver" in window)) return;
+
+  const sticky = document.querySelector(".sticky-cta");
+  const actions = document.querySelectorAll(".hero-actions .main-action, .final .main-action");
+  const visibleActions = new Set();
+
+  const updateSticky = () => {
+    sticky.hidden = visibleActions.size > 0 && !sticky.contains(document.activeElement);
+  };
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.intersectionRatio >= 0.9) {
+        visibleActions.add(entry.target);
+      } else {
+        visibleActions.delete(entry.target);
+      }
+    }
+    updateSticky();
+  }, { threshold: 0.9, rootMargin: "0px 0px -65px 0px" });
+
+  actions.forEach(action => observer.observe(action));
+  sticky.addEventListener("focusout", () => requestAnimationFrame(updateSticky));
+})();
+</script>
 </body>
 </html>
