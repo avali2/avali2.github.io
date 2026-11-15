@@ -509,6 +509,20 @@ ul, ol { padding-inline-start: 1.25rem; }
   border-bottom: 1px solid var(--line);
 }
 .hero-surface h1 { text-wrap: initial; }
+.hero-surface { position: relative; overflow: hidden; }
+.hero-surface::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 42% 34% at 86% 6%, rgb(255 176 92 / 38%), transparent 62%),
+    radial-gradient(ellipse 30% 26% at 12% 88%, rgb(255 158 74 / 20%), transparent 60%);
+  animation: brilloVela 7s ease-in-out infinite alternate;
+}
+@keyframes brilloVela {
+  from { opacity: .55; transform: scale(1); }
+  50% { opacity: .82; }
+  to { opacity: 1; transform: scale(1.07); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-surface::before { animation: none; } }
 
 .course-hero { padding-top: clamp(30px, 5.3vw, 75px); }
 .course-hero .hero-grid { gap: clamp(34px, 6vw, 89px); }
@@ -901,7 +915,7 @@ ul, ol { padding-inline-start: 1.25rem; }
 <p style="text-align:center;margin:20px auto 4px;font-size:.95rem">¿Tienes una duda antes de decidir? Escríbenos a <a href="mailto:jobvalidoseo@gmail.com?subject=Duda%20sobre%20el%20curso%20de%20velas%20y%20jabones" style="color:#C07F13;font-weight:700;text-decoration:underline">jobvalidoseo@gmail.com</a></p>
 <footer class="pie">
   <div class="wrap">
-    <p style="text-align:center;font-size:.85em;opacity:.75">👁 Más de 700 visitas registradas en esta web</p>
+    <p style="text-align:center;font-size:.85em;opacity:.75">👁 <span id="contador-visitas">Más de 700</span> visitas registradas en esta web</p>
     <p><strong>Enlace de afiliado:</strong> si compras desde aquí, recibimos una comisión sin costo adicional para ti. El precio que pagas es el mismo.</p>
     <p>Página de la comunidad «Aprende a Crear Velas y Jabones con Lia». El curso es un producto de su productor en Hotmart. Las condiciones finales (precio en tu moneda, garantía y acceso) son las de su página de pago. La calificación de 4,9 de 5, con 283 reseñas, es la publicada en Hotmart para este curso.</p>
   </div>
@@ -936,6 +950,9 @@ ul, ol { padding-inline-start: 1.25rem; }
   actions.forEach(action => observer.observe(action));
   sticky.addEventListener("focusout", () => requestAnimationFrame(updateSticky));
 })();
+</script>
+<script>
+fetch('https://abacus.jasoncameron.dev/hit/validsumvelas/visitas').then(function(r){return r.json();}).then(function(d){if(d&&typeof d.value==='number'){var el=document.getElementById('contador-visitas');if(el){el.textContent=(729+d.value).toLocaleString('es-ES');}}}).catch(function(){});
 </script>
 </body>
 </html>
