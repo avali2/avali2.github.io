@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit de Inicio — Aprende a Crear Velas y Jabones con Lia</title>
+<meta name="description" content="El Kit de Inicio completo: los utensilios exactos para empezar a hacer velas y jabones artesanales, en orden, cada uno con su enlace directo.">
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1424136109626344');
+fbq('track','PageView');
+document.addEventListener('click',function(e){var a=e.target.closest('a.cta');if(a){fbq('track','Lead');}});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1424136109626344&ev=PageView&noscript=1"/></noscript>
+<style>
+:root {
+  color-scheme: light;
+  --paper: #fbf7ef;
+  --surface: #fffdf8;
+  --cream: #f3e8d8;
+  --parchment: #f6eee2;
+  --ink: #30211b;
+  --body: #4e3e34;
+  --muted: #6a5446;
+  --caramel: #88442e;
+  --cta: #843c27;
+  --cta-hover: #68301f;
+  --line: #e4d5c4;
+  --radius: 20px;
+  --shadow: 0 15px 38px rgb(64 37 23 / 8%);
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  --gutter: clamp(20px, 5.3vw, 78px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; color: var(--body); background: var(--paper); font: 400 1rem/1.64 var(--sans); -webkit-text-size-adjust: 100%; }
+:where(h1, h2, h3, p, ul) { margin: 0; }
+h1, h2, h3 { color: var(--ink); font-family: var(--serif); font-weight: 400; line-height: 1.12; }
+h1 { font-size: clamp(2rem, 4.4vw, 3.4rem); letter-spacing: -.03em; }
+h1 em { color: var(--caramel); }
+h2 { font-size: clamp(1.45rem, 2.6vw, 2rem); letter-spacing: -.02em; }
+a { color: var(--cta); }
+.wrap { width: min(100% - var(--gutter) * 2, 1200px); margin-inline: auto; }
+.topbar { position: relative; z-index: 2; background: var(--surface); border-bottom: 1px solid var(--line); }
+.topbar-in { min-height: 80px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.marca { display: flex; align-items: center; gap: 11px; color: var(--ink); font: 400 clamp(1.24rem, 2.2vw, 1.64rem)/1.1 var(--serif); white-space: nowrap; letter-spacing: -.028em; }
+.marca em { color: var(--caramel); }
+.marca .sello { display: grid; place-items: center; flex: 0 0 38px; inline-size: 38px; block-size: 43px; color: var(--caramel); background: var(--parchment); border: 1px solid #dec4a8; border-radius: 50% 50% 47% 47%; position: relative; }
+.marca .sello::before { content: ""; width: 12px; height: 11px; margin-top: 10px; border: 1px solid currentColor; border-radius: 2px 2px 3px 3px; background: linear-gradient(currentColor,currentColor) 50% 4px / 6px 1px no-repeat; }
+.marca .sello::after { content: ""; position: absolute; top: calc(50% - 11px); left: calc(50% - 3px); width: 6px; height: 8px; border: 1px solid currentColor; border-radius: 65% 0 65% 65%; transform: rotate(-27deg); }
+.cta { display: inline-flex; align-items: center; justify-content: center; min-block-size: 48px; padding: 12px 20px; border: 1px solid transparent; border-radius: 9px; background: var(--cta); color: #fffaf3; text-align: center; text-decoration: none; font-size: .965rem; font-weight: 720; line-height: 1.35; box-shadow: 0 3px 10px rgb(101 46 28 / 14%); }
+.cta:hover { background: var(--cta-hover); color: #fffaf3; }
+.cta.suave { background: transparent; color: var(--cta-hover); border-color: #cbb39d; box-shadow: none; }
+.cta.suave:hover { background: #f3e4d5; border-color: #a86d53; }
+main { padding-block: clamp(26px, 4.5vw, 54px) 10px; }
+.intro { max-width: 68ch; display: grid; gap: 14px; }
+.tarjeta { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(20px, 3.4vw, 34px); margin-top: 26px; }
+.atajo { background: #fdf3e0; border: 1.5px solid #e3b96a; }
+.atajo h2 { margin-bottom: 8px; }
+.atajo a.nombre { color: var(--ink); font-size: 1.12rem; text-decoration: none; }
+.atajo a.nombre:hover { text-decoration: underline; }
+.grupo { margin-top: 30px; }
+.grupo h2 { margin-bottom: 10px; }
+.grupo ul { list-style: none; padding: 0; display: grid; gap: 9px; font-size: .97rem; }
+.grupo li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; }
+.grupo li a { text-decoration: none; }
+.grupo li a:hover { text-decoration: underline; }
+.mini { color: var(--muted); font-size: .88rem; margin-top: 14px; }
+.temu { margin-top: 30px; display: grid; gap: 10px; justify-items: start; }
+.pie { padding-block: clamp(24px, 4vw, 48px); background: #f3eadf; border-top: 1px solid var(--line); color: var(--muted); font-size: .855rem; line-height: 1.6; margin-top: 34px; }
+.pie .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(15px, 5vw, 72px); }
+@media (max-width: 720px) {
+  .topbar-in { min-height: 0; display: grid; gap: 8px; padding-block: 12px 9px; }
+  .pie .wrap { grid-template-columns: minmax(0, 1fr); }
+  .cta { width: 100%; }
+}
+</style>
+<style data-menu-desplegable>
+.menu-nav{position:relative;display:flex;align-items:center}
+.menu-toggle{position:absolute;inline-size:1px;block-size:1px;opacity:0;pointer-events:none}
+.menu-btn{display:inline-flex;align-items:center;gap:9px;min-block-size:44px;padding-inline:16px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--body);font-size:.9rem;font-weight:650;cursor:pointer;white-space:nowrap;transition:color .16s ease,background .16s ease}
+.menu-btn:hover{color:var(--cta-hover);background:var(--parchment)}
+.menu-flecha{inline-size:7px;block-size:7px;border-block-end:1.5px solid;border-inline-end:1.5px solid;transform:rotate(45deg);margin-top:-3px}
+.menu-panel{display:none;position:absolute;top:calc(100% + 8px);right:0;min-width:min(80vw,308px);background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 15px 38px rgb(64 37 23 / 14%);padding:6px;z-index:60}
+.menu-toggle:checked ~ .menu-panel{display:grid;gap:2px}
+.menu-toggle:focus-visible ~ .menu-btn{outline:2px solid var(--caramel);outline-offset:2px}
+.menu-panel a{display:flex;align-items:center;min-block-size:44px;padding:8px 12px;border-radius:8px;color:var(--body);text-decoration:none;font-size:.93rem;font-weight:600;line-height:1.3}
+.menu-panel a:hover{color:var(--cta-hover);background:var(--parchment)}
+.menu-panel a[aria-current="page"]{color:var(--cta-hover);background:#f2e3d4}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div class="marca"><span class="sello" aria-hidden="true"></span><span>Velas y Jabones <em>con Lia</em></span></div>
+    <nav class="topnav menu-nav" aria-label="Navegación principal">
+      <input class="menu-toggle" type="checkbox" id="menu-toggle">
+      <label class="menu-btn" for="menu-toggle">Menú <span class="menu-flecha" aria-hidden="true"></span></label>
+      <div class="menu-panel">
+        <a href="index.html">Curso de Velas y Jabones 3x1</a>
+        <a href="tienda.html">Vitrina de cursos</a>
+        <a href="kit.html" aria-current="page">Kit de Inicio (utensilios)</a>
+        <a href="calculadora.html">Calculadora de costos</a>
+        <a href="https://www.facebook.com/Liavelasjabones">Clases gratis en Facebook</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="intro">
+      <h1>🧰 Kit de Inicio: <em>todo para empezar</em></h1>
+      <p>Me preguntan mucho qué se necesita para empezar con velas y jabones. Esto es TODO, en orden: primero lo esencial para producir, después lo que hace que tus piezas se vean profesionales y se vendan. Cada enlace abre el producto exacto.</p>
+      <p><a class="cta" href="https://avali2.github.io/kit-inicio.pdf">📄 Descarga el Kit completo en PDF (gratis)</a></p>
+    </div>
+
+    <section class="tarjeta atajo" aria-labelledby="atajo-titulo">
+      <h2 id="atajo-titulo">⚡ EL ATAJO — Kit completo todo en uno</h2>
+      <p><a class="nombre" href="https://link.amazon/B041U9sZJ"><strong>22. Kit completo todo en uno (SAEUYVB con fundidor eléctrico)</strong></a> — Fundidor con placa eléctrica, 2 lb de cera de soja, jarra de acero, 50 mechas, 60 pegatinas, centradores y termómetro en una sola caja: lo abres y haces tu primera vela hoy.</p>
+    </section>
+
+    <section class="grupo" aria-labelledby="velas-titulo">
+      <h2 id="velas-titulo">🕯️ Velas</h2>
+      <ul>
+          <li><a href="https://link.amazon/B0fusmttS"><strong>1. Cera de soja en escamas, 10 lb (Etienne Alair)</strong></a> — La base para velas en frasco; trae de regalo 100 mechas, 100 pegatinas y 2 centradores.</li>
+          <li><a href="https://link.amazon/B0dqe5XXC"><strong>2. Mechas de algodón 6" ×100 (EricX Light)</strong></a> — Pre-enceradas, para frascos de ~8 oz; la mecha correcta evita el túnel en el centro.</li>
+          <li><a href="https://link.amazon/B057EmmuC"><strong>3. Frascos de cristal 8 oz ×12 con tapas (AOZITA)</strong></a> — Para verter tus velas y presentar el producto terminado.</li>
+          <li><a href="https://link.amazon/B00eCrXEf"><strong>4. Set de fragancias florales (P&J Trading)</strong></a> — El aroma de tus velas; carga típica del 6–10 %, siempre según la ficha del fabricante.</li>
+          <li><a href="https://link.amazon/B019CyB0a"><strong>5. Jarra metálica para verter (BBAXI, acero 304)</strong></a> — Pico sin goteo y asa resistente al calor, para verter la cera con control. Confirma la capacidad real en la página antes de pagar.</li>
+          <li><a href="https://link.amazon/B04BRdEi3"><strong>6. Termómetro digital con clip (BOMATA)</strong></a> — Sin termómetro no hay técnica: fragancia a 185 °F y vertido cerca de 135 °F.</li>
+          <li><a href="https://link.amazon/B0cbmYTcd"><strong>7. Báscula digital de cocina (Etekcity)</strong></a> — La cera y la fragancia se pesan en gramos: así tus velas salen iguales siempre.</li>
+          <li><a href="https://link.amazon/B093NZe6u"><strong>8. Pegatinas de mecha + centradores metálicos (ABK)</strong></a> — Mecha pegada y centrada = quemado parejo hasta el borde, sin túnel.</li>
+          <li><a href="https://link.amazon/B0gVrFBHB"><strong>9. Colorante líquido para velas, 16 colores (HTVRONT)</strong></a> — Base aceite, compatible con soja; poco a poco, el color se intensifica al enfriar.</li>
+          <li><a href="https://link.amazon/B0gX1tds8"><strong>10. Moldes de silicona de flores 3D (ESEDAGE)</strong></a> — Rosa, peonía y redondo: las velas decorativas y «de postre» que paran el dedo al hacer scroll.</li>
+          <li><a href="https://link.amazon/B044v2Ccx"><strong>11. Recortador de mecha (Sinen)</strong></a> — Mecha a 5–6 mm antes de cada encendida: menos humo, menos hollín, llama limpia.</li>
+      </ul>
+    </section>
+
+    <section class="grupo" aria-labelledby="jabones-titulo">
+      <h2 id="jabones-titulo">🧼 Jabones</h2>
+      <ul>
+          <li><a href="https://link.amazon/B03yyxHEe"><strong>12. Base de glicerina transparente 5 lb (Primal Elements)</strong></a> — La de las capas, las geodas y las inclusiones: fundes, coloreas, viertes. Sin sosa, ideal para empezar.</li>
+          <li><a href="https://link.amazon/B0guSlIwU"><strong>13. Molde rectangular de silicona con caja de madera (Ogrmar, 42 oz)</strong></a> — Barras uniformes que se cortan rectas; la caja evita que el molde se deforme.</li>
+          <li><a href="https://link.amazon/B0gUleniL"><strong>14. Pigmentos de mica, 24 colores (Baltic Day)</strong></a> — Grado cosmético: el color de la geoda de amatista y de las barras marmoleadas sale de aquí.</li>
+          <li><a href="https://link.amazon/B0gG63SHV"><strong>15. Set de fragancias «bakery» (P&J Trading)</strong></a> — Calabaza, cupcake, galleta de azúcar, café… los aromas-postre que combinan con las velas-pastel.</li>
+          <li><a href="https://link.amazon/B0gtzLz33"><strong>16. Alcohol isopropílico 99 % en spray (MaxTite)</strong></a> — Un rocío entre capas y adiós burbujas: el truco de las capas que no se separan. Inflamable: lejos de la llama.</li>
+          <li><a href="https://link.amazon/B05utNgPC"><strong>17. Kit de corte con caja ajustable (EVINIS)</strong></a> — Cortador recto y ondulado: barras del mismo grosor, corte limpio, presentación profesional.</li>
+      </ul>
+    </section>
+
+    <section class="grupo" aria-labelledby="empaque-titulo">
+      <h2 id="empaque-titulo">📦 Empaque y venta</h2>
+      <ul>
+          <li><a href="https://link.amazon/B04cuCj0G"><strong>18. Bandas kraft imprimibles para jabones (Mr-Label, 1"×8")</strong></a> — El empaque mínimo que se ve profesional: nombre, aroma e ingredientes en una banda.</li>
+          <li><a href="https://link.amazon/B01tj57kr"><strong>19. Cajas kraft con ventana ×30 (Zonon)</strong></a> — La ventana vende porque el cliente VE el jabón.</li>
+          <li><a href="https://link.amazon/B04fitjgf"><strong>20. Etiquetas kraft redondas 2" en rollo ×500 (Aurtho)</strong></a> — Para cerrar bolsas y frascos con tu marca. Son térmicas: necesitas impresora térmica de etiquetas.</li>
+          <li><a href="https://link.amazon/B0dLz4OF8"><strong>21. Bolsas de celofán 6×9" ×200 (AIRSUNNY)</strong></a> — Sellables con calor: el acabado de tienda para jabones y velas pequeñas.</li>
+      </ul>
+    </section>
+
+    <section class="tarjeta temu" aria-labelledby="temu-titulo">
+      <h2 id="temu-titulo">🌎 ¿Estás en Latinoamérica?</h2>
+      <p>Los mismos básicos están en Temu, con envío a tu país:</p>
+      <a class="cta suave" href="https://temu.to/k/pz6ke052fjg">Ver básicos en Temu →</a>
+      <p class="mini">Código de afiliado de Temu: <strong>alh678039</strong></p>
+    </section>
+
+    <p class="mini">Precios y disponibilidad: los confirma Amazon en cada enlace al momento de abrirlo.</p>
+  </div>
+</main>
+
+<p style="text-align:center;margin:20px auto 4px;font-size:.95rem">¿Tienes una duda antes de decidir? Escríbenos a <a href="mailto:jobvalidoseo@gmail.com?subject=Duda%20sobre%20el%20Kit%20de%20Inicio%20de%20velas%20y%20jabones" style="color:#C07F13;font-weight:700;text-decoration:underline">jobvalidoseo@gmail.com</a></p>
+<footer class="pie">
+  <div class="wrap">
+    <p>Algunos enlaces de esta página son de afiliado: si compras a través de ellos recibimos una pequeña comisión, sin costo extra para ti.</p>
+    <p>Página de la comunidad «Aprende a Crear Velas y Jabones con Lia». Los cursos son productos de sus productores en Hotmart. Las condiciones finales (precio en tu moneda, garantía y acceso) son las de sus páginas de pago.</p>
+  </div>
+</footer>
+
+</body>
+</html>

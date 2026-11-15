@@ -645,17 +645,35 @@ ul, ol { padding-inline-start: 1.25rem; }
   .product-ribbon { min-height: 83px; }
 }
 </style>
+<style data-menu-desplegable>
+.menu-nav{position:relative;display:flex;align-items:center}
+.menu-toggle{position:absolute;inline-size:1px;block-size:1px;opacity:0;pointer-events:none}
+.menu-btn{display:inline-flex;align-items:center;gap:9px;min-block-size:44px;padding-inline:16px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--body);font-size:.9rem;font-weight:650;cursor:pointer;white-space:nowrap;transition:color .16s ease,background .16s ease}
+.menu-btn:hover{color:var(--cta-hover);background:var(--parchment)}
+.menu-flecha{inline-size:7px;block-size:7px;border-block-end:1.5px solid;border-inline-end:1.5px solid;transform:rotate(45deg);margin-top:-3px}
+.menu-panel{display:none;position:absolute;top:calc(100% + 8px);right:0;min-width:min(80vw,308px);background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 15px 38px rgb(64 37 23 / 14%);padding:6px;z-index:60}
+.menu-toggle:checked ~ .menu-panel{display:grid;gap:2px}
+.menu-toggle:focus-visible ~ .menu-btn{outline:2px solid var(--caramel);outline-offset:2px}
+.menu-panel a{display:flex;align-items:center;min-block-size:44px;padding:8px 12px;border-radius:8px;color:var(--body);text-decoration:none;font-size:.93rem;font-weight:600;line-height:1.3}
+.menu-panel a:hover{color:var(--cta-hover);background:var(--parchment)}
+.menu-panel a[aria-current="page"]{color:var(--cta-hover);background:#f2e3d4}
+</style>
 </head>
 <body>
 
 <header class="topbar">
   <div class="wrap topbar-in">
     <div class="marca"><span class="sello" aria-hidden="true"></span><span>Velas y Jabones <em>con Lia</em></span></div>
-    <nav class="topnav" aria-label="Navegación principal">
-      <a href="tienda.html" aria-current="page">Vitrina</a>
-      <a href="index.html">Curso 3x1</a>
-      <a href="calculadora.html">Calculadora</a>
-      <a class="fb" href="https://www.facebook.com/Liavelasjabones">Facebook</a>
+    <nav class="topnav menu-nav" aria-label="Navegación principal">
+      <input class="menu-toggle" type="checkbox" id="menu-toggle">
+      <label class="menu-btn" for="menu-toggle">Menú <span class="menu-flecha" aria-hidden="true"></span></label>
+      <div class="menu-panel">
+        <a href="index.html">Curso de Velas y Jabones 3x1</a>
+        <a href="tienda.html" aria-current="page">Vitrina de cursos</a>
+        <a href="kit.html">Kit de Inicio (utensilios)</a>
+        <a href="calculadora.html">Calculadora de costos</a>
+        <a href="https://www.facebook.com/Liavelasjabones">Clases gratis en Facebook</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -745,11 +763,44 @@ ul, ol { padding-inline-start: 1.25rem; }
       <section class="tile resource-card" aria-labelledby="utensilios-titulo">
         <div class="section-intro">
           <h2 id="utensilios-titulo">Utensilios del taller</h2>
-          <p>Para tus primeras piezas basta con lo esencial y económico: cera de soya o base de glicerina, mechas, moldes, fragancias, termómetro y balanza. Puedes ampliar tu equipo poco a poco.</p>
+          <p>El Kit de Inicio completo: todo lo que usamos para producir y vender, en orden — primero lo esencial, después el acabado profesional. Cada enlace abre el producto exacto.</p>
         </div>
+        <a class="cta" href="https://avali2.github.io/kit-inicio.pdf">📄 Descarga el Kit completo en PDF (gratis)</a>
+        <a class="cta suave" href="kit.html" style="margin-top:10px">🧰 Ver el Kit de Inicio completo</a>
+        <p class="loc" style="margin-top:16px">⚡ <strong>El atajo:</strong> <a href="https://link.amazon/B041U9sZJ"><strong>Kit completo todo en uno (SAEUYVB con fundidor eléctrico)</strong></a> — cera, fundidor, jarra, mechas y termómetro en una sola caja, para hacer tu primera vela hoy.</p>
+        <p class="loc"><strong>🕯️ Velas</strong></p>
+        <ul style="margin-block:6px 14px;font-size:.93rem">
+          <li><a href="https://link.amazon/B0fusmttS">Cera de soja en escamas, 10 lb (Etienne Alair)</a></li>
+          <li><a href="https://link.amazon/B0dqe5XXC">Mechas de algodón 6" ×100 (EricX Light)</a></li>
+          <li><a href="https://link.amazon/B057EmmuC">Frascos de cristal 8 oz ×12 con tapas (AOZITA)</a></li>
+          <li><a href="https://link.amazon/B00eCrXEf">Set de fragancias florales (P&J Trading)</a></li>
+          <li><a href="https://link.amazon/B019CyB0a">Jarra metálica para verter (BBAXI)</a></li>
+          <li><a href="https://link.amazon/B04BRdEi3">Termómetro digital con clip (BOMATA)</a></li>
+          <li><a href="https://link.amazon/B0cbmYTcd">Báscula digital de cocina (Etekcity)</a></li>
+          <li><a href="https://link.amazon/B093NZe6u">Pegatinas de mecha + centradores (ABK)</a></li>
+          <li><a href="https://link.amazon/B0gVrFBHB">Colorante líquido 16 colores (HTVRONT)</a></li>
+          <li><a href="https://link.amazon/B0gX1tds8">Moldes de silicona de flores 3D (ESEDAGE)</a></li>
+          <li><a href="https://link.amazon/B044v2Ccx">Recortador de mecha (Sinen)</a></li>
+        </ul>
+        <p class="loc"><strong>🧼 Jabones</strong></p>
+        <ul style="margin-block:6px 14px;font-size:.93rem">
+          <li><a href="https://link.amazon/B03yyxHEe">Base de glicerina transparente 5 lb (Primal Elements)</a></li>
+          <li><a href="https://link.amazon/B0guSlIwU">Molde rectangular con caja de madera (Ogrmar)</a></li>
+          <li><a href="https://link.amazon/B0gUleniL">Pigmentos de mica, 24 colores (Baltic Day)</a></li>
+          <li><a href="https://link.amazon/B0gG63SHV">Set de fragancias «bakery» (P&J Trading)</a></li>
+          <li><a href="https://link.amazon/B0gtzLz33">Alcohol isopropílico 99 % en spray (MaxTite)</a></li>
+          <li><a href="https://link.amazon/B05utNgPC">Kit de corte con caja ajustable (EVINIS)</a></li>
+        </ul>
+        <p class="loc"><strong>📦 Empaque y venta</strong></p>
+        <ul style="margin-block:6px 14px;font-size:.93rem">
+          <li><a href="https://link.amazon/B04cuCj0G">Bandas kraft imprimibles para jabones (Mr-Label)</a></li>
+          <li><a href="https://link.amazon/B01tj57kr">Cajas kraft con ventana ×30 (Zonon)</a></li>
+          <li><a href="https://link.amazon/B04fitjgf">Etiquetas kraft redondas 2" ×500 (Aurtho)</a></li>
+          <li><a href="https://link.amazon/B0dLz4OF8">Bolsas de celofán 6×9" ×200 (AIRSUNNY)</a></li>
+        </ul>
         <p class="loc"><strong>Para Latinoamérica:</strong> los mismos básicos están en Temu.</p>
         <a class="cta suave" href="https://temu.to/k/pz6ke052fjg">Ver básicos en Temu →</a>
-        <p class="mini">Estamos preparando la lista completa de utensilios con enlaces por tienda. Mientras tanto, pídela en los comentarios de nuestra página y te la compartimos.</p>
+        <p class="mini">Precios y disponibilidad: los confirma Amazon en cada enlace al momento de abrirlo.</p>
       </section>
     </div>
   </div>
@@ -770,7 +821,7 @@ ul, ol { padding-inline-start: 1.25rem; }
 <p style="text-align:center;margin:20px auto 4px;font-size:.95rem">¿Tienes una duda antes de decidir? Escríbenos a <a href="mailto:jobvalidoseo@gmail.com?subject=Duda%20sobre%20los%20cursos%20de%20velas%20y%20jabones" style="color:#C07F13;font-weight:700;text-decoration:underline">jobvalidoseo@gmail.com</a></p>
 <footer class="pie">
   <div class="wrap">
-    <p><strong>Enlaces de afiliado:</strong> si compras desde aquí, recibimos una comisión sin costo adicional para ti. El precio que pagas es el mismo.</p>
+    <p>Algunos enlaces de esta página son de afiliado: si compras a través de ellos recibimos una pequeña comisión, sin costo extra para ti.</p>
     <p>Página de la comunidad «Aprende a Crear Velas y Jabones con Lia». Los cursos son productos de sus productores en Hotmart. Las condiciones finales (precio en tu moneda, garantía y acceso) son las de sus páginas de pago.</p>
   </div>
 </footer>
