@@ -835,7 +835,7 @@ ul, ol { margin: 0; padding: 0; }
 .prod-ico svg { inline-size: 22px; block-size: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .prod-kicker {
   margin: 0 0 4px;
-  color: var(--gold);
+  color: #7a5620;
   font-size: .69rem;
   font-weight: 750;
   letter-spacing: .09em;

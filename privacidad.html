@@ -15,6 +15,7 @@
 <meta property="og:url" content="https://avali2.github.io/privacidad.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f4e9da'/%3E%3Crect x='11' y='13' width='10' height='13' rx='2.5' fill='%238a4429'/%3E%3Cpath d='M16 5c2 2.4 3 3.9 3 5.4a3 3 0 0 1-6 0C13 8.9 14 7.4 16 5Z' fill='%23a8543a'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/consent.css">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -32,6 +33,7 @@
       <a href="tienda.html">Cursos</a>
       <a href="kit.html">Kit de taller</a>
       <a href="bienestar.html">Bienestar</a>
+      <a href="guias.html">Guías</a>
       <a href="calculadora.html">Calculadora</a>
       <a class="nav-cta" href="https://go.hotmart.com/O107442122M?ap=e5ca&src=LANDNAV10" target="_blank" rel="sponsored noopener">Entrar al curso</a>
     </nav>
@@ -64,7 +66,8 @@
       </ul>
 
       <h2>3. Cookies y tecnologías de terceros</h2>
-      <p>Esta página usa tres tipos de servicios externos:</p>
+      <p>Esta página usa tres tipos de servicios externos. <strong>Nada de eso se carga hasta que tú lo aceptas</strong>: al entrar verás un aviso donde puedes elegir «Aceptar» o «Solo lo necesario». Si eliges solo lo necesario, el píxel de medición no se ejecuta y el sitio funciona igual.</p>
+      <p><button type="button" onclick="if(window.vjlOpenConsent){window.vjlOpenConsent()}" style="min-block-size:40px;padding:9px 16px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--caramel);font-weight:700;cursor:pointer">Cambiar mi preferencia de cookies</button></p>
       <ul>
         <li><strong>Píxel de Meta (Facebook):</strong> mide visitas y clics en los botones de compra para saber qué anuncios funcionan. Puede dejar cookies de Meta. Puedes limitarlo en la configuración de anuncios de tu cuenta de Facebook.</li>
         <li><strong>Contador de visitas (Abacus):</strong> un servicio que devuelve un número agregado de visitas. No usa tu identidad.</li>
@@ -126,6 +129,7 @@
         <ul>
           <li><a href="kit.html">Kit de inicio</a></li>
           <li><a href="bienestar.html">Bienestar en casa</a></li>
+          <li><a href="guias.html">Guías prácticas</a></li>
         </ul>
       </div>
       <div>
@@ -145,6 +149,7 @@
   </div>
 </footer>
 
+<script src="assets/js/consent.js" defer></script>
 <script src="assets/js/site.js" defer></script>
 </body>
 </html>
