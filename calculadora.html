@@ -2,774 +2,312 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Recetas para Jabones — Tu costo real, en segundos</title>
-<meta name="description" content="La app que calcula costos, cantidades y precio de venta de tus jabones en segundos. Deja de poner el precio a ojo: conoce tu costo completo, con tu tiempo incluido.">
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1424136109626344');
-fbq('track','PageView');
-document.addEventListener('click',function(e){var a=e.target.closest('a.cta');if(a){fbq('track','Lead');}});
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1424136109626344&ev=PageView&noscript=1"/></noscript>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de recetas para jabones: costo real y precio de venta</title>
+<meta name="description" content="La calculadora que te dice cuánto cuesta de verdad cada barra de jabón y a cuánto venderla sin perder dinero. Costos, cantidades y precio en segundos, desde el celular.">
+<link rel="canonical" href="https://avali2.github.io/calculadora.html">
+<meta name="theme-color" content="#fbf7ef">
+<meta property="og:type" content="product">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Velas y Jabones con Lia">
+<meta property="og:title" content="Calculadora de recetas para jabones: costo real y precio de venta">
+<meta property="og:description" content="Deja de poner el precio a ojo. Costo por barra, cantidades y precio de venta en segundos.">
+<meta property="og:url" content="https://avali2.github.io/calculadora.html">
+<meta property="og:image" content="https://avali2.github.io/assets/img/taller-800.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f4e9da'/%3E%3Crect x='11' y='13' width='10' height='13' rx='2.5' fill='%238a4429'/%3E%3Cpath d='M16 5c2 2.4 3 3.9 3 5.4a3 3 0 0 1-6 0C13 8.9 14 7.4 16 5Z' fill='%23a8543a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/site.css">
 <style>
-:root {
-  color-scheme: light;
-  --paper: #fbf7ef;
-  --surface: #fffdf8;
-  --cream: #f3e8d8;
-  --parchment: #f6eee2;
-  --ink: #30211b;
-  --body: #4e3e34;
-  --muted: #6a5446;
-  --caramel: #88442e;
-  --cta: #843c27;
-  --cta-hover: #68301f;
-  --line: #e4d5c4;
-  --olive: #3f503b;
-  --olive-pale: #e9ecdf;
-  --radius: 20px;
-  --shadow: 0 15px 38px rgb(64 37 23 / 8%);
-  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
-  --gutter: clamp(20px, 5.3vw, 78px);
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-padding-block: 20px; }
-body {
-  margin: 0;
-  color: var(--body);
-  background: var(--paper);
-  font: 400 1rem/1.64 var(--sans);
-  -webkit-text-size-adjust: 100%;
-}
-:where(h1, h2, h3, p, figure, dl, dd, ul, ol) { margin: 0; }
-h1, h2, h3 {
-  color: var(--ink);
-  font-family: var(--serif);
-  font-weight: 400;
-  line-height: 1.09;
-  text-wrap: balance;
-}
-h1 { font-size: clamp(2.65rem, 5.35vw, 5.35rem); letter-spacing: -.046em; }
-h2 { font-size: clamp(2.1rem, 3.7vw, 3.65rem); letter-spacing: -.036em; }
-h3 { font-size: clamp(1.55rem, 2.2vw, 2.12rem); letter-spacing: -.024em; }
-h1 em { color: var(--caramel); font-weight: inherit; }
-a { color: var(--caramel); text-underline-offset: .22em; }
-a:hover { color: var(--cta-hover); }
-:where(a, summary, button):focus-visible {
-  outline: 2px solid #3f503b;
-  outline-offset: 4px;
-}
-img { display: block; max-width: 100%; }
-strong { color: var(--ink); }
-ul, ol { padding-inline-start: 1.25rem; }
-::selection { color: var(--ink); background: #f1d4b9; }
-.wrap { width: min(100% - var(--gutter) * 2, 1200px); margin-inline: auto; }
-
-.topbar {
-  position: relative;
-  z-index: 2;
-  background: var(--surface);
-  border-bottom: 1px solid var(--line);
-}
-.topbar-in {
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.marca {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  color: var(--ink);
-  font: 400 clamp(1.24rem, 2.2vw, 1.64rem)/1.1 var(--serif);
-  white-space: nowrap;
-  letter-spacing: -.028em;
-}
-.marca em { color: var(--caramel); }
-.marca .sello {
-  display: grid;
-  place-items: center;
-  flex: 0 0 38px;
-  inline-size: 38px;
-  block-size: 43px;
-  color: var(--caramel);
-  background: var(--parchment);
-  border: 1px solid #dec4a8;
-  border-radius: 50% 50% 47% 47%;
-}
-.line-icon {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.topnav { display: flex; align-items: center; gap: 6px; }
-.topnav a {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  min-block-size: 44px;
-  padding-inline: 14px;
-  border: 1px solid transparent;
-  border-radius: 9px;
-  color: var(--body);
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: .875rem;
-  font-weight: 650;
-  transition: color .16s ease, background .16s ease, border-color .16s ease;
-}
-.topnav a:hover { color: var(--cta-hover); background: var(--parchment); }
-.topnav a[aria-current="page"] {
-  color: var(--cta-hover);
-  background: #f2e3d4;
-  border-color: #ecdbcb;
-}
-.topnav .fb { margin-inline-start: 8px; border-color: var(--line); }
-.topnav .fb::after {
-  content: "";
-  inline-size: 7px;
-  block-size: 7px;
-  border-block-start: 1px solid;
-  border-inline-end: 1px solid;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.09fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(30px, 6vw, 88px);
-}
-.hero-copy .sub, .section-intro p { max-width: 61ch; }
-.hero-copy .sub {
-  margin-top: 20px;
-  font-size: clamp(1rem, 1.45vw, 1.15rem);
-  line-height: 1.58;
-}
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  width: fit-content;
-  color: var(--caramel);
-  font-size: .75rem;
-  font-weight: 750;
-  letter-spacing: .077em;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-.eyebrow::before {
-  content: "";
-  flex: 0 0 20px;
-  block-size: 1px;
-  background: currentColor;
-  opacity: .66;
-}
-.mini {
-  max-width: 60ch;
-  color: var(--muted);
-  font-size: .855rem;
-  line-height: 1.56;
-}
-.stars { color: #914521; letter-spacing: .075em; white-space: nowrap; }
-
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-block-size: 48px;
-  padding: 12px 20px;
-  border: 1px solid transparent;
-  border-radius: 9px;
-  background: var(--cta);
-  color: #fffaf3;
-  text-align: center;
-  text-decoration: none;
-  font-size: .965rem;
-  font-weight: 720;
-  line-height: 1.35;
-  box-shadow: 0 3px 10px rgb(101 46 28 / 14%);
-  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
-}
-.cta:hover {
-  background: var(--cta-hover);
-  color: #fffaf3;
-  box-shadow: 0 6px 16px rgb(101 46 28 / 20%);
-}
-.cta.main-action {
-  display: inline-grid;
-  min-block-size: 62px;
-  grid-template-columns: minmax(0,1fr) auto;
-  gap: 3px 22px;
-  justify-items: start;
-  align-content: center;
-  padding-inline: 20px;
-  text-align: left;
-  font-size: 1.06rem;
-}
-.main-action small {
-  grid-row: 2;
-  color: inherit;
-  font-size: .765rem;
-  font-weight: 500;
-  opacity: .94;
-}
-.main-action .arrow {
-  grid-row: 1 / 3;
-  grid-column: 2;
-  align-self: center;
-  width: 19px;
-  height: 19px;
-}
-.cta.suave {
-  background: transparent;
-  color: var(--cta-hover);
-  border-color: #cbb39d;
-  box-shadow: none;
-}
-.cta.suave:hover { background: #f3e4d5; border-color: #a86d53; }
-.hero-actions { margin-top: 23px; }
-.hero-actions .mini { margin-top: 10px; }
-.alt-link { margin-top: 11px; font-size: .895rem; }
-.alt-link a { display: inline-block; padding-block: 4px; font-weight: 700; }
-.checklist { padding: 0; list-style: none; }
-.checklist li {
-  position: relative;
-  min-height: 24px;
-  padding-inline-start: 31px;
-}
-.checklist li + li { margin-top: 8px; }
-.checklist li::before {
-  content: "";
-  position: absolute;
-  inset: .22em auto auto 0;
-  width: 19px;
-  height: 19px;
-  border-radius: 50%;
-  background: var(--olive-pale);
-}
-.checklist li::after {
-  content: "";
-  position: absolute;
-  inset: .5em auto auto 5px;
-  width: 9px;
-  height: 5px;
-  border-inline-start: 1.5px solid var(--olive);
-  border-block-end: 1.5px solid var(--olive);
-  transform: rotate(-45deg);
-}
-
-.section-block { padding-block: clamp(47px, 6.15vw, 91px); }
-.section-intro { margin-bottom: clamp(22px, 3.35vw, 43px); }
-.section-intro p { margin-top: 12px; font-size: 1.055rem; }
-.soft-band {
-  background: var(--parchment);
-  border-block: 1px solid var(--line);
-}
-.split-section {
-  display: grid;
-  grid-template-columns: minmax(0, .71fr) minmax(0, 1.29fr);
-  align-items: start;
-  gap: clamp(24px, 5.5vw, 80px);
-}
-.split-section h2 { text-wrap: initial; }
-.split-section .section-intro { margin-bottom: 0; }
-.split-section .section-intro p { max-width: 36ch; }
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(14px, 2.25vw, 28px);
-}
-.tile {
-  min-width: 0;
-  padding: clamp(20px, 2.6vw, 35px);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 18px rgb(64 37 23 / 4%);
-}
-.tile p { margin-top: 11px; }
-.icon-box {
-  display: inline-grid;
-  place-items: center;
-  flex: 0 0 42px;
-  width: 42px;
-  height: 42px;
-  color: var(--caramel);
-  background: #f5e8d9;
-  border-radius: 12px;
-}
-.icon-box svg { width: 22px; height: 22px; }
-.icon-box.olive { color: var(--olive); background: var(--olive-pale); }
-
-.payment-list {
-  margin: 0;
-  padding-inline: clamp(14px, 3vw, 30px);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgb(64 37 23 / 4%);
-}
-.payment-row {
-  position: relative;
-  min-block-size: 76px;
-  padding-block: 17px;
-  padding-inline-start: 55px;
-}
-.payment-row + .payment-row { border-top: 1px solid var(--line); }
-.payment-row .icon-box { position: absolute; inset: 17px auto auto 0; }
-.payment-row dt { display: block; color: var(--ink); font-weight: 720; }
-.payment-row dd { margin-top: 3px; font-size: .95rem; line-height: 1.58; }
-
-.faq {
-  overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-.faq details + details { border-top: 1px solid var(--line); }
-.faq summary {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  min-block-size: 61px;
-  padding: 14px clamp(17px, 3vw, 25px);
-  color: var(--ink);
-  background: transparent;
-  font-weight: 700;
-  line-height: 1.42;
-  cursor: pointer;
-  list-style: none;
-}
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary:focus-visible { outline-offset: -4px; border-radius: 8px; }
-.faq summary:hover { background: var(--paper); }
-.faq summary::after {
-  content: "";
-  flex: 0 0 28px;
-  height: 28px;
-  border: 1px solid #e2cbb6;
-  border-radius: 50%;
-  background:
-    linear-gradient(var(--caramel), var(--caramel)) center / 11px 1.5px no-repeat,
-    linear-gradient(var(--caramel), var(--caramel)) center / 1.5px 11px no-repeat,
-    var(--parchment);
-}
-.faq details[open] summary::after { background-size: 11px 1.5px, 0 0, auto; }
-.faq details p {
-  max-width: 75ch;
-  margin: -3px clamp(17px, 3vw, 25px) 18px;
-  font-size: .975rem;
-}
-
-.finale { padding-bottom: clamp(40px, 5vw, 75px); }
-.final {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
-  align-items: center;
-  gap: clamp(24px, 5vw, 76px);
-  padding: clamp(28px, 5vw, 71px);
-  color: #fff1e3;
-  background: #472b23;
-  border: 1px solid #583328;
-  border-radius: clamp(18px, 3vw, 30px);
-}
-.final::before, .final::after {
-  position: absolute;
-  content: "";
-  z-index: -1;
-  inset: -85px -77px auto auto;
-  width: 300px;
-  height: 300px;
-  border: 1px solid rgb(241 206 165 / 19%);
-  border-radius: 50%;
-}
-.final::after { width: 425px; height: 425px; inset: -83px -97px auto auto; }
-.final h2 { color: #fff8e9; text-wrap: initial; }
-.final p { max-width: 57ch; margin-top: 13px; }
-.final .mini { color: #f2dfcd; margin-top: 11px; }
-.final .cta { background: #fae0c0; color: #41271d; }
-.final .cta:hover { background: #f2cda5; color: #41271d; }
-.final .cta:focus-visible { outline-color: #ffebca; }
-
-.pie {
-  padding-block: clamp(24px, 4vw, 48px);
-  background: #f3eadf;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: .855rem;
-  line-height: 1.6;
-}
-.pie .wrap {
-  display: grid;
-  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
-  gap: clamp(15px, 5vw, 72px);
-}
-
-.sticky-cta { display: none; }
-.sticky-cta[hidden] { display: none; }
-
-@media (max-width: 900px) {
-  .hero-grid { gap: clamp(24px, 4.3vw, 48px); }
-  .split-section { grid-template-columns: minmax(0, .77fr) minmax(0, 1.23fr); gap: 25px; }
-}
-@media (max-width: 740px) {
-  .topbar-in { min-height: 0; display: grid; gap: 8px; padding-block: 12px 9px; }
-  .marca .sello { flex-basis: 31px; inline-size: 31px; block-size: 35px; }
-  .topnav { display: grid; grid-template-columns: .85fr 1fr 1.13fr 1.12fr; gap: 3px; }
-  .topnav a { min-block-size: 43px; padding-inline: 5px; font-size: .8rem; }
-  .topnav .fb { margin-inline-start: 2px; }
-  .topnav .fb::after { display: none; }
-  .hero-grid, .split-section, .feature-grid, .final, .pie .wrap { grid-template-columns: minmax(0, 1fr); }
-  .split-section .section-intro p { max-width: 56ch; }
-  .hero-copy .sub { margin-top: 15px; }
-  .final h2 { text-wrap: balance; }
-}
-@media (max-width: 640px) {
-  html:has(.sticky-cta) { scroll-padding-block-end: calc(85px + env(safe-area-inset-bottom)); }
-  body:has(.sticky-cta) { padding-bottom: calc(65px + env(safe-area-inset-bottom)); }
-  .hero-actions .main-action, .final .main-action { width: 100%; }
-  .sticky-cta {
-    display: block;
-    position: fixed;
-    z-index: 5;
-    inset: auto 0 0;
-    padding: 8px var(--gutter) calc(8px + env(safe-area-inset-bottom));
-    background: var(--surface);
-    border-top: 1px solid var(--line);
-    box-shadow: 0 -6px 27px rgb(64 37 23 / 9%);
-  }
-  .sticky-cta .cta { display: flex; width: 100%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; }
-}
-
-.sello {
-  position: relative;
-}
-.sello::before {
-  content: "";
-  width: 12px;
-  height: 11px;
-  margin-top: 10px;
-  border: 1px solid currentColor;
-  border-radius: 2px 2px 3px 3px;
-  background: linear-gradient(currentColor,currentColor) 50% 4px / 6px 1px no-repeat;
-}
-.sello::after {
-  content: "";
-  position: absolute;
-  top: calc(50% - 11px);
-  left: calc(50% - 3px);
-  width: 6px;
-  height: 8px;
-  border: 1px solid currentColor;
-  border-radius: 65% 0 65% 65%;
-  transform: rotate(-27deg);
-}
-.arrow {
-  display: inline-block;
-  position: relative;
-  color: inherit;
-}
-.arrow::before, .arrow::after { content: ""; position: absolute; }
-.arrow::before {
-  top: calc(50% - 1px);
-  inset-inline: 1px 3px;
-  border-block-start: 1.5px solid;
-}
-.arrow::after {
-  top: calc(50% - 4.5px);
-  inset-inline-end: 3px;
-  width: 8px;
-  height: 8px;
-  border-block-start: 1.5px solid;
-  border-inline-end: 1.5px solid;
-  transform: rotate(45deg);
-}
-.hero-surface {
-  isolation: isolate;
-  background:
-    radial-gradient(ellipse at 88% 3%, rgb(233 196 158 / 29%), transparent 56%),
-    repeating-linear-gradient(115deg, transparent 0 9px, rgb(130 80 44 / 2%) 9px 10px),
-    var(--parchment);
-  border-bottom: 1px solid var(--line);
-}
-.hero-surface h1 { text-wrap: initial; }
-
-.calc-hero { padding-block: clamp(35px, 5.7vw, 84px); }
-.calc-hero .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, .92fr); }
-.calc-hero h1 { max-width: 13ch; margin-top: 13px; }
-.calc-hero .eyebrow { max-width: 42ch; }
-.receipt-wrap {
-  position: relative;
-  isolation: isolate;
-  padding: clamp(16px, 3.4vw, 47px);
-  overflow: hidden;
-  border: 1px solid #d6d4c0;
-  border-radius: 23px;
-  background:
-    repeating-linear-gradient(134deg, transparent 0 8px, rgb(66 75 44 / 4%) 8px 9px),
-    radial-gradient(ellipse at 30% 0, #f4f1e2, transparent 58%),
-    #e5e8d9;
-}
-.receipt-wrap::before, .receipt-wrap::after {
-  position: absolute;
-  z-index: -1;
-  content: "";
-  inset: auto -85px -106px auto;
-  width: 270px;
-  height: 270px;
-  border: 1px solid rgb(63 80 59 / 23%);
-  border-radius: 50%;
-}
-.receipt-wrap::after { width: 325px; height: 325px; inset: auto -100px -120px auto; }
 .recibo {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: clamp(20px, 3vw, 30px);
+  font-family: var(--sans);
+  font-size: .9rem;
   position: relative;
-  z-index: 1;
-  padding: clamp(16px, 2.6vw, 32px);
-  background: #fffdf6;
-  border: 1px solid #ded7c1;
-  border-radius: 10px 10px 2px 2px;
-  box-shadow: 0 10px 22px rgb(53 58 37 / 11%);
 }
 .recibo::after {
   content: "";
   position: absolute;
-  inset: 100% -1px auto;
-  height: 5px;
-  background: linear-gradient(135deg, #fffdf6 25%, transparent 25%) 0 0 / 10px 10px repeat-x,
-    linear-gradient(225deg, #fffdf6 25%, transparent 25%) 0 0 / 10px 10px repeat-x;
+  inset-inline: 0;
+  inset-block-end: -1px;
+  block-size: 10px;
+  background:
+    radial-gradient(circle at 6px 0, transparent 5px, var(--surface) 5px) repeat-x;
+  background-size: 12px 10px;
 }
-.recibo h2 { font-size: clamp(1.53rem, 2.55vw, 2.5rem); letter-spacing: -.027em; text-wrap: initial; }
-.recibo .ej {
-  margin-block: 7px 12px;
-  color: var(--olive);
-  font-size: .835rem;
-  font-weight: 720;
-  line-height: 1.41;
-}
-.receipt-line {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: 10px;
-  padding-block: 7px;
-  border-top: 1px solid #eee3d4;
-  font-size: .87rem;
-  line-height: 1.38;
-}
-.receipt-line dd { color: var(--ink); font-weight: 680; font-variant-numeric: tabular-nums; }
-.receipt-line.total {
-  margin-top: 1px;
-  padding-block: 9px 8px;
-  border-top: 1px dashed #cbbb9e;
-  color: var(--ink);
-  font-weight: 700;
-}
-.receipt-line.pieza {
-  align-items: center;
-  margin-top: 3px;
-  padding: 7px 10px;
-  border: 0;
-  border-radius: 6px;
-  background: var(--olive-pale);
-  color: var(--olive);
-  font-weight: 700;
-}
-.receipt-line.pieza dd { color: var(--olive); font-size: 1.17rem; }
-.recibo .ojo {
-  margin-top: 13px;
+.recibo h3 {
+  font-family: var(--sans);
+  font-size: .78rem;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
   color: var(--muted);
-  font-size: .813rem;
+  margin-bottom: 14px;
+}
+.recibo-linea {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding-block: 7px;
+  border-block-end: 1px dashed var(--line);
+  color: var(--body);
+}
+.recibo-linea span:last-child { font-variant-numeric: tabular-nums; font-weight: 650; color: var(--ink); }
+.recibo-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 12px;
+  font-weight: 750;
+  color: var(--ink);
+}
+.recibo-total span:last-child { font-family: var(--serif); font-size: 1.3rem; }
+.recibo-alerta {
+  margin-top: 14px;
+  padding: 11px 13px;
+  background: #fdeee6;
+  border: 1px solid #f3d3c2;
+  border-radius: 10px;
+  color: #8a3d1f;
+  font-size: .82rem;
   line-height: 1.5;
 }
-.calc-features .icon-box { margin-bottom: 12px; }
-@media (max-width: 900px) {
-  .receipt-wrap { padding: 17px; }
-}
-@media (max-width: 740px) {
-  .calc-hero .hero-grid { grid-template-columns: minmax(0, 1fr); }
-  .calc-hero h1 { max-width: 15ch; }
-}
-</style>
-<style data-menu-desplegable>
-.menu-nav{position:relative;display:flex;align-items:center}
-.menu-toggle{position:absolute;inline-size:1px;block-size:1px;opacity:0;pointer-events:none}
-.menu-btn{display:inline-flex;align-items:center;gap:9px;min-block-size:44px;padding-inline:16px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--body);font-size:.9rem;font-weight:650;cursor:pointer;white-space:nowrap;transition:color .16s ease,background .16s ease}
-.menu-btn:hover{color:var(--cta-hover);background:var(--parchment)}
-.menu-flecha{inline-size:7px;block-size:7px;border-block-end:1.5px solid;border-inline-end:1.5px solid;transform:rotate(45deg);margin-top:-3px}
-.menu-panel{display:none;position:absolute;top:calc(100% + 8px);right:0;width:max-content;min-width:240px;max-width:min(88vw,340px);max-height:calc(100dvh - 110px);overflow:auto;overscroll-behavior:contain;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 15px 38px rgb(64 37 23 / 14%);padding:6px;z-index:60}
-@media (max-width:740px){.menu-nav{position:static}.menu-panel{left:16px;right:16px;width:auto;max-width:none;top:calc(100% + 6px)}}
-.menu-toggle:checked ~ .menu-panel{display:grid;gap:2px}
-.menu-toggle:focus-visible ~ .menu-btn{outline:2px solid var(--caramel);outline-offset:2px}
-.menu-panel a{display:flex;align-items:center;min-block-size:44px;padding:8px 12px;border-radius:8px;color:var(--body);text-decoration:none;font-size:.93rem;font-weight:600;line-height:1.3}
-.menu-panel a:hover{color:var(--cta-hover);background:var(--parchment)}
-.menu-panel a[aria-current="page"]{color:var(--cta-hover);background:#f2e3d4}
 </style>
 </head>
 <body>
+<!--sprites-->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+<symbol id="ico-flame" viewBox="0 0 24 24"><path d="M12 3c2.2 2.8 3.6 4.9 3.6 7.2A3.6 3.6 0 0 1 12 13.8a3.6 3.6 0 0 1-3.6-3.6C8.4 7.9 9.8 5.8 12 3Z"/><path d="M12 21c2.2 0 4-1.5 4-3.4 0-2.1-2-3.3-4-5.6-2 2.3-4 3.5-4 5.6C8 19.5 9.8 21 12 21Z"/></symbol>
+<symbol id="ico-candle" viewBox="0 0 24 24"><rect x="8" y="10" width="8" height="11" rx="2"/><path d="M12 3c1.4 1.7 2.2 2.9 2.2 4.2a2.2 2.2 0 0 1-4.4 0C9.8 5.9 10.6 4.7 12 3Z"/><path d="M12 7v3"/></symbol>
+<symbol id="ico-soap" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="11.5" rx="3.5"/><path d="M7.5 8V6.6A2.6 2.6 0 0 1 10.1 4h3.8a2.6 2.6 0 0 1 2.6 2.6V8"/><path d="M8.5 13h7"/></symbol>
+<symbol id="ico-droplet" viewBox="0 0 24 24"><path d="M12 3.2c3 3.4 6 6.3 6 9.6a6 6 0 0 1-12 0c0-3.3 3-6.2 6-9.6Z"/></symbol>
+<symbol id="ico-jar" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M5 5.5h14V8H5z"/><path d="M9.5 12.5v4M14.5 12.5v4"/></symbol>
+<symbol id="ico-scale" viewBox="0 0 24 24"><path d="M12 4v16"/><path d="M7 20h10"/><path d="M4 9h16"/><path d="M4 9l-2 5a3.2 3.2 0 0 0 6 0L6 9"/><path d="M18 9l-2 5a3.2 3.2 0 0 0 6 0"/></symbol>
+<symbol id="ico-thermo" viewBox="0 0 24 24"><path d="M14 14.6V5a2 2 0 1 0-4 0v9.6a4 4 0 1 0 4 0Z"/><path d="M12 10v5"/></symbol>
+<symbol id="ico-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><path d="M8.1 7.9 20 18M8.1 16.1 20 6"/></symbol>
+<symbol id="ico-box" viewBox="0 0 24 24"><path d="M3.5 8.5 12 4l8.5 4.5v7L12 20l-8.5-4.5v-7Z"/><path d="M3.5 8.5 12 13l8.5-4.5M12 13v7"/></symbol>
+<symbol id="ico-tag" viewBox="0 0 24 24"><path d="M4 4h7.2L20 12.8 13.2 20 4 11.2V4Z"/><circle cx="8" cy="8" r="1.4"/></symbol>
+<symbol id="ico-gift" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8h14v-8"/><path d="M12 8v12"/><path d="M12 8S10.8 4 8.6 4a2.4 2.4 0 0 0 0 4H12Zm0 0s1.2-4 3.4-4a2.4 2.4 0 0 1 0 4H12Z"/></symbol>
+<symbol id="ico-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5V4.5Z"/><path d="M4 19V4.5M8 7h8M8 11h6"/></symbol>
+<symbol id="ico-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.2c0 4.4-3 8.1-7 9.8-4-1.7-7-5.4-7-9.8V6l7-3Z"/><path d="M9 12l2 2 4-4.5"/></symbol>
+<symbol id="ico-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3.2 2"/></symbol>
+<symbol id="ico-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3.4 12h17.2M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></symbol>
+<symbol id="ico-check" viewBox="0 0 24 24"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+<symbol id="ico-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></symbol>
+<symbol id="ico-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.4"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+<symbol id="ico-arrow" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></symbol>
+<symbol id="ico-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.4L19 10.5l-5.1 2.1L12 18l-1.9-5.4L5 10.5l5.1-2.1L12 3Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2Z"/></symbol>
+<symbol id="ico-leaf" viewBox="0 0 24 24"><path d="M20 4S6 3 4.5 11.5C3.6 16.6 8 20 12 20c6 0 8-8 8-16Z"/><path d="M4.5 19.5C7 14 11 10.5 16 8.5"/></symbol>
+<symbol id="ico-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"/></symbol>
+<symbol id="ico-bath" viewBox="0 0 24 24"><path d="M3 11h18v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-3Z"/><path d="M6 11V6.5A2.5 2.5 0 0 1 8.5 4c1.3 0 2.3.9 2.5 2"/><path d="M7 21l.8-2M17 21l-.8-2"/></symbol>
+<symbol id="ico-diffuser" viewBox="0 0 24 24"><path d="M9 3h6l-1 4h-4L9 3Z"/><path d="M7.5 7h9l1.2 12.2a2 2 0 0 1-2 2.2H8.3a2 2 0 0 1-2-2.2L7.5 7Z"/><path d="M12 10.5v6"/></symbol>
+<symbol id="ico-oil" viewBox="0 0 24 24"><path d="M10 3h4v3.2l2 2.4c.6.8 1 1.7 1 2.7V19a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-7.7c0-1 .4-1.9 1-2.7l2-2.4V3Z"/><path d="M7.4 14h9.2"/></symbol>
+<symbol id="ico-salt" viewBox="0 0 24 24"><path d="M8 5h8l1.5 14.5a2 2 0 0 1-2 2.2H8.5a2 2 0 0 1-2-2.2L8 5Z"/><path d="M7.6 10h8.8"/><circle cx="11" cy="15" r=".9"/><circle cx="14" cy="17.5" r=".9"/></symbol>
+<symbol id="ico-wheat" viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M12 9c0-2.5-1.4-4.5-3.5-5M12 9c0-2.5 1.4-4.5 3.5-5"/><path d="M12 14c0-2-1.2-3.6-3-4M12 14c0-2 1.2-3.6 3-4"/><path d="M12 19c0-2-1.2-3.6-3-4M12 19c0-2 1.2-3.6 3-4"/></symbol>
+<symbol id="ico-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5Z"/></symbol>
+<symbol id="ico-calculator" viewBox="0 0 24 24"><rect x="4.5" y="3" width="15" height="18" rx="2.4"/><path d="M8 7h8"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18.2h.01M12 18.2h.01M15.5 18.2h.01"/></symbol>
+<symbol id="ico-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c0-3 2.5-5.2 5.5-5.2s5.5 2.2 5.5 5.2"/><path d="M16 5.2A3.2 3.2 0 0 1 16 11"/><path d="M17.5 14.7c2 .6 3.5 2.3 3.5 4.8"/></symbol>
+<symbol id="ico-refresh" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 0 1 14.4-6.1L21 8.5"/><path d="M21 4v4.5h-4.5"/><path d="M20.5 12a8.5 8.5 0 0 1-14.4 6.1L3 15.5"/><path d="M3 20v-4.5h4.5"/></symbol>
+<symbol id="ico-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6h.01"/></symbol>
+</svg>
+<!--/sprites-->
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <header class="topbar">
   <div class="wrap topbar-in">
-    <div class="marca"><span class="sello" aria-hidden="true"></span><span>Velas y Jabones <em>con Lia</em></span></div>
-    <nav class="topnav menu-nav" aria-label="Navegación principal">
-      <input class="menu-toggle" type="checkbox" id="menu-toggle">
-      <label class="menu-btn" for="menu-toggle">Menú <span class="menu-flecha" aria-hidden="true"></span></label>
-      <div class="menu-panel">
-        <a href="index.html">Curso de Velas y Jabones 3x1</a>
-        <a href="tienda.html">Vitrina de cursos</a>
-        <a href="kit.html">Kit de Inicio (utensilios)</a>
-        <a href="calculadora.html" aria-current="page">Calculadora de costos</a>
-        <a href="https://www.facebook.com/Liavelasjabones">Clases gratis en Facebook</a>
-      </div>
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="8" height="11" rx="2"/><path d="M12 3c1.4 1.7 2.2 2.9 2.2 4.2a2.2 2.2 0 0 1-4.4 0C9.8 5.9 10.6 4.7 12 3Z"/></svg></span>
+      <span>Velas y Jabones <em>con Lia</em></span>
+    </a>
+    <input class="nav-input sr-only" type="checkbox" id="nav-open" aria-label="Abrir menú de navegación">
+    <label class="nav-toggle" for="nav-open" aria-hidden="true">Menú</label>
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a href="index.html">El curso</a>
+      <a href="tienda.html">Cursos</a>
+      <a href="kit.html">Kit de taller</a>
+      <a href="bienestar.html">Bienestar</a>
+      <a href="calculadora.html" aria-current="page">Calculadora</a>
+      <a class="nav-cta" href="https://go.hotmart.com/O107442122M?ap=e5ca&src=LANDNAV10" target="_blank" rel="sponsored noopener">Entrar al curso</a>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="hero-surface calc-hero" aria-labelledby="calc-titulo">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Herramienta del taller · Aprende a Crear Velas y Jabones con Lia</p>
-        <h1 id="calc-titulo">¿Sabes cuánto te cuesta <em>de verdad</em> cada jabón?</h1>
-        <p class="sub">Si pones el precio «a ojo», puedes estar perdiendo dinero en cada venta sin saberlo. En la <strong>Calculadora de Recetas para Jabones</strong> ingresas tus ingredientes y tus costos, y obtienes el costo real en segundos.</p>
-        <div class="hero-actions">
-          <a class="cta main-action" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1"><span>Quiero mi Calculadora</span><small>Pago único · Acceso inmediato</small><span class="arrow" aria-hidden="true"></span></a>
-          <p class="mini">Pago único, sin suscripción. El precio exacto, en tu moneda, se confirma en la página de pago antes de pagar.</p>
+<main id="contenido">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Herramienta · Para quien ya produce</p>
+          <h1>¿Sabes cuánto te cuesta <em>de verdad</em> cada jabón?</h1>
+          <p class="hero-sub">La app calcula costos, cantidades y precio de venta en segundos. Ingresas tus ingredientes y ves el costo real por barra antes de poner precio. Se instala en el celular, funciona en la computadora e incluye tutoriales en video.</p>
+
+          <div class="price-row mt-2">
+            <span class="price-now">$27 <span class="small muted">USD</span></span>
+            <span class="price-tag">Pago único</span>
+          </div>
+          <a class="cta cta--hero" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1" target="_blank" rel="sponsored noopener" data-hotmart data-sticky-anchor>
+            <span>Quiero mi calculadora</span>
+            <small>Pago único · Acceso inmediato</small>
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <p class="trust-line"><svg class="lock" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.4"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg> Pago procesado por Hotmart · El precio final, en tu moneda, se confirma antes de pagar.</p>
+          <p class="hero-alt">¿Buscas el oficio completo? <a href="index.html">Ver el curso de velas y jabones →</a></p>
+        </div>
+
+        <div class="reveal">
+          <div class="recibo">
+            <h3>El error que esta herramienta corrige</h3>
+            <div class="recibo-linea"><span>Base de glicerina (500 g)</span><span>$3,80</span></div>
+            <div class="recibo-linea"><span>Mica + aroma</span><span>$0,90</span></div>
+            <div class="recibo-linea"><span>Envase y etiqueta</span><span>$0,70</span></div>
+            <div class="recibo-linea"><span>Bolsa de celofán</span><span>$0,15</span></div>
+            <div class="recibo-linea"><span><strong>Lo que mucha gente suma</strong></span><span>$5,55</span></div>
+            <div class="recibo-total"><span>Precio puesto «a ojo»</span><span>$6,00</span></div>
+            <div class="recibo-alerta">Margen real: <strong>$0,45</strong> por barra. Ahí no está tu tiempo, ni mermas, ni el costo de llegar a la feria. Estás trabajando gratis.</div>
+          </div>
+          <p class="small muted mt-2" style="text-align:center">Ejemplo ilustrativo para mostrar el problema. La app calcula tus números, no los de este ejemplo.</p>
         </div>
       </div>
-      <div class="receipt-wrap">
-        <section class="recibo" aria-labelledby="ejemplo-titulo">
-          <h2 id="ejemplo-titulo">El error que esta herramienta corrige</h2>
-          <p class="ej">Ejemplo ilustrativo de costos de un lote de 6 piezas</p>
-          <dl>
-            <div class="receipt-line"><dt>Materiales</dt><dd>$15.68</dd></div>
-            <div class="receipt-line"><dt>Tu tiempo de trabajo (45 min)</dt><dd>$11.25</dd></div>
-            <div class="receipt-line"><dt>Gastos del taller (luz, empaque, desgaste)</dt><dd>$3.00</dd></div>
-            <div class="receipt-line total"><dt>Costo real del lote</dt><dd>$29.93</dd></div>
-            <div class="receipt-line pieza"><dt>Costo real por pieza</dt><dd>$4.99</dd></div>
-          </dl>
-          <p class="ojo">Si solo cuentas los materiales, parece que cada pieza cuesta <strong>$2.61</strong>. Si vendes a ese valor, pierdes dinero. Para calcular el costo completo de tus jabones, suma materiales, tiempo y gastos del taller.</p>
-        </section>
-      </div>
     </div>
   </section>
 
-  <section class="section-block calc-features" aria-labelledby="funciones-titulo">
+  <section class="section band">
     <div class="wrap">
-      <div class="section-intro"><h2 id="funciones-titulo">Qué hace la Calculadora</h2></div>
-      <div class="feature-grid">
-        <article class="tile">
-          <span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 19h.01M12 19h.01"/></svg></span>
+      <div class="section-head center">
+        <p class="eyebrow" style="justify-content:center">Qué hace</p>
+        <h2>Tres cosas, bien hechas</h2>
+      </div>
+      <div class="module-grid">
+        <article class="module reveal">
+          <p class="module-count" style="font-size:1.5rem">01</p>
           <h3>Tus números, en segundos</h3>
-          <p>Calcula costos, cantidades y precio de venta de tus recetas. Tú ingresas tus ingredientes y tus costos. La app hace las cuentas.</p>
+          <p>Ingresas ingredientes y cantidades; la app devuelve el costo por barra, el costo del lote y un precio de venta sugerido con el margen que tú elijas.</p>
         </article>
-        <article class="tile">
-          <span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
+        <article class="module reveal">
+          <p class="module-count" style="font-size:1.5rem">02</p>
           <h3>En tu celular, como una app</h3>
-          <p>Se instala en tu teléfono y también funciona en la computadora. Recibes acceso inmediato al comprarla y puedes usarla en el taller cuando la necesites.</p>
+          <p>La abres en el teléfono en plena feria o en la cocina, sin abrir la computadora. Funciona igual en tablet y escritorio.</p>
         </article>
-        <article class="tile">
-          <span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5l5 2.5-5 2.5z"/></svg></span>
+        <article class="module reveal">
+          <p class="module-count" style="font-size:1.5rem">03</p>
           <h3>Tutoriales en video</h3>
-          <p>Incluye tutoriales paso a paso para usarla desde el primer día, aunque los números no sean lo tuyo.</p>
+          <p>Incluye videos de uso y de carga de recetas, para que no te quedes mirando la pantalla sin saber por dónde empezar.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="section-block soft-band" aria-labelledby="pago-titulo">
-    <div class="wrap split-section">
-      <div class="section-intro"><h2 id="pago-titulo">Antes de pagar, que te quede claro</h2></div>
-      <dl class="payment-list">
-        <div class="payment-row"><dt><span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></span>Quién te cobra</dt><dd>Hotmart procesa el pago del producto. Ese es el cargo que verás en tu tarjeta.</dd></div>
-        <div class="payment-row"><dt><span class="icon-box" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.2c-.6-.8-1.7-1.2-3-1.2-1.9 0-3.2 1-3.2 2.4 0 3.3 6.6 1.9 6.6 4.7 0 1.4-1.5 2.4-3.4 2.4-1.4 0-2.7-.6-3.4-1.5"/></svg></span>Cuánto pagas</dt><dd>Una sola vez, sin mensualidades. El monto exacto, en la moneda de tu país, aparece en la página de pago antes de que confirmes.</dd></div>
-        <div class="payment-row"><dt><span class="icon-box olive" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4.5"/></svg></span>Garantía</dt><dd>Hotmart gestiona la devolución dentro del plazo de garantía del producto. Puedes consultar ese plazo en la página de pago antes de confirmar.</dd></div>
-        <div class="payment-row"><dt><span class="icon-box olive" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></span>Idioma</dt><dd>La página de pago puede abrir en inglés según tu país. El producto y sus tutoriales son en español.</dd></div>
+  <section class="section">
+    <div class="wrap split">
+      <div class="section-head">
+        <p class="eyebrow">Antes de pagar</p>
+        <h2>Que quede claro</h2>
+        <p>Esto no es un curso: es una herramienta. Si lo que quieres es aprender a hacer jabón, esta no es la compra correcta.</p>
+      </div>
+      <dl class="facts" style="margin-top:0">
+        <div class="fact"><span class="fact-ico" aria-hidden="true"><svg><use href="#ico-info"/></svg></span><span><b>No enseña a hacer jabón.</b> Calcula costos y precios. El oficio lo aprendes en el <a href="index.html">curso 3x1</a> o en un curso de jabón.</span></div>
+        <div class="fact"><span class="fact-ico" aria-hidden="true"><svg><use href="#ico-info"/></svg></span><span><b>Es una herramienta digital.</b> Su uso es en navegador o instalada como app web; no incluye materiales.</span></div>
+        <div class="fact"><span class="fact-ico" aria-hidden="true"><svg><use href="#ico-info"/></svg></span><span><b>Quién cobra.</b> Hotmart procesa el pago. El precio final y los medios de pago los ves antes de confirmar.</span></div>
+        <div class="fact"><span class="fact-ico" aria-hidden="true"><svg><use href="#ico-info"/></svg></span><span><b>Garantía.</b> Las condiciones de devolución son las que aparecen en la página de pago de Hotmart.</span></div>
       </dl>
     </div>
   </section>
 
-  <section class="section-block" aria-labelledby="faq-titulo">
-    <div class="wrap split-section">
-      <div class="section-intro"><h2 id="faq-titulo">Preguntas frecuentes</h2></div>
+  <section class="section band">
+    <div class="wrap split">
+      <div class="section-head"><h2>Preguntas frecuentes</h2></div>
       <div class="faq">
-        <details><summary>¿Necesito saber de números?</summary><p>Solo ingresas los datos de tu receta y la app calcula. Los tutoriales en video te guían paso a paso.</p></details>
-        <details><summary>¿Sirve para velas también?</summary><p>Está hecha para recetas de jabones. El método de costo completo (materiales + tu tiempo + gastos) es el mismo que enseñamos para velas en nuestras clases gratis.</p></details>
-        <details><summary>¿Cuándo la recibo?</summary><p>El acceso es inmediato tras confirmar el pago.</p></details>
+        <details open><summary>¿Necesito saber hacer jabón?</summary><p>No para usar la calculadora, pero sí para que los resultados tengan sentido: la app trabaja con las cantidades que tú le das. Si estás empezando, la combinación lógica es el curso 3x1 más adelante.</p></details>
+        <details><summary>¿Sirve para velas?</summary><p>Está pensada para jabones. Para velas el cálculo de costo es más simple (cera + mecha + frasco + aroma) y puedes hacerlo a mano con una báscula.</p></details>
+        <details><summary>¿Cómo la recibo?</summary><p>Al confirmarse el pago, Hotmart te envía el acceso al correo que registras. Desde ahí la abres en el celular o en la computadora.</p></details>
+        <details><summary>¿Puedo usarla sin conexión?</summary><p>Depende de cómo la instales en tu teléfono. En el uso normal necesitas estar conectado para abrirla la primera vez.</p></details>
       </div>
     </div>
   </section>
 
-  <section class="wrap finale" aria-labelledby="empezar-titulo">
-    <div class="final">
-      <div>
-        <h2 id="empezar-titulo">Deja de adivinar tu precio</h2>
-        <p>Si vendes un jabón por debajo de lo que cuesta producirlo, pierdes dinero. Conoce el costo de tu trabajo desde hoy.</p>
-      </div>
-      <div>
-        <a class="cta main-action" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1"><span>Ir a la Calculadora</span><small>Pago único · Acceso inmediato</small><span class="arrow" aria-hidden="true"></span></a>
-        <p class="mini">El precio exacto, en tu moneda, lo confirmas en la página de pago antes de pagar.</p>
+  <section class="section band band--dark">
+    <div class="wrap">
+      <div class="finale">
+        <span class="flame-glow" aria-hidden="true"></span>
+        <div class="finale-grid">
+          <div>
+            <p class="eyebrow">La decisión</p>
+            <h2>Deja de adivinar tu precio</h2>
+            <p>Un jabón mal precio no se nota en la foto: se nota a fin de mes. La calculadora te da el número real antes de que lo pongas en la mesa.</p>
+          </div>
+          <div>
+            <div class="price-row">
+              <span class="price-now">$27 <span class="small">USD</span></span>
+              <span class="price-tag">Pago único</span>
+            </div>
+            <a class="cta cta--hero" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1" target="_blank" rel="sponsored noopener" data-hotmart>
+              <span>Ir a la calculadora</span>
+              <small>Pago único · Acceso inmediato</small>
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+            <p class="trust-line trust-line--dark"><svg class="lock" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.4"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg> Pago procesado por Hotmart. El monto final lo ves antes de confirmar.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
 </main>
 
-<p style="text-align:center;margin:20px auto 4px;font-size:.95rem">¿Tienes una duda antes de decidir? Escríbenos a <a href="mailto:jobvalidoseo@gmail.com?subject=Duda%20sobre%20la%20Calculadora%20de%20Recetas%20para%20Jabones" style="color:#C07F13;font-weight:700;text-decoration:underline">jobvalidoseo@gmail.com</a></p>
-<footer class="pie">
+<footer class="footer">
   <div class="wrap">
-    <p style="text-align:center;font-size:.85em;opacity:.75">👁 <span id="contador-visitas">Más de 700</span> visitas registradas en esta web</p>
-    <p><strong>Enlace de afiliado:</strong> si compras desde aquí, recibimos una comisión sin costo adicional para ti. El precio que pagas es el mismo.</p>
-    <p>Página de la comunidad «Aprende a Crear Velas y Jabones con Lia». La Calculadora es un producto de su productor en Hotmart. Las condiciones finales (precio en tu moneda, garantía y acceso) son las de su página de pago. El ejemplo de costos de esta página es ilustrativo.</p>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="8" height="11" rx="2"/><path d="M12 3c1.4 1.7 2.2 2.9 2.2 4.2a2.2 2.2 0 0 1-4.4 0C9.8 5.9 10.6 4.7 12 3Z"/></svg></span>
+          <span>Velas y Jabones <em>con Lia</em></span>
+        </a>
+        <p>Guía independiente sobre velas, jabones y vida lenta.</p>
+        <p class="mt-2">Dudas: <a href="mailto:jobvalidoseo@gmail.com">jobvalidoseo@gmail.com</a></p>
+      </div>
+      <div>
+        <h4>Cursos</h4>
+        <ul>
+          <li><a href="index.html">Velas y Jabones 3x1</a></li>
+          <li><a href="tienda.html">Ruta de aprendizaje</a></li>
+          <li><a href="calculadora.html">Calculadora de recetas</a></li>
+          <li><a href="vsl.html">Ver el video</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Taller</h4>
+        <ul>
+          <li><a href="kit.html">Kit de inicio</a></li>
+          <li><a href="bienestar.html">Bienestar en casa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>La página</h4>
+        <ul>
+          <li><a href="sobre.html">Quiénes somos</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="terminos.html">Términos</a></li>
+          <li><a href="sobre.html#afiliados">Enlaces de afiliado</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p><strong>Enlaces de afiliado.</strong> Si compras a través de los enlaces de esta página recibimos una comisión sin costo adicional para ti.</p>
+      <p>© <span data-year>2026</span> Velas y Jabones con Lia · Hecho a mano, como todo lo demás.</p>
+    </div>
   </div>
 </footer>
 
-<div class="sticky-cta">
-  <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCLAND1">Quiero mi Calculadora →</a>
+<div class="sticky-buy">
+  <div class="sb-price"><b>$27 USD</b><span>Pago único · Acceso inmediato</span></div>
+  <a class="cta" href="https://go.hotmart.com/L108460297U?ap=5b71&src=CALCSTICKY" target="_blank" rel="sponsored noopener" data-hotmart>Quiero la app</a>
 </div>
 
-<script>
-(() => {
-  if (!("IntersectionObserver" in window)) return;
-
-  const sticky = document.querySelector(".sticky-cta");
-  const actions = document.querySelectorAll(".hero-actions .main-action, .final .main-action");
-  const visibleActions = new Set();
-
-  const updateSticky = () => {
-    sticky.hidden = visibleActions.size > 0 && !sticky.contains(document.activeElement);
-  };
-  const observer = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (entry.intersectionRatio >= 0.9) {
-        visibleActions.add(entry.target);
-      } else {
-        visibleActions.delete(entry.target);
-      }
-    }
-    updateSticky();
-  }, { threshold: 0.9, rootMargin: "0px 0px -65px 0px" });
-
-  actions.forEach(action => observer.observe(action));
-  sticky.addEventListener("focusout", () => requestAnimationFrame(updateSticky));
-})();
-</script>
-<script>
-fetch('https://abacus.jasoncameron.dev/hit/validsumvelas/visitas').then(function(r){return r.json();}).then(function(d){if(d&&typeof d.value==='number'){var el=document.getElementById('contador-visitas');if(el){el.textContent=(729+d.value).toLocaleString('es-ES');}}}).catch(function(){});
-</script>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

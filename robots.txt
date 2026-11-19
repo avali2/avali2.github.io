@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avali2.github.io/sitemap.xml
