@@ -53,4 +53,8 @@
 }
 .consent .reject:hover { background: rgb(255 255 255 / 8%); color: #fff; }
 
+.consent { max-height: 75dvh; overflow-y: auto; }
+.consent .dismiss { background: transparent; border-color: #8f7768; color: #e0cbb8; }
+.consent button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.consent .storage-note:empty { display: none; }
 body.consent-open .sticky-buy { display: none; }

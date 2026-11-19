@@ -20,6 +20,7 @@
 <meta name="twitter:image" content="https://avali2.github.io/assets/img/og-image.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f4e9da'/%3E%3Crect x='11' y='13' width='10' height='13' rx='2.5' fill='%238a4429'/%3E%3Cpath d='M16 5c2 2.4 3 3.9 3 5.4a3 3 0 0 1-6 0C13 8.9 14 7.4 16 5Z' fill='%23a8543a'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/theme-trust.css">
 <link rel="stylesheet" href="assets/css/consent.css">
 <style>
 .calc-box {
@@ -176,7 +177,7 @@
       <a href="bienestar.html">Bienestar</a>
       <a href="guias.html">Guías</a>
       <a href="calculadora.html">Calculadora</a>
-      <a class="nav-cta" href="https://go.hotmart.com/O107442122M?ap=e5ca&src=LANDNAV10" target="_blank" rel="sponsored noopener">Entrar al curso</a>
+      <a class="nav-cta" href="https://go.hotmart.com/O107442122M?ap=e5ca&src=LANDNAV10" target="_blank" rel="sponsored noopener">Ver oferta del curso ↗</a>
     </nav>
   </div>
 </header>
@@ -265,7 +266,13 @@
                 <span class="hint">Ganancia sobre el precio de venta</span>
               </div>
             </div>
+            <div class="field-duo">
+              <div class="field"><label for="trabajo">Tu trabajo por vela (USD)</label><input type="number" id="trabajo" value="0" min="0" step="0.01" inputmode="decimal"><span class="hint">Tiempo × tarifa por hora</span></div>
+              <div class="field"><label for="otros">Otros costes por vela (USD)</label><input type="number" id="otros" value="0" min="0" step="0.01" inputmode="decimal"><span class="hint">Transporte, puesto y gastos repartidos</span></div>
+            </div>
           </div>
+          <p id="calc-error" role="status" class="mt-2"></p>
+          <noscript>Activa JavaScript para calcular automáticamente o utiliza la fórmula explicada debajo.</noscript>
         </form>
 
         <div class="resultado" aria-live="polite">
@@ -279,11 +286,12 @@
             <div><span>Frasco</span><b id="cFrasco">—</b></div>
             <div><span>Aroma</span><b id="cAroma">—</b></div>
             <div><span>Etiqueta y empaque</span><b id="cEmpaque">—</b></div>
-            <div><span>Merma</span><b id="cMerma">—</b></div>
+            <div><span>Recargo estimado por merma de materiales</span><b id="cMerma">—</b></div>
+            <div><span>Trabajo y otros costes</span><b id="cExtras">—</b></div>
             <div style="border-top:1px solid rgb(255 255 255 / 14%);padding-top:8px;margin-top:4px"><span><strong style="color:#fff4e6">Costo total</strong></span><b id="cTotal" style="font-size:1rem">—</b></div>
             <div><span>Ganancia bruta por vela</span><b id="cGanancia">—</b></div>
           </div>
-          <p class="nota">No incluye tu tiempo de trabajo ni el costo de traslado a la feria. Si quieres cobrarlos, súmalos al costo antes de calcular el margen.</p>
+          <p class="nota">Incluye trabajo y otros costes solo si los introduces. El margen calculado es anterior a impuestos y comisiones no incluidas; no garantiza beneficio neto ni ventas.</p>
         </div>
       </div>
       <p class="small muted mt-2">Cálculo orientativo. Redondea siempre hacia arriba: es más sano cobrar de más y bajar que descubrir a fin de mes que faltaba dinero.</p>
@@ -390,7 +398,7 @@
           <div>
             <p class="eyebrow">Si quieres el oficio completo</p>
             <h2>Saber el precio es la mitad. La otra es saber hacer la vela</h2>
-            <p>El programa 3x1 incluye las 23 lecciones de costos y negocio dentro del curso, con calculadoras de presupuesto para velas y para jabones.</p>
+            <p>El programa 3x1 reúne velas, jabones y emprendimiento. Confirma con el productor el temario y las herramientas incluidas antes de comprar.</p>
           </div>
           <div>
             <div class="price-row">
@@ -400,10 +408,10 @@
             </div>
             <a class="cta cta--hero" href="https://go.hotmart.com/O107442122M?ap=e5ca&src=GUIDACOSTO" target="_blank" rel="sponsored noopener">
               <span>Quiero el curso 3x1</span>
-              <small>98 lecciones · 18 bonos · Garantía de 7 días</small>
+              <small>Consulta precio, acceso y garantía en Hotmart</small>
               <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
             </a>
-            <p class="trust-line trust-line--dark"><svg class="lock" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.4"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg> Pago procesado por Hotmart. 7 días de garantía.</p>
+            <p class="trust-line trust-line--dark"><svg class="lock" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.4"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg> Precio observado para EE. UU. antes de impuestos aplicables. Revisa las condiciones en Hotmart.</p>
           </div>
         </div>
       </div>

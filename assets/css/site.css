@@ -1168,6 +1168,15 @@ table.compare .no::before { content: "— "; color: #b09a88; }
 .small { font-size: .85rem; }
 .nowrap { white-space: nowrap; }
 
+/* Acceso por teclado, vídeo sin JS y contenido visible aunque falle una animación. */
+.nav-toggle { font-family: inherit; }
+.nav-input:focus-visible ~ .nav-toggle { outline: 3px solid var(--caramel); outline-offset: 3px; }
+.video-play[hidden], html:not(.js) .video-play { display: none; }
+.video-shell video { object-fit: contain; }
+.js .reveal { opacity: 1; transform: none; }
+@media (min-width: 901px) { .nav-input { display: none; } }
+@media (max-width: 900px) { html:not(.js) .sticky-buy { transform: none; } }
+
 /* ajustes finos de móvil */
 @media (max-width: 600px) {
   .hero-figure figcaption { display: none; }

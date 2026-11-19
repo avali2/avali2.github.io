@@ -1,0 +1,44 @@
+/* Capa de conversión: oferta principal y recursos secundarios. */
+.sales-page .hero { padding-top: clamp(28px, 4vw, 54px); }
+.sales-page .hero-grid { gap: clamp(24px, 4vw, 50px); }
+.sales-page .hero-copy h1 { max-width: 20ch; font-size: clamp(2.2rem, 1.55rem + 2.2vw, 3.2rem); }
+.sales-page .hero-sub { max-width: 48ch; }
+.sales-page .hero-list { font-size: .96rem; }
+.sales-page .proof-pill { text-decoration: none; }
+.sales-page .hero-actions { max-width: 530px; }
+.affiliate-note { font-size: .76rem; line-height: 1.55; color: var(--muted); margin-top: 16px; }
+.sales-page .sales-figure { margin: 0; transform: rotate(1deg); order: 0; }
+.sales-page .sales-figure img { aspect-ratio: 4 / 5; object-fit: cover; }
+.sales-page .sales-figure figcaption { display: block; position: static; border: 0; border-radius: 0; padding: 12px 16px; font-size: .73rem; line-height: 1.5; background: var(--cream); color: var(--body); }
+.decision-strip { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 36px; padding: 24px 0 0; gap: 20px; border-top: 1px solid var(--line); }
+.decision-strip span { font-size: .8rem; color: var(--muted); }
+.decision-strip b { display: block; font-size: .98rem; color: var(--ink); }
+.proof-layout { display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 48px; }
+.rating-card { background: var(--surface); padding: 32px; border: 1px solid var(--line); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-sm); }
+.rating-card .stars { font-size: 1.4rem; letter-spacing: .14em; }
+.rating-number { font-family: var(--serif); font-size: 5rem; line-height: 1.1; color: var(--ink); margin: 8px 0; }
+.rating-number span { font-size: 1.8rem; color: var(--muted); }
+.buy-steps { padding-left: 23px; display: grid; gap: 18px; margin-top: 24px; }
+.buy-steps li::marker { color: var(--caramel); font-weight: bold; }
+.resource-links { display: grid; grid-template-columns: 1.3fr 1fr; gap: 30px; align-items: center; }
+.resource-links h2 { font-size: 1.5rem; }
+.resource-links a { display: block; padding: 10px 0; }
+.sales-page .footer { margin-top: 0; }
+@media (max-width: 900px) {
+  .sales-page .hero-grid { grid-template-columns: 1fr; }
+  .sales-page .hero-copy h1 { max-width: 21ch; }
+  .sales-figure { max-width: 560px; width: 100%; justify-self: center; transform: none; }
+  .sales-page .sales-figure img { aspect-ratio: 4 / 3; }
+  .decision-strip { grid-template-columns: repeat(2, 1fr); }
+  .proof-layout, .resource-links { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 480px) {
+  .sales-page .hero { padding-top: 24px; }
+  .sales-page .hero-copy h1 { font-size: 2.25rem; }
+  .sales-page .hero-sub { font-size: 1rem; }
+  .sales-page .hero-list { gap: 7px; font-size: .9rem; }
+  .sales-page .proof-pill { font-size: .73rem; padding-inline: 9px; gap: 6px; }
+  .sales-page .hero-actions { margin-top: 18px; }
+  .sales-page .hero-actions .cta { width: 100%; }
+  .rating-card { padding: 24px 16px; }
+}

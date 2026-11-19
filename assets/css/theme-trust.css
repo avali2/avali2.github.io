@@ -1,0 +1,215 @@
+/* ==========================================================================
+   Tema "Confianza" — rediseño orientado a conversión
+   --------------------------------------------------------------------------
+   Decisiones de color (psicología de compra):
+   · Azul marino (#0A2540)  -> ancla de seguridad/estabilidad en navegación,
+     títulos y cierres. Es el color de la confianza en servicios profesionales.
+   · Verde azulado (#0E7C7B) -> CTA principal. Comunica "avanzar/completar"
+     y se asocia a crecimiento y a finalización segura de una compra.
+   · Blanco/gris claro (#F8F9FA) -> fondos amplios: transparencia y limpieza.
+   · Sin amarillos/naranjas/rojos saturados en áreas grandes. El único acento
+     cálido (dorado apagado) queda en las estrellas de valoración, que son
+     una señal pequeña de confianza, nunca un botón principal.
+   ========================================================================== */
+
+:root {
+  --paper: #F8F9FA;
+  --surface: #FFFFFF;
+  --cream: #E9F0F7;
+  --parchment: #F1F5F9;
+  --ink: #0A2540;          /* azul marino: títulos */
+  --body: #334155;         /* gris pizarra legible */
+  --muted: #64748B;
+  --caramel: #0E7C7B;      /* acento teal para énfasis, enlaces y eyebrow */
+  --terracotta: #2A9D8F;   /* teal claro de refuerzo */
+  --gold: #C9973B;         /* dorado apagado solo para estrellas */
+  --olive: #0A2540;
+  --olive-pale: #E6F0F0;
+  --line: #E2E8F0;
+  --line-soft: #EEF2F7;
+  --green: #0E7C7B;        /* CTA primario */
+  --green-dark: #0B5E5D;
+  --cta-hover: #2A9D8F;    /* verde más brillante al pasar el cursor */
+  --navy: #0A2540;
+  --navy-deep: #081B2E;
+}
+
+body { background: var(--paper); color: var(--body); }
+h1, h2, h3, h4 { color: var(--ink); }
+
+/* ---- Barra de navegación azul marino --------------------------------- */
+.topbar {
+  background: var(--navy);
+  border-block-end: 1px solid rgb(255 255 255 / 8%);
+}
+.brand { color: #FFFFFF; }
+.brand:hover { color: #FFFFFF; }
+.brand em { color: #6FD3C8; }
+.brand-mark { background: rgb(255 255 255 / 10%); border-color: rgb(255 255 255 / 14%); color: #6FD3C8; }
+.nav a { color: #D7E3F0; }
+.nav a:hover { background: rgb(255 255 255 / 10%); color: #FFFFFF; }
+.nav a[aria-current="page"] { background: rgb(46 196 182 / 18%); color: #6FD3C8; }
+.nav .nav-cta { background: var(--green); color: #FFFFFF; }
+.nav .nav-cta:hover { background: var(--cta-hover); color: #FFFFFF; }
+.nav-toggle { background: #FFFFFF; color: var(--navy); border-color: transparent; }
+
+@media (max-width: 900px) {
+  .nav { background: #FFFFFF; border-block-end: 1px solid var(--line); }
+  .nav a { color: var(--navy); border-block-end: 1px solid var(--line-soft); }
+  .nav a[aria-current="page"] { background: transparent; color: var(--green); }
+  .nav .nav-cta { color: #FFFFFF; border: 0; }
+}
+
+/* ---- Bandas oscuras (cierres) en azul marino -------------------------- */
+.band--dark {
+  background:
+    radial-gradient(120% 90% at 15% 0%, #12375f 0%, #0A2540 48%, #081B2E 100%);
+}
+.band--dark .eyebrow { color: #6FD3C8; }
+.finale .price-tag { background: #2EE0C9; color: #063B38; }
+/* El resplandor del cierre pasa de naranja a teal para no romper la paleta. */
+.flame-glow { background: radial-gradient(circle, rgb(46 224 201 / 30%) 0%, rgb(46 224 201 / 0%) 62%); }
+
+/* ---- Footer azul marino profundo -------------------------------------- */
+.footer { background: var(--navy-deep); color: #C7D3E2; }
+.footer a { color: #8FD8CF; }
+.footer a:hover { color: #FFFFFF; }
+.footer h4 { color: #EAF3FB; }
+.footer .brand { color: #FFFFFF; }
+.footer .brand em { color: #6FD3C8; }
+.footer-bottom strong { color: #DCE7F2; }
+
+/* ---- CTA con micro-interacción --------------------------------------- */
+/* Al pasar el cursor: crece, se ilumina a verde más brillante y aparece
+   un texto de refuerzo ("Pago seguro · Sin compromiso"). */
+.cta {
+  background: var(--green);
+  transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
+  box-shadow: 0 2px 8px rgb(14 124 123 / 22%);
+}
+.cta:hover, .cta:focus-visible {
+  background: var(--cta-hover);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 26px rgb(14 124 123 / 30%);
+  color: #FFFFFF;
+}
+.cta:active { transform: translateY(0) scale(1); }
+.cta--ghost { background: transparent; color: var(--green); border-color: #BFD9D7; box-shadow: none; }
+.cta--ghost:hover, .cta--ghost:focus-visible { background: #E7F5F3; color: var(--green-dark); }
+
+.cta--hero { grid-template-columns: minmax(0, 1fr) auto; }
+.cta-reinforce {
+  display: none;
+  grid-column: 1 / -1;
+  grid-row: 3;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  opacity: .95;
+}
+.cta--hero:hover .cta-reinforce,
+.cta--hero:focus-visible .cta-reinforce { display: block; }
+
+/* ---- Señales de confianza bajo el héroe ------------------------------ */
+.trust-strip {
+  background: var(--navy);
+  color: #D7E3F0;
+  border-block: 1px solid rgb(255 255 255 / 8%);
+  padding-block: 18px;
+}
+.trust-strip .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  align-items: center;
+  justify-content: center;
+  font-size: .84rem;
+}
+.trust-strip .wrap > span { display: inline-flex; gap: 7px; align-items: center; }
+.trust-strip b { color: #FFFFFF; font-weight: 700; }
+.trust-strip .dot { width: 4px; height: 4px; border-radius: 50%; background: #2EE0C9; }
+.trust-strip a { color: #8FD8CF; font-weight: 600; }
+.trust-strip .stars { color: var(--gold); }
+
+/* ---- Tarjetas y bloques ------------------------------------------------- */
+.proof-pill { border-color: var(--line); }
+.rating-card { border-color: var(--line); box-shadow: var(--shadow-sm); }
+.rating-number { color: var(--ink); }
+.rating-number span { color: var(--muted); }
+.price-tag { background: #E1F2F0; color: #0B5E5D; }
+.stars { color: var(--gold); }
+.decision-strip { border-top-color: var(--line); }
+
+/* ---- Calculadora integrada -------------------------------------------- */
+.calc-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--green);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: clamp(20px, 3vw, 28px);
+  display: grid;
+  gap: 16px;
+}
+.calc-card .field { display: grid; gap: 6px; }
+.calc-card label { font-size: .86rem; font-weight: 650; color: var(--ink); }
+.calc-card input {
+  min-block-size: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 1.05rem;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-appearance: none;
+}
+.calc-card input:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-color: transparent; }
+.calc-result {
+  background: #EFF7F6;
+  border: 1px solid #D2EAE7;
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: center;
+}
+.calc-result span { display: block; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.calc-result b { display: block; font-size: 2rem; line-height: 1.15; color: var(--green-dark); }
+.calc-result p { margin-top: 4px; font-size: .78rem; color: var(--muted); }
+
+/* ---- Tour guiado ------------------------------------------------------- */
+.tour-focus {
+  position: relative;
+  outline: 3px solid var(--green) !important;
+  outline-offset: 6px;
+  border-radius: var(--radius);
+}
+.tour-bar {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 110;
+  display: grid;
+  gap: 8px;
+  padding: 14px var(--gutter) calc(14px + env(safe-area-inset-bottom, 0px));
+  background: var(--navy);
+  color: #EAF3FB;
+  box-shadow: 0 -12px 34px rgb(8 27 46 / 35%);
+}
+.tour-bar .tour-label { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: #6FD3C8; }
+.tour-bar .tour-title { font-size: 1.02rem; font-weight: 700; color: #FFFFFF; }
+.tour-bar .tour-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.tour-bar button {
+  min-block-size: 44px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.tour-bar .tour-next { background: var(--green); color: #fff; }
+.tour-bar .tour-next:hover { background: var(--cta-hover); }
+.tour-bar .tour-prev, .tour-bar .tour-close { background: transparent; color: #D7E3F0; border-color: rgb(255 255 255 / 24%); }
+.tour-bar .tour-progress { font-size: .8rem; color: #9FB4C8; }
+@media (max-width: 600px) {
+  .tour-bar { gap: 6px; }
+}

@@ -17,17 +17,32 @@
   var nav = doc.getElementById("nav");
   var navToggle = doc.querySelector(".nav-toggle");
 
+  // El checkbox mantiene un menú funcional sin JS; con JS usamos un botón real.
+  if (navInput && navToggle) {
+    var menuButton = doc.createElement("button");
+    menuButton.type = "button";
+    menuButton.className = "nav-toggle";
+    menuButton.textContent = "Menú";
+    menuButton.setAttribute("aria-controls", "nav");
+    menuButton.setAttribute("aria-expanded", "false");
+    navToggle.replaceWith(menuButton);
+    navToggle = menuButton;
+    navInput.tabIndex = -1;
+    navInput.setAttribute("aria-hidden", "true");
+    navToggle.addEventListener("click", function () {
+      navInput.checked = !navInput.checked;
+      navToggle.setAttribute("aria-expanded", String(navInput.checked));
+    });
+  }
+
   function closeNav() {
-    if (navInput && navInput.checked) {
-      navInput.checked = false;
-    }
+    if (navInput) navInput.checked = false;
+    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
   }
 
   if (navInput) {
     navInput.addEventListener("change", function () {
-      if (navToggle) {
-        navToggle.setAttribute("aria-expanded", navInput.checked ? "true" : "false");
-      }
+      if (navToggle) navToggle.setAttribute("aria-expanded", String(navInput.checked));
     });
 
     if (nav) {
@@ -128,7 +143,10 @@
     var visible = new Set();
 
     var sync = function () {
-      sticky.classList.toggle("is-visible", visible.size === 0);
+      var show = visible.size === 0;
+      sticky.classList.toggle("is-visible", show);
+      sticky.inert = !show;
+      sticky.setAttribute("aria-hidden", String(!show));
     };
 
     var stickyObserver = new IntersectionObserver(function (entries) {
@@ -162,9 +180,13 @@
       }
       video.setAttribute("controls", "controls");
       shell.classList.add("is-playing");
-      button.remove();
+      button.hidden = true;
+      video.focus();
       var play = video.play();
-      if (play && typeof play.catch === "function") play.catch(function () {});
+      if (play && typeof play.catch === "function") play.catch(function () {
+        // Los controles nativos y el enlace directo permiten reintentar.
+        video.setAttribute("controls", "controls");
+      });
     });
   });
 
