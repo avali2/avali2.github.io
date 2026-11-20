@@ -11,7 +11,7 @@
   var sendingEvent = false;
   var banner = null;
   var previousFocus = null;
-  var sources = /^(LANDNAV10|LANDFINAL|LANDGUIAS|LANDVSL1|LANDVSLSTICKY|LANDBIEN1|GUIDAVENDER|GUIDACOSTO|LANDKIT1|LANDVELAS[123]|LANDSTICKY|VITRINA3X1|VITRINASTORE|VITRINACALC|CALCLAND1|CALCSTICKY)$/;
+  var sources = /^(LANDNAV10|LANDFINAL|LANDOFERTA|LANDGUIAS|LANDVSL1|LANDVSLSTICKY|LANDBIEN1|GUIDAVENDER|GUIDACOSTO|LANDKIT1|LANDVELAS[123]|LANDSTICKY|VITRINA3X1|VITRINASTORE|VITRINACALC|CALCLAND1|CALCSTICKY)$/;
 
   try {
     choice = window.localStorage.getItem(STORAGE_KEY);
@@ -109,7 +109,7 @@
   function cleanParams(params) {
     params = params && typeof params === "object" ? params : {};
     var result = { pathname: pagePath() };
-    if (typeof params.placement === "string" && /^(nav|hero|sticky|footer|content|link|final|video|reviews)$/.test(params.placement)) {
+    if (typeof params.placement === "string" && /^(nav|hero|sticky|footer|content|link|final|video|reviews|offer)$/.test(params.placement)) {
       result.placement = params.placement;
     }
     if (typeof params.src === "string" && sources.test(params.src)) result.src = params.src;
@@ -147,7 +147,7 @@
       /^(www\.)?(amazon\.com|amzn\.to|temu\.com|temu\.to)$/.test(host);
     if (!affiliate) return;
     var placement = link.getAttribute("data-placement");
-    if (!/^(nav|hero|sticky|footer|content|link|final|video|reviews)$/.test(placement)) {
+    if (!/^(nav|hero|sticky|footer|content|link|final|video|reviews|offer)$/.test(placement)) {
       placement = link.closest(".sticky-buy") ? "sticky" :
         link.closest("nav, .topbar") ? "nav" :
         link.closest("footer") ? "footer" :

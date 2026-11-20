@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Capa "profesional" — solo portada.
+   Refuerza jerarquía, señales de confianza junto al CTA y una tarjeta de
+   oferta clara. Sin dependencias externas (rendimiento = confianza).
+   ========================================================================== */
+
+/* Iconos de trazo consistentes (sustituyen emojis sueltos). */
+.ico {
+  width: 18px; height: 18px;
+  fill: none; stroke: currentColor;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+  flex: 0 0 auto; display: inline-block; vertical-align: -.18em;
+}
+.ico--lg { width: 26px; height: 26px; }
+
+/* Halo del héroe en teal (coherente con la paleta). */
+.hero::before {
+  background: radial-gradient(circle, rgb(46 224 201 / 18%) 0%, rgb(46 224 201 / 0%) 66%);
+}
+
+/* Listas con check (héroe y oferta). */
+.check-list { list-style: none; display: grid; gap: 10px; margin: 18px 0 0; padding: 0; }
+.check-list li { display: flex; gap: 10px; align-items: flex-start; font-size: .96rem; }
+.check-list .ico { color: var(--green); margin-top: 3px; }
+
+/* Fila de sellos junto al CTA: se ve la confianza justo donde se decide. */
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 11px; border-radius: 999px;
+  font-size: .76rem; font-weight: 650; line-height: 1.2;
+  background: #fff; border: 1px solid var(--line); color: var(--body);
+}
+.badge .ico { width: 15px; height: 15px; }
+.badge--rating { background: #FFF8EC; border-color: #F0DFBE; color: #7A5A1E; }
+.badge--secure { background: #EFF7F6; border-color: #CFE8E4; color: #0B5E5D; }
+.badge--access { background: #EEF4FB; border-color: #D3E2F3; color: #1B3A63; }
+
+/* Enlaces de prueba social reales (Hotmart, Facebook, email). */
+.social-row { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .83rem; }
+.social-row a {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--green); font-weight: 650; text-decoration: none;
+}
+.social-row a:hover { color: var(--green-dark); text-decoration: underline; }
+.social-row .ico { width: 15px; height: 15px; }
+
+/* Figura limpia (sin rotación) con sello flotante de valoración. */
+.figure-clean { position: relative; margin: 0; border-radius: var(--radius-lg); }
+.figure-clean picture {
+  display: block; border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.figure-clean img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.figure-badge {
+  position: absolute; inset-inline-start: -12px; inset-block-end: 18px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; background: #fff; border: 1px solid var(--line);
+  border-radius: 14px; box-shadow: var(--shadow-md);
+  font-size: .8rem; line-height: 1.25;
+}
+.figure-badge .stars { color: var(--gold); font-size: 1rem; }
+.figure-badge b { display: block; font-size: 1rem; color: var(--ink); }
+.figure-badge span { display: block; color: var(--muted); font-size: .72rem; }
+
+/* Tarjeta de oferta: el bloque que empuja la decisión de compra. */
+.offer-card {
+  position: relative; display: grid; grid-template-columns: 1.15fr .85fr;
+  gap: clamp(20px, 3vw, 36px);
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  padding: clamp(20px, 3.4vw, 40px); overflow: hidden;
+}
+.offer-card::before {
+  content: ""; position: absolute; inset-block-start: 0; inset-inline: 0;
+  block-size: 5px; background: linear-gradient(90deg, var(--green), #2EE0C9);
+}
+.offer-ribbon {
+  position: absolute; inset-block-start: 0; inset-inline-end: 0;
+  padding: 7px 16px; background: var(--navy); color: #fff;
+  font-size: .72rem; font-weight: 750; letter-spacing: .06em;
+  text-transform: uppercase; border-end-start-radius: 12px;
+}
+.offer-head h2 { margin: 0; }
+.offer-head > p { margin-top: 8px; color: var(--muted); }
+.offer-side {
+  display: flex; flex-direction: column; justify-content: center; gap: 10px;
+  background: var(--paper); border: 1px solid var(--line-soft);
+  border-radius: 16px; padding: 20px;
+}
+.offer-side .price-now { font-size: 2.4rem; }
+.offer-side .cta { margin-top: 6px; width: 100%; }
+.offer-side .small { line-height: 1.45; }
+
+/* Widget de dudas (contacto real, ligero y accesible). */
+.support-fab {
+  position: fixed; inset-inline-end: 16px;
+  inset-block-end: calc(88px + env(safe-area-inset-bottom, 0px));
+  z-index: 95; display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 16px; border: 0; border-radius: 999px;
+  background: var(--navy); color: #fff; font-weight: 700; font-size: .86rem;
+  box-shadow: var(--shadow-lg); cursor: pointer;
+}
+.support-fab:hover { background: #12375f; }
+.support-panel {
+  position: fixed; inset-inline-end: 16px;
+  inset-block-end: calc(150px + env(safe-area-inset-bottom, 0px));
+  z-index: 96; width: min(320px, calc(100vw - 32px));
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: var(--shadow-lg); padding: 18px; display: none;
+}
+.support-panel.is-open { display: block; }
+.support-panel h3 { margin: 0 0 6px; font-size: 1rem; }
+.support-panel p { margin: 0 0 8px; font-size: .84rem; color: var(--muted); }
+.support-panel a {
+  display: flex; align-items: center; gap: 8px; padding: 10px 0;
+  font-size: .89rem; font-weight: 650; color: var(--green);
+  text-decoration: none; border-block-start: 1px solid var(--line-soft);
+}
+.support-panel .close {
+  position: absolute; inset-block-start: 8px; inset-inline-end: 8px;
+  border: 0; background: transparent; font-size: 1.2rem;
+  cursor: pointer; color: var(--muted);
+}
+
+@media (min-width: 901px) {
+  .support-fab { inset-block-end: 24px; }
+  .support-panel { inset-block-end: 86px; }
+}
+@media (max-width: 860px) {
+  .offer-card { grid-template-columns: 1fr; }
+  .figure-clean img { aspect-ratio: 4 / 3; }
+  .figure-badge { inset-inline-start: 10px; inset-block-end: 10px; }
+}

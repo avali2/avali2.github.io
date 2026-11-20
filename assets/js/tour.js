@@ -7,12 +7,13 @@
   "use strict";
 
   var steps = [
-    { id: "oferta",        label: "Paso 1 de 6", title: "Tu oferta y precio" },
-    { id: "contenido-curso", label: "Paso 2 de 6", title: "Qué aprenderás" },
-    { id: "calculadora",   label: "Paso 3 de 6", title: "Calcula tu precio" },
-    { id: "evaluaciones",  label: "Paso 4 de 6", title: "Opiniones reales" },
-    { id: "faq",           label: "Paso 5 de 6", title: "Resuelve tus dudas" },
-    { id: "empezar",       label: "Paso 6 de 6", title: "Toma la decisión" }
+    { id: "oferta",           title: "Tu oferta y precio" },
+    { id: "contenido-curso",  title: "Qué aprenderás" },
+    { id: "calculadora",      title: "Calcula tu precio" },
+    { id: "oferta-precio",    title: "Lo que incluye y cuánto cuesta" },
+    { id: "evaluaciones",     title: "Opiniones reales" },
+    { id: "faq",              title: "Resuelve tus dudas" },
+    { id: "empezar",          title: "Toma la decisión" }
   ];
 
   var startButtons = document.querySelectorAll("[data-tour-start]");
@@ -49,7 +50,7 @@
 
   function render() {
     var step = steps[current];
-    bar.querySelector(".tour-label").textContent = step.label;
+    bar.querySelector(".tour-label").textContent = "Paso " + (current + 1) + " de " + steps.length;
     bar.querySelector(".tour-title").textContent = step.title;
     bar.querySelector(".tour-progress").textContent = (current + 1) + " / " + steps.length;
     bar.querySelector(".tour-prev").disabled = current === 0;
