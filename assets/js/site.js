@@ -18,6 +18,15 @@
   var navToggle = doc.querySelector(".nav-toggle");
 
   // El checkbox mantiene un menú funcional sin JS; con JS usamos un botón real.
+  function syncNavState() {
+    var open = !!(navInput && navInput.checked);
+    if (navToggle) {
+      navToggle.setAttribute("aria-expanded", String(open));
+      navToggle.textContent = open ? "Cerrar" : "Menú";
+    }
+    if (doc.body) doc.body.classList.toggle("nav-open", open);
+  }
+
   if (navInput && navToggle) {
     var menuButton = doc.createElement("button");
     menuButton.type = "button";
@@ -31,19 +40,17 @@
     navInput.setAttribute("aria-hidden", "true");
     navToggle.addEventListener("click", function () {
       navInput.checked = !navInput.checked;
-      navToggle.setAttribute("aria-expanded", String(navInput.checked));
+      syncNavState();
     });
   }
 
   function closeNav() {
     if (navInput) navInput.checked = false;
-    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+    syncNavState();
   }
 
   if (navInput) {
-    navInput.addEventListener("change", function () {
-      if (navToggle) navToggle.setAttribute("aria-expanded", String(navInput.checked));
-    });
+    navInput.addEventListener("change", syncNavState);
 
     if (nav) {
       nav.addEventListener("click", function (e) {
@@ -66,6 +73,29 @@
     doc.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeNav();
     });
+  }
+
+  /* ------------------------------------------- menú: enlace de sección activo --- */
+  // Solo actúa en páginas donde la navegación apunta a anclas de esta misma
+  // página (por ejemplo la portada). En el resto no cambia nada.
+  var sectionLinks = nav
+    ? Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'))
+    : [];
+  var spyTargets = sectionLinks.map(function (link) {
+    var id = link.getAttribute("href").slice(1);
+    return { link: link, el: id ? doc.getElementById(id) : null };
+  }).filter(function (item) { return item.el; });
+
+  if (spyTargets.length && "IntersectionObserver" in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        spyTargets.forEach(function (item) {
+          item.link.classList.toggle("is-active", item.el === entry.target);
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    spyTargets.forEach(function (item) { spy.observe(item.el); });
   }
 
   /* -------------------------------------------------------- animar entrada --- */

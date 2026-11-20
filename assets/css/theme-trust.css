@@ -213,3 +213,180 @@ h1, h2, h3, h4 { color: var(--ink); }
 @media (max-width: 600px) {
   .tour-bar { gap: 6px; }
 }
+
+/* ==========================================================================
+   Refinamiento v3 — color, cajas y menús
+   · Color: se añade una escala fría (surface-2 / teal-50 / teal-100) para
+     separar secciones sin ruido y unificar acentos. El dorado queda solo
+     para las estrellas; el teal marca acción y confirmación.
+   · Cajas: misma radio, borde y sombra; el acento superior y el hover
+     elevan ligeramente las tarjetas para guiar la lectura.
+   · Menús: subrayado de estado activo, fondo atenuado en móvil y panel
+     con entrada suave.
+   ========================================================================== */
+
+:root {
+  --muted: #5B6B7F;
+  --line-strong: #CBD5E1;
+  --surface-2: #F5F8FC;
+  --teal-50: #EFF7F6;
+  --teal-100: #D8EFEC;
+  --shadow-xs: 0 1px 2px rgb(10 37 64 / 5%);
+  --shadow-sm: 0 6px 18px rgb(10 37 64 / 6%);
+  --shadow-md: 0 14px 34px rgb(10 37 64 / 9%);
+  --shadow-lg: 0 26px 60px rgb(10 37 64 / 14%);
+  --radius-sm: 11px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --header-h: 66px;
+}
+
+/* Ritmo de secciones: alternancia limpia blanco / gris frío. */
+.band { background: var(--surface-2); border-block: 1px solid var(--line); }
+.section-head h2 { letter-spacing: -.02em; }
+.eyebrow { color: var(--green); letter-spacing: .14em; }
+
+/* ---- Menú superior ---------------------------------------------------- */
+.topbar { box-shadow: 0 6px 24px rgb(8 27 46 / 16%); }
+.nav { gap: 2px; }
+.nav a {
+  padding: 10px 14px;
+  border-radius: 10px;
+  position: relative;
+  transition: color .2s ease, background .2s ease;
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  inset-inline: 14px;
+  inset-block-end: 5px;
+  block-size: 2px;
+  border-radius: 2px;
+  background: #2EE0C9;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav a:hover::after,
+.nav a.is-active::after,
+.nav a[aria-current="page"]::after { transform: scaleX(1); }
+.nav a[aria-current="page"],
+.nav a.is-active { background: transparent; color: #FFFFFF; }
+.nav .nav-cta::after { display: none; }
+.nav .nav-cta {
+  box-shadow: 0 6px 16px rgb(14 124 123 / 30%);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.nav .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgb(14 124 123 / 34%); }
+
+/* Menú móvil: panel limpio, fondo atenuado y entrada suave. */
+@media (max-width: 900px) {
+  .nav {
+    padding: 12px var(--gutter) calc(18px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 28px 56px rgb(8 27 46 / 22%);
+    animation: navIn .22s ease both;
+  }
+  @keyframes navIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: none; }
+  }
+  .nav a {
+    padding: 14px 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border-block-end: 0;
+    border-inline-start: 3px solid transparent;
+  }
+  .nav a.is-active,
+  .nav a[aria-current="page"] {
+    background: var(--teal-50);
+    color: var(--green-dark);
+    border-inline-start-color: var(--green);
+  }
+  .nav .nav-cta {
+    margin-top: 10px;
+    padding-block: 15px;
+    border-radius: 12px;
+  }
+  body.nav-open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 85;
+    background: rgb(8 27 46 / 42%);
+    animation: fadeIn .2s ease both;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  body.nav-open .support-fab { display: none; }
+}
+
+/* ---- Cajas unificadas -------------------------------------------------- */
+.module,
+.honest article,
+.rating-card,
+.prod,
+.bonus,
+.notice,
+.fact,
+.faq,
+.calc-card,
+.offer-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+.module {
+  position: relative;
+  overflow: hidden;
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.module::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 44px;
+  block-size: 3px;
+  background: var(--green);
+  transition: inline-size .3s ease;
+}
+.module:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--teal-100);
+}
+.module:hover::before { inline-size: 100%; }
+.prod { transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+.prod:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--teal-100);
+}
+
+.chips li { background: var(--teal-50); border-color: var(--teal-100); color: var(--green-dark); }
+.fact { border-inline-start: 3px solid var(--teal-100); }
+.fact-ico { color: var(--green); }
+.honest .yes h3 span { background: var(--teal-100); color: var(--green-dark); }
+.honest .no h3 span { background: #EEF2F7; color: #475569; }
+.rating-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--teal-50) 100%);
+  border-color: var(--teal-100);
+  box-shadow: var(--shadow-md);
+}
+.faq { overflow: hidden; }
+.faq summary { transition: background .2s ease; }
+.faq summary:hover { background: var(--teal-50); }
+.notice { background: #F4F8FD; border-color: #DCE7F3; color: #1B3A63; }
+.notice svg { color: #2A5D9F; }
+.calc-card { border-top: 4px solid var(--green); box-shadow: var(--shadow-md); }
+
+/* ---- Barra fija de compra --------------------------------------------- */
+.sticky-buy {
+  border-block-start: 1px solid var(--line);
+  box-shadow: 0 -10px 30px rgb(10 37 64 / 12%);
+}
+
+/* ---- Foco visible coherente ------------------------------------------- */
+.cta:focus-visible,
+.nav-toggle:focus-visible { outline: 3px solid #7FE3D6; outline-offset: 3px; }
