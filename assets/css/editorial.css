@@ -153,18 +153,30 @@ h1 em, h2 em { color: var(--terracotta); font-style: italic; }
 }
 .hero-body { margin-top: 14px; max-width: 50ch; color: var(--body); font-size: 1rem; line-height: 1.65; }
 
-.hero-actions { margin-top: clamp(22px, 3vw, 30px); max-width: 540px; }
-.hero-actions .cta--hero {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
-  text-align: center;
-  gap: 3px;
-  min-block-size: 64px;
-  padding: 13px 22px;
-  font-size: 1.05rem;
+.hero-copy--value { max-width: 840px; }
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin-top: clamp(20px, 3vw, 28px);
 }
+.hero-actions .cta--ghost { min-block-size: 48px; padding: 11px 18px; }
+.hero-offer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  text-decoration: none;
+  border-block-end: 1px solid rgb(168 86 58 / 35%);
+  padding-block-end: 2px;
+}
+.hero-offer-link:hover { color: var(--terracotta-hover); border-block-end-color: var(--terracotta-hover); }
+.hero-checks { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 8px; }
+.hero-checks li { display: flex; gap: 9px; align-items: flex-start; font-size: .95rem; color: var(--body); }
+.hero-checks .ico { color: var(--terracotta); margin-top: 3px; width: 17px; height: 17px; }
 .cta--hero small { font-size: .76rem; font-weight: 500; opacity: .92; }
 .reassure { margin-top: 11px; text-align: center; font-size: .8rem; color: var(--muted); }
 .reassure b { color: var(--ink); }
@@ -356,6 +368,48 @@ h1 em, h2 em { color: var(--terracotta); font-style: italic; }
   .figure-badge { inset-inline-start: 10px; inset-block-end: 10px; }
   .inc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* ---- Listas de valor ------------------------------------------------- */
+.check-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 9px; }
+.check-list li { display: flex; gap: 9px; align-items: flex-start; font-size: .95rem; color: var(--body); }
+.check-list .ico { color: var(--terracotta); margin-top: 3px; width: 17px; height: 17px; flex: 0 0 auto; }
+
+/* ---- Prueba social con retrato --------------------------------------- */
+.proof-avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--surface); box-shadow: var(--shadow-sm); flex: 0 0 auto; }
+.proof-text { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.proof-note { flex-basis: 100%; font-size: .74rem; color: var(--muted); }
+
+/* ---- Oferta / precio -------------------------------------------------- */
+.offer-block {
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  gap: clamp(20px, 3vw, 36px);
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+  padding: clamp(20px, 3.4vw, 40px);
+}
+.offer-copy h2 { margin-top: 6px; }
+.offer-copy > p { margin-top: 10px; color: var(--body); }
+.offer-copy .check-list { margin-top: 16px; }
+.offer-side {
+  display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  background: var(--paper); border: 1px solid var(--line-soft);
+  border-radius: 16px; padding: 20px;
+}
+.offer-side .cta { width: 100%; }
+.offer-side .cta--hero {
+  display: grid; grid-template-columns: 1fr; justify-items: center;
+  text-align: center; min-block-size: 62px; padding: 12px 18px; font-size: 1rem;
+}
+.secure-box {
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px 14px; margin-top: 18px;
+}
+.secure-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-weight: 750; color: var(--ink); font-size: .9rem; }
+.secure-title .ico { color: var(--green); }
+.secure-box ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.secure-box li { display: flex; gap: 8px; align-items: flex-start; font-size: .82rem; color: var(--body); line-height: 1.4; }
+.secure-box li .ico { width: 15px; height: 15px; color: var(--green); margin-top: 2px; }
+@media (max-width: 860px) { .offer-block { grid-template-columns: 1fr; } }
+
 @media (max-width: 600px) {
   .hero { padding-block: 16px 28px; }
   .hero h1 { font-size: 2rem; }

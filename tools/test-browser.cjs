@@ -47,7 +47,6 @@ async function context(browser, options={}) {
    if(width===390) {
     // El menú superior debe estar siempre visible y la cabecera, fija.
     assert.equal(await p.locator('#nav').isVisible(),true,'menú superior visible');
-    assert.equal(await p.locator('[data-placement=hero]').isVisible(),true,'CTA de compra visible');
     await p.locator('#muestra').scrollIntoViewIfNeeded(); await p.waitForTimeout(350);
     const topY=await p.locator('.topbar').evaluate(el=>Math.round(el.getBoundingClientRect().top));
     assert.ok(topY<=2,'la cabecera debe quedar fija arriba al hacer scroll');
