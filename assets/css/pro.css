@@ -46,14 +46,15 @@
 .social-row .ico { width: 15px; height: 15px; }
 
 /* Figura limpia (sin rotación) con sello flotante de valoración. */
-.figure-clean { position: relative; margin: 0; border-radius: var(--radius-lg); }
-.figure-clean picture {
-  display: block; border-radius: var(--radius-lg); overflow: hidden;
-  box-shadow: var(--shadow-lg);
+.figure-clean { margin: 0; }
+.figure-media {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-lg); background: var(--cream);
 }
-.figure-clean img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 22%; }
+.figure-media picture { display: block; }
+.figure-media img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 8%; }
 .figure-badge {
-  position: absolute; inset-inline-start: -12px; inset-block-end: 18px;
+  position: absolute; inset-inline-start: 14px; inset-block-end: 14px;
   display: flex; align-items: center; gap: 10px;
   padding: 10px 14px; background: #fff; border: 1px solid var(--line);
   border-radius: 14px; box-shadow: var(--shadow-md);
@@ -129,7 +130,7 @@
 }
 @media (max-width: 860px) {
   .offer-card { grid-template-columns: 1fr; }
-  .figure-clean img { aspect-ratio: 4 / 5; object-position: 50% 18%; }
+  .figure-media img { aspect-ratio: 4 / 5; object-position: 50% 0%; }
   .figure-badge { inset-inline-start: 10px; inset-block-end: 10px; }
 }
 
@@ -195,4 +196,38 @@
 .candle-note b { color: #8FD8CF; }
 @media (prefers-reduced-motion: reduce) {
   .flame { animation: none; }
+}
+
+/* ---- Compra protegida ------------------------------------------------- */
+.secure-box { background: #F4F8FD; border: 1px solid #DCE7F3; border-radius: 12px; padding: 12px 14px; }
+.secure-title {
+  display: flex; align-items: center; gap: 8px;
+  margin: 0 0 8px; font-weight: 750; color: var(--ink); font-size: .9rem;
+}
+.secure-title .ico { color: var(--green); }
+.secure-box ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.secure-box li { display: flex; gap: 8px; align-items: flex-start; font-size: .82rem; color: var(--body); line-height: 1.4; }
+.secure-box li .ico { width: 15px; height: 15px; color: var(--green); margin-top: 2px; }
+
+/* ---- Widget de dudas: compacto en móvil ------------------------------ */
+.support-fab-label { display: inline; }
+@media (max-width: 600px) {
+  .support-fab {
+    width: 52px; height: 52px; padding: 0; border-radius: 50%;
+    justify-content: center; gap: 0;
+  }
+  .support-fab-label { display: none; }
+  .support-fab .ico { width: 22px; height: 22px; }
+}
+
+/* ---- Franja de confianza ordenada en móvil --------------------------- */
+@media (max-width: 640px) {
+  .trust-strip { padding-block: 16px; }
+  .trust-strip .wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px 14px; justify-items: start; text-align: left;
+    font-size: .78rem;
+  }
+  .trust-strip .dot { display: none; }
+  .trust-strip .wrap > a { grid-column: 1 / -1; justify-self: start; }
 }
