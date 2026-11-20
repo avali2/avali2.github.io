@@ -51,7 +51,7 @@
   display: block; border-radius: var(--radius-lg); overflow: hidden;
   box-shadow: var(--shadow-lg);
 }
-.figure-clean img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.figure-clean img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 22%; }
 .figure-badge {
   position: absolute; inset-inline-start: -12px; inset-block-end: 18px;
   display: flex; align-items: center; gap: 10px;
@@ -129,6 +129,70 @@
 }
 @media (max-width: 860px) {
   .offer-card { grid-template-columns: 1fr; }
-  .figure-clean img { aspect-ratio: 4 / 3; }
+  .figure-clean img { aspect-ratio: 4 / 5; object-position: 50% 18%; }
   .figure-badge { inset-inline-start: 10px; inset-block-end: 10px; }
+}
+
+/* ---- Velas animadas (decorativo y ligero) ----------------------------- */
+/* Llamas con parpadeo suave + brillo. Solo CSS, sin librerías, para no
+   penalizar la carga. Con "prefers-reduced-motion" el parpadeo se detiene. */
+.candle-band {
+  background: linear-gradient(180deg, #0A2540, #081B2E);
+  padding-block: 22px;
+  overflow: hidden;
+}
+.candle-band-in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 3vw, 28px);
+  flex-wrap: wrap;
+  text-align: center;
+}
+.candles { display: flex; align-items: flex-end; gap: 16px; height: 92px; }
+.candle {
+  position: relative;
+  width: 16px;
+  height: 46px;
+  border-radius: 4px 4px 3px 3px;
+  background: linear-gradient(180deg, #FBEFD6, #E7C99F);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 55%), 0 6px 12px rgb(0 0 0 / 25%);
+}
+.candle.mid { height: 52px; }
+.candle.tall { height: 62px; }
+.candle::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  width: 2px;
+  height: 6px;
+  background: #3A2A1E;
+  border-radius: 1px;
+  transform: translateX(-50%);
+}
+.flame {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 1px);
+  width: 13px;
+  height: 21px;
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+  border-radius: 50% 50% 50% 50% / 68% 68% 32% 32%;
+  background: radial-gradient(50% 62% at 50% 72%, #FFF7C4 0%, #FFD166 34%, #FF9A3D 68%, rgb(255 154 61 / 0) 100%);
+  box-shadow: 0 0 16px 5px rgb(255 176 64 / 38%);
+  animation: flameFlicker 1.2s infinite alternate ease-in-out;
+}
+.candle:nth-child(2) .flame { animation-delay: -.35s; }
+.candle:nth-child(3) .flame { animation-delay: -.7s; }
+@keyframes flameFlicker {
+  0% { transform: translateX(-50%) scale(1, 1) rotate(-2deg); opacity: .92; }
+  45% { transform: translateX(-50%) scale(.93, 1.08) rotate(1.5deg); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1.04, .96) rotate(2.5deg); opacity: .88; }
+}
+.candle-note { color: #C7D3E2; font-size: .85rem; max-width: 48ch; margin: 0; }
+.candle-note b { color: #8FD8CF; }
+@media (prefers-reduced-motion: reduce) {
+  .flame { animation: none; }
 }
