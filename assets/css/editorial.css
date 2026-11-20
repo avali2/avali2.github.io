@@ -373,10 +373,18 @@ h1 em, h2 em { color: var(--terracotta); font-style: italic; }
 .check-list li { display: flex; gap: 9px; align-items: flex-start; font-size: .95rem; color: var(--body); }
 .check-list .ico { color: var(--terracotta); margin-top: 3px; width: 17px; height: 17px; flex: 0 0 auto; }
 
-/* ---- Prueba social con retrato --------------------------------------- */
-.proof-avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--surface); box-shadow: var(--shadow-sm); flex: 0 0 auto; }
-.proof-text { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
-.proof-note { flex-basis: 100%; font-size: .74rem; color: var(--muted); }
+/* ---- Foto grande centrada -------------------------------------------- */
+.section--photo { padding-block: clamp(28px, 4vw, 48px); }
+.photo-big { margin: 0 auto; max-width: 660px; text-align: center; }
+.photo-big picture {
+  display: block; border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-lg); background: var(--surface-2);
+}
+.photo-big img {
+  display: block; width: 100%; aspect-ratio: 4 / 5;
+  object-fit: cover; object-position: 50% 12%;
+}
+.photo-big figcaption { margin-top: 10px; font-size: .8rem; color: var(--muted); }
 
 /* ---- Oferta / precio -------------------------------------------------- */
 .offer-block {
