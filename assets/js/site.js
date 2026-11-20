@@ -98,6 +98,30 @@
     spyTargets.forEach(function (item) { spy.observe(item.el); });
   }
 
+  /* ------------------------------------------- menú desplegable "Cursos" --- */
+  var navMenus = doc.querySelectorAll(".nav-menu");
+  if (navMenus.length) {
+    navMenus.forEach(function (menu) {
+      var btn = menu.querySelector(".nav-drop");
+      if (!btn) return;
+      btn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        var open = !menu.classList.contains("is-open");
+        navMenus.forEach(function (m) { m.classList.remove("is-open"); });
+        if (open) menu.classList.add("is-open");
+        btn.setAttribute("aria-expanded", String(open));
+      });
+    });
+    doc.addEventListener("click", function () {
+      navMenus.forEach(function (m) { m.classList.remove("is-open"); });
+    });
+    doc.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        navMenus.forEach(function (m) { m.classList.remove("is-open"); });
+      }
+    });
+  }
+
   /* -------------------------------------------------------- animar entrada --- */
   var reveals = doc.querySelectorAll(".reveal");
   if (reveals.length) {
