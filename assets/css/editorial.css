@@ -786,3 +786,82 @@ table.compare tbody tr:hover { background: #FBF6EC; }
   box-shadow: 0 34px 74px -38px rgb(31 51 39 / 48%);
 }
 .sticky-buy { background: linear-gradient(180deg, #25432F, #1E3A2B); }
+
+/* Auditoría móvil: menú por encima del widget de ayuda, anclas visibles. */
+.topbar { z-index: 110; }
+.topbar-main .brand { order: 0; }
+.topbar-main .menu-toggle { order: 1; flex: 0 0 auto; }
+.menu-toggle { min-block-size: 44px; }
+.mobile-menu a { min-block-size: 48px; }
+.mobile-menu a[aria-current="page"] {
+  border-inline-start: 3px solid var(--page-accent);
+  padding-inline-start: 12px;
+  background: var(--surface-2);
+}
+@media (max-width: 900px) {
+  :root { --header-h: 62px; }
+  .topbar-main { min-block-size: 58px; }
+  .topbar-main .brand { font-size: clamp(.8rem, 2.9vw, 1rem); min-width: 0; }
+  .topbar-main .brand-mark { flex: 0 0 32px; }
+}
+@media (max-width: 350px) {
+  .topbar-main { gap: 6px; }
+  .topbar-main .brand { font-size: .8rem; gap: 6px; }
+  .topbar-main .menu-toggle { padding-inline: 10px; }
+}
+@media (min-width: 901px) { :root { --header-h: 114px; } }
+
+/* Una foto del producto para equilibrar el héroe, sin atribuirla al productor. */
+.hero-grid--editorial { grid-template-columns: minmax(0, 1.24fr) minmax(0, .76fr); }
+.hero-grid--editorial .hero-copy { min-width: 0; }
+.hero-grid--editorial .hero-figure { align-self: center; }
+.hero-grid--editorial .figure-media img {
+  aspect-ratio: 4 / 5;
+  object-position: center;
+}
+.hero-grid--editorial .figure-clean figcaption { text-align: center; font-size: .8rem; color: var(--muted); }
+.hero .hero-action-primary { min-block-size: 52px; padding-inline: 22px; width: auto; max-width: none; }
+.hero .hero-offer-link { color: var(--terracotta-hover); }
+@media (max-width: 900px) {
+  .hero-grid--editorial { grid-template-columns: 1fr; }
+  .hero-grid--editorial .hero-figure { width: 100%; max-width: 540px; }
+  .hero-grid--editorial .figure-media img { aspect-ratio: 16 / 8; object-position: center 41%; }
+}
+@media (max-width: 600px) {
+  .hero .hero-action-primary { width: 100%; justify-content: center; }
+  .hero-grid--editorial .hero-figure { max-width: none; }
+  .hero-grid--editorial .figure-media img { aspect-ratio: 16 / 8; }
+}
+
+/* La tienda necesita una navegación de cursos propia: antes no tenía CSS activo. */
+.course-menu { background: var(--surface); border-block: 1px solid var(--line); }
+.course-menu-in { display: flex; gap: 8px; overflow-x: auto; padding-block: 12px; scrollbar-width: thin; }
+.course-menu a {
+  flex: 0 0 auto; display: inline-flex; align-items: center;
+  min-block-size: 44px; padding: 8px 15px; border: 1px solid var(--line);
+  border-radius: 999px; color: var(--ink); background: var(--paper);
+  font-size: .83rem; font-weight: 650; text-decoration: none; white-space: nowrap;
+}
+.course-menu a:hover, .course-menu a[aria-current="page"] {
+  background: var(--green); color: #fff; border-color: var(--green);
+}
+
+/* Pasos explicativos utilizados por las páginas de compra. */
+.buy-steps { list-style: none; counter-reset: steps; display: grid; gap: 14px; margin-top: 22px; }
+.buy-steps li {
+  counter-increment: steps; position: relative; padding: 12px 14px 12px 55px;
+  min-block-size: 48px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 13px; font-size: .94rem;
+}
+.buy-steps li::before {
+  content: counter(steps); position: absolute; inset-inline-start: 12px; inset-block-start: 13px;
+  display: grid; place-items: center; inline-size: 27px; block-size: 27px;
+  border-radius: 50%; background: var(--green-soft); color: var(--green);
+  font-weight: 750; font-size: .8rem;
+}
+
+/* Focus y formularios: una cuenta inválida no se presenta como precio. */
+.calc-card input[aria-invalid="true"] { border-color: #AD4E37; background: #FFF4EF; }
+.calc-card .calc-error { color: #9A3927; font-size: .84rem; font-weight: 650; }
+.calc-card .calc-error:empty { display: none; }
+@media (hover: none) { .prod:hover, .module:hover, .bonus:hover, .shop-card:hover, .inc-card:hover { transform: none; } }

@@ -1047,7 +1047,7 @@ table.compare .no::before { content: "— "; color: #b09a88; }
 
 @media (max-width: 900px) {
   .sticky-buy { display: flex; }
-  body { padding-block-end: 74px; }
+  body:has(.sticky-buy) { padding-block-end: calc(78px + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* -------------------------------------------------------------- footer --- */

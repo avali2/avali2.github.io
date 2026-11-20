@@ -11,7 +11,7 @@
   var sendingEvent = false;
   var banner = null;
   var previousFocus = null;
-  var sources = /^(LANDNAV10|LANDFINAL|LANDOFERTA|LANDGUIAS|LANDVSL1|LANDVSLSTICKY|LANDBIEN1|GUIDAVENDER|GUIDACOSTO|LANDKIT1|LANDVELAS[123]|LANDSTICKY|VITRINA3X1|VITRINASTORE|VITRINACALC|CALCLAND1|CALCSTICKY)$/;
+  var sources = /^(LANDNAV10|LANDFINAL|LANDOFERTA|LANDGUIAS|LANDVSL1|LANDVSLSTICKY|LANDBIEN1|GUIDAVENDER|GUIDACOSTO|LANDKIT1|LANDVELAS[123]|LANDHERO|LANDSTICKY|VITRINA3X1|VITRINASTORE|VITRINACALC|CALCLAND1|CALCSTICKY)$/;
 
   try {
     choice = window.localStorage.getItem(STORAGE_KEY);
@@ -102,7 +102,7 @@
   function pagePath() {
     // Solo rutas públicas conocidas, sin query/hash, IDs ni segmentos privados.
     var name = window.location.pathname.split("/").pop();
-    return /^(index|vsl|guias|bienestar|guia-vender-jabones|guia-costo-velas|kit|privacidad|terminos|sobre|tienda|calculadora)\.html$/.test(name)
+    return /^(index|vsl|guias|bienestar|guia-vender-jabones|guia-costo-velas|curso-primeros-jabones|curso-jabones-navidenas|kit|privacidad|terminos|sobre|tienda|calculadora)\.html$/.test(name)
       ? "/" + name : "/";
   }
 
@@ -141,7 +141,7 @@
     catch (e) { return; }
     if (!/^https?:$/.test(destination.protocol) || destination.origin === window.location.origin) return;
     var host = destination.hostname.toLowerCase();
-    var course = host === "go.hotmart.com" ||
+    var course = host === "go.hotmart.com" || host === "pay.hotmart.com" ||
       ((host === "hotmart.com" || host === "www.hotmart.com") && link.hasAttribute("data-hotmart"));
     var affiliate = course || /(^|\s)sponsored(\s|$)/i.test(link.getAttribute("rel") || "") ||
       /^(www\.)?(amazon\.com|amzn\.to|temu\.com|temu\.to)$/.test(host);
@@ -172,29 +172,27 @@
     previousFocus = null;
   }
 
-  function open() {
+  function open(manual) {
     if (!document.body) {
       document.addEventListener("DOMContentLoaded", open, { once: true });
       return;
     }
     if (banner) {
-      banner.querySelector(".reject").focus();
+      if (manual !== false) banner.querySelector(".reject").focus();
       return;
     }
-    previousFocus = document.activeElement;
+    previousFocus = manual !== false ? document.activeElement : null;
     banner = document.createElement("div");
     banner.className = "consent is-open";
-    banner.setAttribute("role", "dialog");
+    banner.setAttribute("role", "region");
     banner.setAttribute("aria-label", "Preferencias de medición con Meta");
     banner.setAttribute("aria-describedby", "vjl-consent-description");
     banner.innerHTML =
       '<div class="consent-in">' +
-        '<div><p id="vjl-consent-description">Si aceptas, cargamos el píxel de Meta (Facebook) ' +
-        'para medir visitas y clics en enlaces de afiliado. Meta puede usar cookies y recibir datos técnicos de navegación. ' +
-        'Un clic no confirma una compra ni el inicio de un pago. Rechazar desactiva esta medición, pero no bloquea los enlaces: ' +
-        'al abrir Hotmart, Amazon u otros sitios externos se aplican sus propias políticas. ' +
-        'Puedes cambiar o retirar tu permiso desde «Cambiar mi preferencia de cookies» en ' +
-        '<a href="privacidad.html">Privacidad</a>.</p>' +
+        '<div><p id="vjl-consent-description"><strong>Tu privacidad importa.</strong> Solo si aceptas, ' +
+        'Meta (Facebook) medirá visitas y clics mediante cookies y datos técnicos. ' +
+        'Rechazar no bloquea cursos ni compras. Puedes cambiar tu decisión en ' +
+        '<a href="privacidad.html">Privacidad y cookies</a>.</p>' +
         '<p class="storage-note"></p></div>' +
         '<div class="consent-actions">' +
           '<button type="button" class="reject">Rechazar Meta</button>' +
@@ -223,13 +221,14 @@
         close();
       }
     });
-    banner.querySelector(".reject").focus();
+    // El aviso automático no interrumpe el foco mientras alguien lee o compra.
+    if (manual !== false) banner.querySelector(".reject").focus();
   }
 
   // Reabrir NO borra ni altera la elección; solo los botones deciden.
-  window.vjlOpenConsent = open;
+  window.vjlOpenConsent = function () { open(true); };
   if (choice === "all") loadPixel();
   else if (choice === null) {
-    window.setTimeout(function () { if (choice === null) open(); }, 1200);
+    window.setTimeout(function () { if (choice === null) open(false); }, 1600);
   }
 })();

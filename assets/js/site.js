@@ -154,8 +154,12 @@
       }
     });
     doc.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") closeMobileMenu();
+      if (event.key === "Escape" && mobileMenu.classList.contains("is-open")) {
+        closeMobileMenu();
+        menuToggle.focus();
+      }
     });
+    window.matchMedia("(min-width: 901px)").addEventListener("change", closeMobileMenu);
   }
 
   /* -------------------------------------------------------- animar entrada --- */

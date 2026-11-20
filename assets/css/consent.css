@@ -7,12 +7,12 @@
   inset-block-end: 0;
   z-index: 120;
   display: none;
-  padding: 14px var(--gutter) calc(14px + env(safe-area-inset-bottom, 0px));
-  background: rgb(30 20 15 / 97%);
-  color: #e8d6c6;
-  border-block-start: 1px solid rgb(255 255 255 / 12%);
-  box-shadow: 0 -12px 40px rgb(20 12 8 / 35%);
-  font-size: .84rem;
+  padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+  background: #FFFDF8;
+  color: #1E2A22;
+  border-block-start: 2px solid #A8563A;
+  box-shadow: 0 -12px 34px rgb(30 42 34 / 16%);
+  font-size: .82rem;
   line-height: 1.55;
 }
 .consent.is-open { display: block; }
@@ -26,12 +26,13 @@
   max-width: var(--maxw);
   margin-inline: auto;
 }
-.consent p { margin: 0; max-width: 62ch; color: #dcc9b8; }
-.consent a { color: #f2d3ae; font-weight: 600; }
+.consent p { margin: 0; max-width: 68ch; color: #3D4A3E; }
+.consent strong { color: #1E2A22; }
+.consent a { color: #8E4630; font-weight: 700; }
 .consent-actions { display: flex; flex-wrap: wrap; gap: 9px; }
 
 .consent button {
-  min-block-size: 42px;
+  min-block-size: 44px;
   padding: 10px 18px;
   border-radius: 10px;
   border: 1px solid transparent;
@@ -41,20 +42,13 @@
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.consent .accept {
-  background: var(--green);
-  color: #fff;
-}
-.consent .accept:hover { background: #0f6633; }
-.consent .reject {
-  background: transparent;
-  color: #e0cbb8;
-  border-color: rgb(255 255 255 / 26%);
-}
-.consent .reject:hover { background: rgb(255 255 255 / 8%); color: #fff; }
+.consent .accept { background: #233B2E; color: #fff; }
+.consent .accept:hover { background: #18281F; }
+.consent .reject { background: #F4EDE0; color: #1E2A22; border-color: #D6CDBD; }
+.consent .reject:hover { background: #E7EDE4; }
 
-.consent { max-height: 75dvh; overflow-y: auto; }
-.consent .dismiss { background: transparent; border-color: #8f7768; color: #e0cbb8; }
-.consent button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.consent { max-height: min(42dvh, 300px); overflow-y: auto; }
+.consent .dismiss { background: transparent; border-color: #D6CDBD; color: #3D4A3E; }
+.consent button:focus-visible { outline: 3px solid #A8563A; outline-offset: 3px; }
 .consent .storage-note:empty { display: none; }
 body.consent-open .sticky-buy { display: none; }
