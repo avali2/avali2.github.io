@@ -124,12 +124,39 @@
 
   /* --------------------------------- marcar la página actual en el menú --- */
   var here = window.location.pathname.split("/").pop() || "index.html";
-  doc.querySelectorAll(".topnav a").forEach(function (link) {
+  doc.querySelectorAll(".topnav a, .mobile-menu a").forEach(function (link) {
     var raw = link.getAttribute("href") || "";
     if (!raw || raw.indexOf("#") > -1) return;
     var name = raw.split("/").pop();
     if (name === here) link.setAttribute("aria-current", "page");
   });
+
+  /* ------------------------------------- menú desplegable móvil --- */
+  var menuToggle = doc.querySelector(".menu-toggle");
+  var mobileMenu = doc.getElementById("mobile-menu");
+  if (menuToggle && mobileMenu) {
+    function closeMobileMenu() {
+      mobileMenu.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+    menuToggle.addEventListener("click", function (event) {
+      event.stopPropagation();
+      var open = !mobileMenu.classList.contains("is-open");
+      mobileMenu.classList.toggle("is-open", open);
+      menuToggle.setAttribute("aria-expanded", String(open));
+    });
+    mobileMenu.addEventListener("click", function (event) {
+      if (event.target.closest("a")) closeMobileMenu();
+    });
+    doc.addEventListener("click", function (event) {
+      if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
+    doc.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeMobileMenu();
+    });
+  }
 
   /* -------------------------------------------------------- animar entrada --- */
   var reveals = doc.querySelectorAll(".reveal");

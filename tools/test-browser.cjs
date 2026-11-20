@@ -45,12 +45,17 @@ async function context(browser, options={}) {
     if(width===1440) await p.screenshot({path:path.join(OUT,'pagina-completa.png'),fullPage:true});
    }
    if(width===390) {
-    // El menú superior debe estar siempre visible y la cabecera, fija.
-    assert.equal(await p.locator('#nav').isVisible(),true,'menú superior visible');
+    // En móvil el menú es desplegable; la cabecera queda fija.
+    assert.equal(await p.locator('.menu-toggle').isVisible(),true,'botón Menú visible');
+    await p.locator('.menu-toggle').click();
+    assert.equal(await p.locator('#mobile-menu.is-open').count(),1,'menú desplegable abierto');
+    assert.equal(await p.locator('#mobile-menu a').count(),8,'8 enlaces en el menú');
+    await p.keyboard.press('Escape');
+    assert.equal(await p.locator('#mobile-menu.is-open').count(),0,'menú cerrado');
     await p.locator('#muestra').scrollIntoViewIfNeeded(); await p.waitForTimeout(350);
     const topY=await p.locator('.topbar').evaluate(el=>Math.round(el.getBoundingClientRect().top));
     assert.ok(topY<=2,'la cabecera debe quedar fija arriba al hacer scroll');
-    report.interactions.push('Menú superior siempre visible y cabecera fija: OK');
+    report.interactions.push('Menú móvil desplegable y cabecera fija: OK');
     await p.locator('#faq details').nth(2).locator('summary').click();
     assert.equal(await p.locator('#faq details').nth(2).getAttribute('open'),'');
     report.interactions.push('FAQ: OK');
