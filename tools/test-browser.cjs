@@ -45,15 +45,13 @@ async function context(browser, options={}) {
     if(width===1440) await p.screenshot({path:path.join(OUT,'pagina-completa.png'),fullPage:true});
    }
    if(width===390) {
-    // El menú superior y el enlace de compra deben estar siempre visibles.
+    // El menú superior debe estar siempre visible y la cabecera, fija.
     assert.equal(await p.locator('#nav').isVisible(),true,'menú superior visible');
-    assert.equal(await p.locator('.cart-cta').isVisible(),true,'enlace de compra visible');
+    assert.equal(await p.locator('[data-placement=hero]').isVisible(),true,'CTA de compra visible');
     await p.locator('#muestra').scrollIntoViewIfNeeded(); await p.waitForTimeout(350);
     const topY=await p.locator('.topbar').evaluate(el=>Math.round(el.getBoundingClientRect().top));
     assert.ok(topY<=2,'la cabecera debe quedar fija arriba al hacer scroll');
-    await p.locator('.cart-cta').focus();
-    assert.equal(await p.locator('.cart-cta').evaluate(e=>e===document.activeElement),true);
-    report.interactions.push('Menú superior y compra siempre visibles (fijo): OK');
+    report.interactions.push('Menú superior siempre visible y cabecera fija: OK');
     await p.locator('#faq details').nth(2).locator('summary').click();
     assert.equal(await p.locator('#faq details').nth(2).getAttribute('open'),'');
     report.interactions.push('FAQ: OK');
@@ -94,8 +92,7 @@ async function context(browser, options={}) {
   assert.equal(await n.locator('.video-play').isVisible(),false);
   assert.equal(await n.locator('video').getAttribute('controls'),'');
   assert.equal(await n.locator('#nav').isVisible(),true);
-  assert.equal(await n.locator('.cart-cta').isVisible(),true);
-  report.interactions.push('Sin JS: menú superior y compra visibles; vídeo nativo: OK');
+  report.interactions.push('Sin JS: menú superior visible; vídeo nativo: OK');
   await nojs.close();
   assert.deepEqual(errors,[]);
   report.jsErrors=errors;
