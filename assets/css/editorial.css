@@ -494,3 +494,23 @@ h1 em, h2 em { color: var(--terracotta); font-style: italic; }
   .sample-head .sample-meta { letter-spacing: .03em; }
   .proof-in { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---- Otros cursos y materiales --------------------------------------- */
+.shop-title { margin: 30px 0 0; font-size: 1.25rem; color: var(--ink); }
+.shop-title:first-of-type { margin-top: 10px; }
+.shop-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 12px; }
+.shop-card {
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-xs);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.shop-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.shop-kicker { margin: 0; font-size: .7rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; color: var(--terracotta); }
+.shop-card h3 { margin: 0; font-size: 1.02rem; line-height: 1.25; }
+.shop-card p { margin: 0; font-size: .86rem; color: var(--muted); line-height: 1.5; flex: 1; }
+.shop-card .cta { margin-top: 8px; align-self: flex-start; font-size: .86rem; min-block-size: 44px; padding: 10px 16px; }
+.shop-note { margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.shop-note a { color: var(--terracotta); font-weight: 650; }
+@media (max-width: 900px) { .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .shop-grid { grid-template-columns: 1fr; } }
