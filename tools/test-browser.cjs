@@ -7,7 +7,7 @@ const path = require('node:path');
 const assert = require('node:assert/strict');
 const ROOT = path.resolve(__dirname, '..');
 const OUT = process.env.QA_OUTPUT || path.join(ROOT, 'qa');
-const types = {'.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.jpg':'image/jpeg', '.webp':'image/webp', '.svg':'image/svg+xml', '.mp4':'video/mp4'};
+const types = {'.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.jpg':'image/jpeg', '.webp':'image/webp', '.svg':'image/svg+xml', '.mp4':'video/mp4', '.woff2':'font/woff2'};
 const errors=[];
 const report={viewports:[], interactions:[], externalRequests:[], video:null};
 fs.mkdirSync(OUT,{recursive:true});
