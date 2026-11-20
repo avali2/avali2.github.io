@@ -45,12 +45,15 @@ async function context(browser, options={}) {
     if(width===1440) await p.screenshot({path:path.join(OUT,'pagina-completa.png'),fullPage:true});
    }
    if(width===390) {
-    await p.getByRole('button',{name:'Menú',exact:true}).click();
-    assert.equal(await p.locator('.nav-toggle').getAttribute('aria-expanded'),'true');
-    await p.locator('#nav a').first().focus(); await p.keyboard.press('Escape');
-    assert.equal(await p.locator('.nav-toggle').getAttribute('aria-expanded'),'false');
-    assert.equal(await p.locator('.nav-toggle').evaluate(e=>e===document.activeElement),true);
-    report.interactions.push('Menú teclado/Escape y foco: OK');
+    // El menú superior y el enlace de compra deben estar siempre visibles.
+    assert.equal(await p.locator('#nav').isVisible(),true,'menú superior visible');
+    assert.equal(await p.locator('.cart-cta').isVisible(),true,'enlace de compra visible');
+    await p.locator('#muestra').scrollIntoViewIfNeeded(); await p.waitForTimeout(350);
+    const topY=await p.locator('.topbar').evaluate(el=>Math.round(el.getBoundingClientRect().top));
+    assert.ok(topY<=2,'la cabecera debe quedar fija arriba al hacer scroll');
+    await p.locator('.cart-cta').focus();
+    assert.equal(await p.locator('.cart-cta').evaluate(e=>e===document.activeElement),true);
+    report.interactions.push('Menú superior y compra siempre visibles (fijo): OK');
     await p.locator('#faq details').nth(2).locator('summary').click();
     assert.equal(await p.locator('#faq details').nth(2).getAttribute('open'),'');
     report.interactions.push('FAQ: OK');
@@ -90,8 +93,9 @@ async function context(browser, options={}) {
   await n.goto('http://audit.local/');
   assert.equal(await n.locator('.video-play').isVisible(),false);
   assert.equal(await n.locator('video').getAttribute('controls'),'');
-  await n.locator('label.nav-toggle').click(); assert.equal(await n.locator('#nav').isVisible(),true);
-  report.interactions.push('Sin JS: menú y vídeo nativo accesibles: OK');
+  assert.equal(await n.locator('#nav').isVisible(),true);
+  assert.equal(await n.locator('.cart-cta').isVisible(),true);
+  report.interactions.push('Sin JS: menú superior y compra visibles; vídeo nativo: OK');
   await nojs.close();
   assert.deepEqual(errors,[]);
   report.jsErrors=errors;

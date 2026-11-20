@@ -44,6 +44,7 @@
 <symbol id="i-soap" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="11.5" rx="3.5"/><path d="M7.5 8V6.6A2.6 2.6 0 0 1 10.1 4h3.8a2.6 2.6 0 0 1 2.6 2.6V8"/></symbol>
 <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4.5" y="3" width="15" height="18" rx="2.4"/><path d="M8 7h8"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18.2h.01M12 18.2h.01M15.5 18.2h.01"/></symbol>
 <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4Z"/><path d="M8 10h8M8 13h5"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17.5" cy="19" r="1.4"/></symbol>
 <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5Z"/></symbol>
 <symbol id="i-tag" viewBox="0 0 24 24"><path d="M4 4h7.2L20 12.8 13.2 20 4 11.2V4Z"/><circle cx="8" cy="8" r="1.4"/></symbol>
 <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5V4.5Z"/><path d="M4 19V4.5M8 7h8M8 11h6"/></symbol>
@@ -52,13 +53,12 @@
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#i-candle"/></svg></span><span>Velas y Jabones <em>con Lia</em></span></a>
-    <input class="nav-input sr-only" type="checkbox" id="nav-open" aria-label="Mostrar navegación" aria-controls="nav">
-    <label class="nav-toggle" for="nav-open">Menú</label>
-    <nav class="nav" id="nav" aria-label="Navegación principal">
+    <a class="cart-cta" href="https://go.hotmart.com/O107442122M?ap=e5ca&amp;src=LANDNAV10" target="_blank" rel="sponsored noopener" data-hotmart data-placement="nav"><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg><span>Comprar · $35</span></a>
+    <nav class="nav" id="nav" aria-label="Menú principal">
       <a href="#muestra">La muestra</a>
       <a href="#incluye">Qué incluye</a>
+      <a href="#calculadora">Calculadora</a>
       <a href="#faq">Dudas</a>
-      <a class="nav-cta" href="https://go.hotmart.com/O107442122M?ap=e5ca&amp;src=LANDNAV10" target="_blank" rel="sponsored noopener" data-placement="nav">Quiero el curso</a>
     </nav>
   </div>
 </header>
@@ -76,7 +76,7 @@
 
           <div class="hero-actions" id="oferta">
             <a class="cta cta--hero" href="https://go.hotmart.com/O107442122M?ap=e5ca&amp;src=LANDVELAS1" target="_blank" rel="sponsored noopener" data-hotmart data-placement="hero" data-sticky-anchor>
-              <span>Quiero empezar — $35 USD</span>
+              <span><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg> Quiero empezar — $35 USD</span>
               <small>Pago único · Continúa en Hotmart</small>
             </a>
             <p class="reassure">Pago único · Acceso tras el pago · <b>Revisa la garantía en Hotmart</b></p>
@@ -216,12 +216,12 @@
   </div></div></section>
 
   <!-- ==================================================== CIERRE / CTA -->
-  <section class="section band--dark" id="empezar"><div class="wrap"><div class="finale"><div class="finale-grid"><div><p class="eyebrow">Tu siguiente paso</p><h2>Deja de guardar ideas.<br>Empieza a crear las tuyas.</h2><p>Si buscas una formación para iniciarte en velas y jabones, revisa la oferta y decide si encaja contigo.</p><p class="mt-2">Sin promesas de dinero fácil. Con espacio para practicar y encontrar tu estilo.</p></div><div><div class="price-row"><span class="price-now">$35 USD</span><span class="price-was">$69,99</span></div><a class="cta cta--hero" href="https://go.hotmart.com/O107442122M?ap=e5ca&amp;src=LANDFINAL" target="_blank" rel="sponsored noopener" data-placement="final" data-sticky-anchor><span>Pagar de forma segura ↗</span><small>Pago único · Confirma precio, acceso y garantía antes de pagar</small></a><p class="reassure" style="color:#C9D3C4">Precio observado para EE. UU. antes de impuestos aplicables. El total definitivo se muestra en Hotmart.</p></div></div></div></div></section>
+  <section class="section band--dark" id="empezar"><div class="wrap"><div class="finale"><div class="finale-grid"><div><p class="eyebrow">Tu siguiente paso</p><h2>Deja de guardar ideas.<br>Empieza a crear las tuyas.</h2><p>Si buscas una formación para iniciarte en velas y jabones, revisa la oferta y decide si encaja contigo.</p><p class="mt-2">Sin promesas de dinero fácil. Con espacio para practicar y encontrar tu estilo.</p></div><div><div class="price-row"><span class="price-now">$35 USD</span><span class="price-was">$69,99</span></div><a class="cta cta--hero" href="https://go.hotmart.com/O107442122M?ap=e5ca&amp;src=LANDFINAL" target="_blank" rel="sponsored noopener" data-placement="final" data-sticky-anchor><span><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg> Pagar de forma segura ↗</span><small>Pago único · Confirma precio, acceso y garantía antes de pagar</small></a><p class="reassure" style="color:#C9D3C4">Precio observado para EE. UU. antes de impuestos aplicables. El total definitivo se muestra en Hotmart.</p></div></div></div></div></section>
 </main>
 
 <footer class="footer"><div class="wrap"><div class="footer-grid"><div class="footer-about"><a class="brand" href="index.html">Velas y Jabones <em>con Lia</em></a><p>Guía independiente de formación y materiales artesanales. No somos el productor ni la plataforma de pago.</p><p class="mt-2"><a href="mailto:jobvalidoseo@gmail.com">jobvalidoseo@gmail.com</a></p></div><div><h4>Aprender</h4><ul><li><a href="tienda.html">Cursos</a></li><li><a href="guias.html">Guías gratuitas</a></li><li><a href="calculadora.html">Calculadora para jabones</a></li></ul></div><div><h4>Tu taller</h4><ul><li><a href="kit.html">Materiales</a></li><li><a href="bienestar.html">Bienestar en casa</a></li><li><a href="https://www.facebook.com/Liavelasjabones" rel="noopener">Comunidad en Facebook</a></li></ul></div><div><h4>Transparencia</h4><ul><li><a href="sobre.html">Quiénes somos</a></li><li><a href="privacidad.html">Privacidad y cookies</a></li><li><a href="terminos.html">Términos</a></li><li><a href="sobre.html#afiliados">Enlaces de afiliado</a></li></ul></div></div><div class="footer-bottom"><p><strong>Enlaces de afiliado.</strong> Podemos recibir una comisión si compras desde nuestros enlaces, sin un recargo por nuestra parte. Los precios, el acceso y la garantía los determina la oferta del productor en Hotmart.</p><p>Imágenes de ambientación: no representan a la instructora ni resultados de alumnas. Fuentes de precio y valoración consultadas el 19/11/2026.</p><p>© <span data-year>2026</span> Velas y Jabones con Lia.</p></div></div></footer>
 
-<div class="sticky-buy" aria-label="Oferta del curso"><div class="sb-price"><b>$35 USD</b><span>Antes de impuestos aplicables</span></div><a class="cta" href="https://go.hotmart.com/O107442122M?ap=e5ca&amp;src=LANDSTICKY" target="_blank" rel="sponsored noopener" data-placement="sticky">Quiero empezar</a></div>
+<div class="sticky-buy" aria-label="Oferta del curso"><div class="sb-price"><b>$35 USD</b><span>Antes de impuestos aplicables</span></div><a class="cta" href="https://go.hotmart.com/O107442122M?ap=e5ca&amp;src=LANDSTICKY" target="_blank" rel="sponsored noopener" data-placement="sticky"><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg> Quiero empezar</a></div>
 
 <button type="button" class="support-fab" aria-expanded="false" aria-controls="support-panel" aria-label="Abrir dudas y contacto"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg><span class="support-fab-label">¿Dudas?</span></button>
 <div class="support-panel" id="support-panel" role="dialog" aria-label="Contacto y ayuda"><button type="button" class="close" aria-label="Cerrar">×</button><h3>¿Te ayudamos a decidir?</h3><p>Resolvemos dudas sobre contenido, materiales y compra.</p><a href="mailto:jobvalidoseo@gmail.com?subject=Duda%20antes%20de%20comprar%20el%20curso"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg> jobvalidoseo@gmail.com</a><a href="https://www.facebook.com/Liavelasjabones" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg> Comunidad en Facebook</a><a href="https://hotmart.com/es/marketplace/productos/velas-y-jabones-artesanales-oferta-2x1/T96306980O" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg> Leer reseñas en Hotmart</a></div>
