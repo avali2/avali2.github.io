@@ -162,6 +162,7 @@ h1 em, h2 em { color: var(--terracotta); font-style: italic; }
   margin-top: clamp(20px, 3vw, 28px);
 }
 .hero-actions .cta--ghost { min-block-size: 48px; padding: 11px 18px; }
+.hero-actions .cta--hero { width: 100%; }
 .hero-offer-link {
   display: inline-flex;
   align-items: center;
