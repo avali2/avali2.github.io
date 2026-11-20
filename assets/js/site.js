@@ -122,6 +122,15 @@
     });
   }
 
+  /* --------------------------------- marcar la página actual en el menú --- */
+  var here = window.location.pathname.split("/").pop() || "index.html";
+  doc.querySelectorAll(".topnav a").forEach(function (link) {
+    var raw = link.getAttribute("href") || "";
+    if (!raw || raw.indexOf("#") > -1) return;
+    var name = raw.split("/").pop();
+    if (name === here) link.setAttribute("aria-current", "page");
+  });
+
   /* -------------------------------------------------------- animar entrada --- */
   var reveals = doc.querySelectorAll(".reveal");
   if (reveals.length) {

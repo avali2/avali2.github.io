@@ -21,7 +21,7 @@
   --line: #E6DCCB;
   --line-soft: #F0E8DA;
   --gold: #B08A4F;
-  --header-h: 66px;
+  --header-h: 100px;
   --radius: 20px;
   --radius-lg: 26px;
   --shadow-xs: 0 1px 2px rgb(30 42 34 / 5%);
@@ -68,7 +68,7 @@ h1 em, h2 em { color: var(--terracotta); font-style: italic; }
 .nav a.is-active { background: var(--terracotta-soft); color: var(--terracotta); }
 
 @media (max-width: 900px) {
-  :root { --header-h: 98px; }
+  :root { --header-h: 100px; }
   .topbar-in { gap: 6px 10px; padding-block: 8px; }
   .brand { font-size: .95rem; }
   .nav {
@@ -547,3 +547,51 @@ h1 em, h2 em { color: var(--terracotta); font-style: italic; }
   .nav-mobile-link { display: inline-flex; }
   .nav-drop-panel { display: none; }
 }
+
+/* ---- Cabecera de dos filas: marca + menú completo -------------------- */
+/* Menú siempre visible en una franja propia bajo la marca: nada de
+   desplegables ni hamburguesas, y funciona igual en móvil y escritorio. */
+.topbar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 90;
+  background: rgb(250 246 238 / 96%);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-block-end: 1px solid var(--line);
+  box-shadow: 0 6px 20px rgb(30 42 34 / 7%);
+}
+.topbar-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 9px;
+}
+.topnav {
+  border-block-start: 1px solid var(--line);
+  background: rgb(255 253 248 / 70%);
+}
+.topnav-in {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  padding-block: 6px;
+  scrollbar-width: none;
+}
+.topnav-in::-webkit-scrollbar { display: none; }
+.topnav a {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 13px;
+  border-radius: 999px;
+  color: var(--body);
+  font-size: .84rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.topnav a:hover { background: var(--surface-2); color: var(--ink); }
+.topnav a[aria-current="page"] { background: var(--terracotta-soft); color: var(--terracotta); }
+@media (min-width: 901px) { .topnav-in { justify-content: center; } }
